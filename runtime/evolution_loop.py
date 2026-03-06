@@ -1,24 +1,23 @@
 import numpy as np
 import random
-from core.state import State, Instruction
+from core.state import State, Instruction, Proposal
 from core.embedder import GMI_Embedder
 from core.memory import MemoryManifold
 from ledger.oplax_verifier import OplaxVerifier
 
-# --- Global Instantiations ---
-embedder = GMI_Embedder()
-memory = MemoryManifold(lambda_c=10.0)
+# Default embedder (can be overridden by passing embedder to run function)
+_default_embedder = GMI_Embedder()
 
 def base_potential(x: np.ndarray) -> float:
     """Pure PhaseLoom potential without scars"""
     return float(np.sum(x**2))
 
-def total_potential(x: np.ndarray) -> float:
-    """Total tension = Base potential + Memory curvature"""
-    return base_potential(x) + memory.read_curvature(x)
-
-# Create verifier with injected potential (no monkey-patching!)
-verifier = OplaxVerifier(potential_fn=total_potential)
+def make_total_potential(memory: MemoryManifold):
+    """Factory function to create total potential with memory closure"""
+    def total_potential(x: np.ndarray) -> float:
+        """Total tension = Base potential + Memory curvature"""
+        return base_potential(x) + memory.read_curvature(x)
+    return total_potential
 
 
 # --- 1. The Dreaming System (Unconstrained Generator) ---
@@ -32,35 +31,29 @@ class NoeticanProposalEngine:
         self.embedder = embedder
         self.temp = temperature
 
-    def generate_proposals(self, current_x) -> list:
+    def generate_proposals(self, current_x) -> list[Proposal]:
         """Generate proposals with pre-computed x_prime to avoid double evaluation"""
         pool = []
         
         # Candidate 1: INFER (The conservative, logical baseline)
         # Pre-compute the proposal
         x_infer = current_x - 0.2 * current_x
-        pool.append({
-            'instr': Instruction("INFER (Logic)", lambda x: x - 0.2*x, sigma=0.5, kappa=0.0),
-            'x_prime': x_infer
-        })
+        instr_infer = Instruction("INFER (Logic)", lambda x: x - 0.2*x, sigma=0.5, kappa=0.0)
+        pool.append(Proposal(instruction=instr_infer, x_prime=x_infer))
         
         # Candidate 2: EXPLORE (A wild leap to an existing concept)
         vocab = list(self.embedder.vocab.keys())
         wild_word = random.choice(vocab)
         x_explore = self.embedder.embed(wild_word)
-        pool.append({
-            'instr': Instruction(f"EXPLORE ('{wild_word}')", lambda x: self.embedder.embed(wild_word), sigma=5.0, kappa=12.0),
-            'x_prime': x_explore
-        })
+        instr_explore = Instruction(f"EXPLORE ('{wild_word}')", lambda x: self.embedder.embed(wild_word), sigma=5.0, kappa=12.0)
+        pool.append(Proposal(instruction=instr_explore, x_prime=x_explore))
         
         # Candidate 3: INVENT (Symbolic Evolution - A totally new mathematical structure)
         noise = np.random.normal(0, 1.5 * self.temp, size=len(current_x))
         mutated_coord = current_x + noise
         glyph_id = f"glyph_{random.randint(1000, 9999)}"
-        pool.append({
-            'instr': Instruction(f"INVENT ({glyph_id})", lambda x: mutated_coord, sigma=8.0, kappa=25.0),
-            'x_prime': mutated_coord
-        })
+        instr_invent = Instruction(f"INVENT ({glyph_id})", lambda x: mutated_coord, sigma=8.0, kappa=25.0)
+        pool.append(Proposal(instruction=instr_invent, x_prime=mutated_coord))
         
         return pool
 
@@ -80,54 +73,77 @@ class NoeticanValidationEngine:
         """
         Evaluate proposals and select the best one.
         
-        Selection now uses: best energy descent per cost (efficiency score)
-        Instead of: highest sigma (most expensive)
+        Selection now uses: efficiency + novelty scoring
+        Formula: score = alpha * efficiency + beta * novelty
+        Where novelty is based on operation type (INFER, EXPLORE, INVENT)
         """
         survivors = []
         
+        # Novelty weights: EXPLORE and INVENT get bonus to encourage exploration
+        novelty_weights = {
+            "INFER": 0.0,      # No novelty bonus - it's conservative
+            "EXPLORE": 0.3,    # Some novelty - new word
+            "INVENT": 0.6      # High novelty - new glyph
+        }
+        alpha = 0.7  # Weight for efficiency
+        beta = 0.3   # Weight for novelty
+        
         for proposal in proposal_pool:
-            instr = proposal['instr']
-            x_prime = proposal['x_prime']
-            
-            # Evaluate with pre-computed proposal (avoid double evaluation)
-            accepted, next_state, receipt = self.verifier.check(step_idx, state, instr, precomputed_x_prime=x_prime)
+            # Use Proposal object - verifier will extract instruction and x_prime
+            accepted, next_state, receipt = self.verifier.check(step_idx, state, proposal)
             
             if accepted:
                 # Calculate efficiency score: descent per unit cost
                 v_before = receipt.v_before
                 v_after = receipt.v_after
-                sigma = instr.sigma
+                sigma = proposal.instruction.sigma
                 efficiency = (v_before - v_after) / max(sigma, 1e-6)
                 
+                # Calculate novelty score
+                novelty = 0.0
+                for op_type, weight in novelty_weights.items():
+                    if op_type in proposal.instruction.op_code:
+                        novelty = weight
+                        break
+                
+                # Combined score
+                score = alpha * efficiency + beta * novelty
+                
                 survivors.append({
-                    'instr': instr,
+                    'proposal': proposal,
                     'next_state': next_state,
                     'receipt': receipt,
                     'efficiency': efficiency,
-                    'descent': v_before - v_after
+                    'novelty': novelty,
+                    'score': score
                 })
             else:
                 # If wild imagination or invention is rejected, scar the geometry
-                if "INVENT" in instr.op_code or "EXPLORE" in instr.op_code:
-                    print(f"    [SCAR] Writing geometric scar at {x_prime.round(2)}")
-                    self.memory.write_scar(x_prime, penalty=5.0)
+                if "INVENT" in proposal.instruction.op_code or "EXPLORE" in proposal.instruction.op_code:
+                    print(f"    [SCAR] Writing geometric scar at {proposal.x_prime.round(2)}")
+                    self.memory.write_scar(proposal.x_prime, penalty=5.0)
         
-        # Selection: Pick highest efficiency (best descent per cost)
+        # Selection: Pick highest combined score (efficiency + novelty)
         if survivors:
-            survivors.sort(key=lambda x: x['efficiency'], reverse=True)
+            survivors.sort(key=lambda x: x['score'], reverse=True)
             best = survivors[0]
-            return True, (best['instr'], best['next_state'], best['receipt'])
+            return True, (best['proposal'].instruction, best['next_state'], best['receipt'])
             
         return False, None
 
 
 # --- 3. The Execution Loop (Mutation -> Selection) ---
-def run_gmi_evolution(initial_text="hypothesis", initial_budget=25.0, steps=10):
+def run_gmi_evolution(initial_text="hypothesis", initial_budget=25.0, steps=10, embedder=None):
+    # Create local instances to avoid global state
+    if embedder is None:
+        embedder = _default_embedder
+    
+    memory = MemoryManifold(lambda_c=10.0)
+    total_potential = make_total_potential(memory)
+    verifier = OplaxVerifier(potential_fn=total_potential)
+    
     npe = NoeticanProposalEngine(embedder)
     nve = NoeticanValidationEngine(verifier, memory)
-    
-    # Clear memory for fresh run
-    memory.clear()
     
     state = State(embedder.embed(initial_text), initial_budget)
     
@@ -161,7 +177,7 @@ def run_gmi_evolution(initial_text="hypothesis", initial_budget=25.0, steps=10):
             print(f"  -> Base Tension: {receipt.v_after:.2f} | Remaining Budget: {state.b:.2f}")
             print(f"  -> Efficiency Score: {(receipt.v_before - receipt.v_after) / max(instr.sigma, 1e-6):.2f}")
         else:
-            print(f"NVE Selected: [HALT] All proposals rejected by the manifold. System exhausted.")
+            print(f"NVE Selected: [HALT] No proposal satisfied thermodynamic admissibility constraints.")
             break
         
         # Print separate tension components

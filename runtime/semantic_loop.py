@@ -85,7 +85,7 @@ def run_semantic_engine(initial_text: str, initial_budget: float, max_steps=15):
                 current_concept = embedder.decode(state.x)
                 print(f"Step {step}: [{receipt.op_code}] ACCEPTED. Mind state: '{current_concept}' (V_PL: {receipt.v_after:.2f}, Budget: {state.b:.2f})")
             else:
-                print(f"Step {step}: [HALT] Paralysis. Engine cannot afford any proposed concepts. {receipt.message}")
+                print(f"Step {step}: [HALT] No proposal satisfied thermodynamic admissibility constraints. {receipt.message}")
                 break
                 
             step += 1

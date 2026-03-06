@@ -1,4 +1,4 @@
-from core.state import State, CompositeInstruction
+from core.state import State, CompositeInstruction, Proposal
 from ledger.receipt import Receipt
 
 class OplaxVerifier:
@@ -35,9 +35,17 @@ class OplaxVerifier:
         Args:
             step_idx: Current step number
             state: Current State
-            instr: Instruction to verify
+            instr: Instruction to verify (or Proposal object)
             precomputed_x_prime: Optional pre-computed proposal to avoid double evaluation
+        
+        Note: If a Proposal object is passed as instr, the precomputed x_prime is used
+        automatically. The verifier will NOT call instr.pi() in this case, ensuring
+        deterministic evaluation.
         """
+        # Handle Proposal objects - extract instruction and use precomputed x_prime
+        if isinstance(instr, Proposal):
+            precomputed_x_prime = instr.x_prime
+            instr = instr.instruction
         is_comp = isinstance(instr, CompositeInstruction)
         x_hash_before = state.hash()
         v_current = self.V_PL(state.x)

@@ -1,6 +1,21 @@
 import numpy as np
 import hashlib
 import json
+from dataclasses import dataclass
+
+@dataclass
+class Proposal:
+    """
+    A materialized proposal for state transition.
+    Typed wrapper around instruction + precomputed result.
+    
+    Using a dataclass instead of dict prevents:
+    - Key typos
+    - Missing fields
+    - Unclear field meanings
+    """
+    instruction: 'Instruction'
+    x_prime: np.ndarray
 
 class State:
     """

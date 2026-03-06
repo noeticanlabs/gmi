@@ -5,7 +5,7 @@ import numpy as np
 import sys
 sys.path.insert(0, '.')
 
-from core.state import State, V_PL, Instruction, CompositeInstruction
+from core.state import State, V_PL, Instruction, CompositeInstruction, Proposal
 
 
 class TestState:
@@ -98,3 +98,27 @@ class TestCompositeInstruction:
         assert comp.r2 is r2
         assert comp.sigma == 2.0
         assert comp.kappa == 2.0
+
+
+class TestProposal:
+    """Test the Proposal dataclass."""
+    
+    def test_proposal_creation(self):
+        """Test Proposal can be created with instruction and x_prime."""
+        instr = Instruction("TEST", lambda x: x, sigma=1.0, kappa=1.0)
+        x_prime = np.array([2.0, 3.0])
+        
+        proposal = Proposal(instruction=instr, x_prime=x_prime)
+        
+        assert proposal.instruction is instr
+        assert np.allclose(proposal.x_prime, [2.0, 3.0])
+    
+    def test_proposal_dataclass(self):
+        """Test Proposal is a proper dataclass with defaults."""
+        instr = Instruction("TEST", lambda x: x, sigma=1.0, kappa=1.0)
+        
+        # Test with required fields only
+        proposal = Proposal(instruction=instr, x_prime=np.array([1.0, 2.0]))
+        
+        assert hasattr(proposal, 'instruction')
+        assert hasattr(proposal, 'x_prime')

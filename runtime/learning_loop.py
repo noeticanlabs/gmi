@@ -118,7 +118,7 @@ def run_learning_engine(initial_text: str, initial_budget: float, max_steps=8):
                 print(f"Step {step}: [{receipt.op_code}] ACCEPTED. Mind state: '{current_concept}'")
                 print(f"  Tension: {tension_now:.2f} | Budget: {state.b:.2f} | Scars: {len(memory.scars)}\n")
             else:
-                print(f"Step {step}: [HALT] Paralysis. {receipt.message}\n")
+                print(f"Step {step}: [HALT] No proposal satisfied thermodynamic admissibility constraints. {receipt.message}\n")
                 break
                 
             step += 1

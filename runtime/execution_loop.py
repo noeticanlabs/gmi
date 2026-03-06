@@ -54,7 +54,7 @@ def run_gmi_engine(initial_x: list[float], initial_budget: float, max_steps=20, 
                 state = next_state
                 print(f"Step {step}: [{receipt.op_code}] ACCEPTED. V_PL: {receipt.v_after:.2f} | Budget: {state.b:.2f}")
             else:
-                print(f"Step {step}: [HALT] Paralysis. All viable directions rejected. {receipt.message}")
+                print(f"Step {step}: [HALT] No proposal satisfied thermodynamic admissibility constraints. {receipt.message}")
                 break
                 
             step += 1

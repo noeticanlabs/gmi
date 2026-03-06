@@ -5,7 +5,7 @@ import numpy as np
 import sys
 sys.path.insert(0, '.')
 
-from core.state import State, V_PL, Instruction, CompositeInstruction
+from core.state import State, V_PL, Instruction, CompositeInstruction, Proposal
 from ledger.oplax_verifier import OplaxVerifier
 
 
@@ -114,3 +114,20 @@ class TestOplaxVerifierWithCustomPotential:
         
         # Should accept if moving toward minimum
         assert accepted is True
+    
+    def test_verifier_accepts_proposal_object(self):
+        """Test verifier correctly handles Proposal objects with precomputed x_prime."""
+        verifier = OplaxVerifier(potential_fn=V_PL)
+        state = State([1.0, 1.0], budget=10.0)
+        
+        # Create a Proposal with precomputed x_prime
+        instr = Instruction("DESCENT", lambda x: x * 0.5, sigma=0.5, kappa=0.5)
+        x_prime = np.array([0.5, 0.5])  # Precomputed result
+        proposal = Proposal(instruction=instr, x_prime=x_prime)
+        
+        accepted, next_state, receipt = verifier.check(1, state, proposal)
+        
+        # Should accept - the proposal is valid
+        assert accepted is True
+        # Verify the verifier used the precomputed x_prime, not calling instr.pi
+        assert receipt.v_after == V_PL(x_prime)
