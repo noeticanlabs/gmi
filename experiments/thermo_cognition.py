@@ -1,3 +1,9 @@
+"""
+DEMO / RESEARCH SCRIPT
+Not canonical runtime implementation.
+This file demonstrates thermodynamic cognition concepts.
+"""
+
 import numpy as np
 
 # --- 1. The Governed State ---

@@ -19,10 +19,13 @@ def dynamics_step(state: State) -> tuple[Instruction, Instruction]:
     
     return explore, infer
 
-def run_gmi_engine(initial_x: list[float], initial_budget: float, max_steps=20, artifact_file="receipts.jsonl"):
+def run_gmi_engine(initial_x: list[float], initial_budget: float, max_steps=20, artifact_file="outputs/receipts/receipts.jsonl"):
     """The Universal Execution Loop."""
     if os.path.exists(artifact_file):
         os.remove(artifact_file)
+    
+    # Create verifier with injected potential (no monkey-patching!)
+    verifier = OplaxVerifier(potential_fn=V_PL)
         
     state = State(initial_x, initial_budget)
     print(f"=== GMI ENGINE BOOT ===")
@@ -35,14 +38,14 @@ def run_gmi_engine(initial_x: list[float], initial_budget: float, max_steps=20, 
             explore_instr, infer_instr = dynamics_step(state)
             
             # 1. Attempt Exploration (Imagination)
-            accepted, next_state, receipt = OplaxVerifier.check(step, state, explore_instr)
+            accepted, next_state, receipt = verifier.check(step, state, explore_instr)
             
             if not accepted:
                 # Log rejected explore attempt
                 ledger_file.write(receipt.to_json() + "\n")
                 
                 # 2. Project to Constraint Boundary (Fallback to Logic)
-                accepted, next_state, receipt = OplaxVerifier.check(step, state, infer_instr)
+                accepted, next_state, receipt = verifier.check(step, state, infer_instr)
             
             # Write final decision to ledger
             ledger_file.write(receipt.to_json() + "\n")

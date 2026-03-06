@@ -1,3 +1,9 @@
+"""
+DEMO / RESEARCH SCRIPT
+Not canonical runtime implementation.
+This file demonstrates ledger algebra concepts.
+"""
+
 import numpy as np
 
 # --- 1. State and Potential ---

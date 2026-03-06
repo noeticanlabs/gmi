@@ -1,3 +1,9 @@
+"""
+DEMO / RESEARCH SCRIPT
+Not canonical runtime implementation - see core/embedder.py for canonical version.
+This file demonstrates GMI embedding concepts.
+"""
+
 import numpy as np
 import re
 

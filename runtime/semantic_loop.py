@@ -47,9 +47,12 @@ def semantic_dynamics_step(state: State) -> tuple[Instruction, Instruction]:
 
 def run_semantic_engine(initial_text: str, initial_budget: float, max_steps=15):
     """The Semantic Execution Loop."""
-    artifact_file = "semantic_receipts.jsonl"
+    artifact_file = "outputs/receipts/semantic_receipts.jsonl"
     if os.path.exists(artifact_file):
         os.remove(artifact_file)
+    
+    # Create verifier with injected potential (no monkey-patching!)
+    verifier = OplaxVerifier(potential_fn=V_PL)
         
     # Embed the initial prompt into physics
     initial_x = embedder.embed(initial_text)
@@ -65,14 +68,14 @@ def run_semantic_engine(initial_text: str, initial_budget: float, max_steps=15):
             explore_instr, infer_instr = semantic_dynamics_step(state)
             
             # 1. Attempt the creative word
-            accepted, next_state, receipt = OplaxVerifier.check(step, state, explore_instr)
+            accepted, next_state, receipt = verifier.check(step, state, explore_instr)
             
             if not accepted:
                 ledger_file.write(receipt.to_json() + "\n")
                 print(f"Step {step}: [REJECTED] {explore_instr.op_code}. Tension too high for budget.")
                 
                 # 2. Fallback to the logical word
-                accepted, next_state, receipt = OplaxVerifier.check(step, state, infer_instr)
+                accepted, next_state, receipt = verifier.check(step, state, infer_instr)
             
             ledger_file.write(receipt.to_json() + "\n")
             

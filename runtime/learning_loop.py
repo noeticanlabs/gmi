@@ -15,9 +15,8 @@ def V_PL_with_memory(x: np.ndarray) -> float:
     curvature_tension = memory.read_curvature(x)
     return base_tension + curvature_tension
 
-# Override the default V_PL in the verifier for this run
-import core.state
-core.state.V_PL = V_PL_with_memory
+# Create verifier with injected potential (no monkey-patching!)
+verifier = OplaxVerifier(potential_fn=V_PL_with_memory)
 
 def semantic_dynamics_step(state: State, attempt_type="chaos") -> tuple[Instruction, Instruction]:
     """
@@ -61,7 +60,7 @@ def semantic_dynamics_step(state: State, attempt_type="chaos") -> tuple[Instruct
     return explore_instr, infer_instr
 
 def run_learning_engine(initial_text: str, initial_budget: float, max_steps=8):
-    artifact_file = "learning_receipts.jsonl"
+    artifact_file = "outputs/receipts/learning_receipts.jsonl"
     if os.path.exists(artifact_file):
         os.remove(artifact_file)
         
@@ -88,7 +87,7 @@ def run_learning_engine(initial_text: str, initial_budget: float, max_steps=8):
             tension_before = V_PL_with_memory(proposed_x)
             
             # 1. Attempt the creative word
-            accepted, next_state, receipt = OplaxVerifier.check(step, state, explore_instr)
+            accepted, next_state, receipt = verifier.check(step, state, explore_instr)
             
             if not accepted:
                 # Log rejected attempt
@@ -105,7 +104,7 @@ def run_learning_engine(initial_text: str, initial_budget: float, max_steps=8):
                 print(f"  -> Curvature at that coordinate now: {memory.read_curvature(proposed_x):.2f}\n")
                 
                 # 2. Fallback to logic
-                accepted, next_state, receipt = OplaxVerifier.check(step, state, infer_instr)
+                accepted, next_state, receipt = verifier.check(step, state, infer_instr)
             
             if accepted:
                 # Update receipt with memory-augmented tension
