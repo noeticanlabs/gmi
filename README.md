@@ -13,13 +13,29 @@ GMI is a computational framework that treats cognitive processes as thermodynami
 ## Core Equation
 
 ```
-V(x') + σ ≤ V(x) + κ
+V(x') + σ ≤ V(x) + κ + b_reserve
 ```
 
 Where:
 - `V(x)` - Cognitive tension (potential function)
 - `σ` - Computational energy cost
 - `κ` - Allowed defect envelope
+
+### Reserve Law (Anti-Greed)
+
+GMI includes a **Reserve Law** that prevents budget bankruptcy:
+
+```
+b' ≥ b_reserve
+```
+
+This ensures moves cannot exhaust the budget below a protected minimum, providing mathematical guarantees against greedy/short-sighted decisions.
+
+**Key Features:**
+- Thermodynamic inequality ensures valid cognitive operations
+- Reserve Law prevents strategic suicide
+- Oplax algebra enforces compositional honesty
+- Hash-chained receipts provide verifiable proof
 
 ## Architecture
 

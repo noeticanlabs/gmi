@@ -52,7 +52,7 @@ The potential function `V(x)` defines the "cognitive landscape":
 
 ### 4. Oplax Verifier (`ledger/oplax_verifier.py`)
 
-The verifier enforces two constraint systems:
+The verifier enforces three constraint systems:
 
 #### A. Thermodynamic Inequality
 
@@ -70,7 +70,21 @@ Where:
 If satisfied → ACCEPT
 If violated → REJECT
 
-#### B. Oplax Operator Algebra
+#### B. Reserve Law (Anti-Greed Mechanism)
+
+```
+b' ≥ b_reserve
+```
+
+Where:
+- `b' = b - σ` (budget after action)
+- `b_reserve` = protected minimum budget (default: 1.0)
+
+This prevents "locally rational but strategically suicidal" moves that exhaust budget for immediate gain but destroy future viability.
+
+If violated → REJECT with "Reserve Law Violation"
+
+#### C. Oplax Operator Algebra
 
 For composite instructions `r1 ⊙ r2`:
 
@@ -174,6 +188,30 @@ This ensures:
 - Budget exhaustion properly handled
 - Oplax algebra enforces composition rules
 
+## Test Suites
+
+### Stress Tests (`experiments/stress_tests.py`)
+
+1. **Pressure Test**: Anti-freeze logic under high constraints
+2. **Laziness Test**: Discipline/commitment to costly but beneficial paths
+3. **Greed Test**: Ledger blocking of catastrophic decisions
+
+### Intellectual Tests (`experiments/intellectual_tests.py`)
+
+1. **Compositional Reasoning**: Oplax algebra enforcement
+2. **Exploration-Exploitation**: Balance between risky and safe moves
+3. **Memory Consolidation**: Memory curvature effects
+4. **Convergence Under Noise**: Stochastic instruction handling
+5. **Multi-Step Planning**: Looking ahead for sustainable paths
+
+### Benchmark Suite (`experiments/benchmark_suite.py`)
+
+Compares GMI against:
+- **Gradient Descent**: Standard optimization baseline
+- **Simulated Annealing**: Temperature-based stochastic optimization
+
+Results show GMI outperforms both in convergence speed, efficiency, and safety.
+
 ## File Organization
 
 ```
@@ -181,18 +219,20 @@ gmi/
 ├── core/           # Pure computational logic
 │   ├── state.py    # State, Instruction, V_PL
 │   ├── embedder.py # Text → vector
-│   └── memory.py   # Scar tracking
+│   ├── memory.py   # Scar tracking
+│   └── potential.py # GMIPotential with budget barrier
 ├── ledger/         # Verification & proof
-│   ├── oplax_verifier.py
-│   └── receipt.py
+│   ├── oplax_verifier.py  # Includes Reserve Law
+│   ├── receipt.py
+│   └── hash_chain.py
 ├── runtime/       # Execution loops
-│   ├── evolution_loop.py
-│   ├── execution_loop.py
-│   ├── learning_loop.py
-│   └── semantic_loop.py
-├── experiments/   # Research demos (NOT canonical)
+├── experiments/   # Research demos & tests
+│   ├── stress_tests.py
+│   ├── intellectual_tests.py
+│   └── benchmark_suite.py
 ├── tests/         # Unit tests
-└── outputs/       # Generated receipts (gitignored)
+├── plans/         # Design documents
+└── docs/          # This documentation
 ```
 
 ## Design Principles

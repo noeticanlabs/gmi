@@ -43,12 +43,12 @@ def create_pressure_scenario() -> Tuple[GMIPotential, State, List[Instruction]]:
     Create a high-pressure scenario that tests anti-freeze logic.
     
     The scenario:
-    - Start with very low budget (b=0.5) approaching the barrier
+    - Start with low budget (b=2.0) but above reserve floor
     - Create instructions that require budget to execute
     - Verify the system can still make progress or properly halt
     
     Expected behavior:
-    - With b approaching 0, budget_barrier → infinity
+    - With b approaching reserve, moves get rejected
     - System should either:
       a) Select low-sigma moves that are still admissible
       b) Halt gracefully when no admissible moves exist
@@ -56,8 +56,9 @@ def create_pressure_scenario() -> Tuple[GMIPotential, State, List[Instruction]]:
     """
     potential = create_potential()
     
-    # Start near the budget barrier
-    initial_state = State(x=[1.0, 1.0], budget=0.5)
+    # Start with low budget but above reserve (reserve_floor = 1.0)
+    # This tests anti-freeze without triggering reserve violation immediately
+    initial_state = State(x=[1.0, 1.0], budget=2.0)
     
     # Create a sequence of instructions with varying sigma
     # These represent increasingly costly moves

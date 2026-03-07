@@ -8,13 +8,24 @@ class OplaxVerifier:
     
     The potential function V_PL is injected at construction time to avoid
     global monkey-patching of module state.
+    
+    RESERVE LAW: The verifier also enforces the Reserve Law - a protected
+    minimum budget that must be preserved after every non-emergency action.
+    
+    Admissible(a) => b_next >= b_reserve
+    
+    This prevents "locally rational but strategically suicidal" moves that
+    exhaust budget for immediate gain but destroy future viability.
     """
-    def __init__(self, potential_fn):
+    def __init__(self, potential_fn, reserve_floor: float = 1.0):
         """
         Args:
             potential_fn: Callable that computes V(x) - the cognitive tension
+            reserve_floor: Protected minimum budget (b_reserve). Default: 1.0
+                          Moves that would drive budget below this are rejected.
         """
         self.V_PL = potential_fn
+        self.reserve_floor = reserve_floor
 
     def verify_composition(self, instr: CompositeInstruction) -> tuple[bool, str]:
         """Enforces the Oplax Operator Algebra for chained thoughts."""
@@ -68,9 +79,13 @@ class OplaxVerifier:
         # 3. Soundness Contract: Thermodynamic Inequality
         thermo_valid = (v_prime + instr.sigma) <= (v_current + instr.kappa)
         
-        # 4. Budget Integrity
+        # 4. Budget Integrity (basic: can't go negative)
         b_prime = state.b - instr.sigma
         budget_valid = b_prime >= 0
+        
+        # 5. RESERVE LAW: Protected minimum budget check
+        # This is the anti-greed mechanism - prevents budget bankruptcy
+        reserve_valid = b_prime >= self.reserve_floor
         
         if not thermo_valid:
             msg = f"Thermodynamic Inequality Failed. V_prime({v_prime:.2f}) + sigma({instr.sigma}) > V({v_current:.2f}) + kappa({instr.kappa})"
@@ -81,8 +96,15 @@ class OplaxVerifier:
             msg = "Budget Exhausted. Cannot pay metabolic cost."
             receipt = Receipt(step_idx, instr.op_code, x_hash_before, x_hash_before, v_current, v_prime, instr.sigma, instr.kappa, state.b, state.b, is_comp, "REJECTED", msg)
             return False, state, receipt
+        
+        # 6. RESERVE LAW: Check if move violates protected reserve
+        # This is the anti-greed mechanism
+        if not reserve_valid:
+            msg = f"Reserve Law Violation. Would drive budget to {b_prime:.2f} < reserve {self.reserve_floor:.2f}. Action too greedy!"
+            receipt = Receipt(step_idx, instr.op_code, x_hash_before, x_hash_before, v_current, v_prime, instr.sigma, instr.kappa, state.b, state.b, is_comp, "REJECTED", msg)
+            return False, state, receipt
             
-        # 5. Commit Valid Transition - Use honest message
+        # 7. Commit Valid Transition - Use honest message
         new_state = State(x_prime, b_prime)
         
         # Honest message about what actually happened
