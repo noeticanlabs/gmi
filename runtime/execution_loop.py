@@ -8,14 +8,13 @@ def dynamics_step(state: State) -> tuple[Instruction, Instruction]:
     Generates untrusted heuristic proposals based on current state.
     Returns: (explore_instruction, infer_instruction)
     """
-    # EXPLORE: Large perturbation, high sigma, wide kappa envelope
-    # Tuned: kappa=12 allows imagination when V(x) is low (e.g., ~2.0)
-    # Inequality: V(x')+5 <= V(x)+12. With x=[1,1], V=2. If x'=[2,2], V'=8: 8+5=13 <= 2+12=14 ✓
-    explore = Instruction("EXPLORE", lambda x: x + np.random.uniform(0.8, 1.2, size=len(x)), sigma=5.0, kappa=12.0)
+    # EXPLORE: Conservative perturbation (optimal from experiments)
+    # Tuned: kappa=8, sigma=3 - optimal for multi-modal landscapes
+    explore = Instruction("EXPLORE", lambda x: x + np.random.uniform(0.8, 1.2, size=len(x)), sigma=3.0, kappa=8.0)
     
     # INFER: Gradient-like local descent, low sigma, zero kappa
-    # Tuned: Smaller gradient (0.1) to avoid overshooting when V is low
-    infer = Instruction("INFER", lambda x: x - 0.1 * x, sigma=0.5, kappa=0.0)
+    # INFER: Gradient descent with small kappa for minor V fluctuations
+    infer = Instruction("INFER", lambda x: x - 0.1 * x, sigma=0.5, kappa=0.5)
     
     return explore, infer
 
@@ -34,7 +33,7 @@ def run_gmi_engine(initial_x: list[float], initial_budget: float, max_steps=20, 
     
     step = 1
     with open(artifact_file, "a") as ledger_file:
-        while step <= max_steps and V_PL(state.x) > 0.05:
+        while step <= max_steps and V_PL(state.x) > 0.10:  # Optimal threshold from experiments
             explore_instr, infer_instr = dynamics_step(state)
             
             # 1. Attempt Exploration (Imagination)

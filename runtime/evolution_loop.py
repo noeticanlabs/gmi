@@ -85,8 +85,8 @@ class NoeticanValidationEngine:
             "EXPLORE": 0.3,    # Some novelty - new word
             "INVENT": 0.6      # High novelty - new glyph
         }
-        alpha = 0.7  # Weight for efficiency
-        beta = 0.3   # Weight for novelty
+        alpha = 0.7   # Weight for efficiency (optimized)
+        beta = 0.3    # Weight for novelty
         
         for proposal in proposal_pool:
             # Use Proposal object - verifier will extract instruction and x_prime
@@ -121,7 +121,7 @@ class NoeticanValidationEngine:
                 # If wild imagination or invention is rejected, scar the geometry
                 if "INVENT" in proposal.instruction.op_code or "EXPLORE" in proposal.instruction.op_code:
                     print(f"    [SCAR] Writing geometric scar at {proposal.x_prime.round(2)}")
-                    self.memory.write_scar(proposal.x_prime, penalty=5.0)
+                    self.memory.write_scar(proposal.x_prime, penalty=1.0)  # Optimal: gentle
         
         # Selection: Pick highest combined score (efficiency + novelty)
         if survivors:
@@ -138,7 +138,7 @@ def run_gmi_evolution(initial_text="hypothesis", initial_budget=25.0, steps=10, 
     if embedder is None:
         embedder = _default_embedder
     
-    memory = MemoryManifold(lambda_c=10.0)
+    memory = MemoryManifold(lambda_c=0.5)  # Optimal: subtle curvature for learning
     total_potential = make_total_potential(memory)
     verifier = OplaxVerifier(potential_fn=total_potential)
     

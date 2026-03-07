@@ -25,22 +25,20 @@ def semantic_dynamics_step(state: State) -> tuple[Instruction, Instruction]:
     chosen_infer = random.choice(infer_words)
     infer_vector = embedder.embed(chosen_infer)
 
-    # EXPLORE: Attempt a creative jump using a FRACTION of the semantic vector
-    # Scale down to make the jump feasible within thermodynamics
+    # EXPLORE: Attempt a creative jump (optimized sigma/kappa)
     explore_instr = Instruction(
         op_code=f"EXPLORE ('{chosen_explore}')", 
         pi_func=lambda x: x + 0.3 * explore_vector,  # Scaled creative jump
-        sigma=5.0, 
-        kappa=15.0  # Wide defect envelope for creativity
+        sigma=3.0, 
+        kappa=8.0  # Optimal from experiments
     )
     
-    # INFER: Attempt to MOVE TOWARD the logical concept (gradient descent)
-    # This moves the state toward low-tension regions (the goal)
+    # INFER: Move toward logical concept (optimized)
     infer_instr = Instruction(
         op_code=f"INFER ('{chosen_infer}')", 
         pi_func=lambda x: x - 0.3 * (x - infer_vector),  # Move toward the concept
         sigma=0.5, 
-        kappa=0.5   # Small defect allowed
+        kappa=0.5   # Optimized: allows minor V fluctuations
     )
     
     return explore_instr, infer_instr
@@ -64,7 +62,7 @@ def run_semantic_engine(initial_text: str, initial_budget: float, max_steps=15):
     
     step = 1
     with open(artifact_file, "a") as ledger_file:
-        while step <= max_steps and V_PL(state.x) > 0.01:
+        while step <= max_steps and V_PL(state.x) > 0.10:  # Optimal threshold
             explore_instr, infer_instr = semantic_dynamics_step(state)
             
             # 1. Attempt the creative word

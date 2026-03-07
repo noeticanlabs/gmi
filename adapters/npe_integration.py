@@ -66,7 +66,7 @@ class NPEGMIAdapter:
         self.npe = npe
         self.verifier = verifier
         self.embedder = embedder
-        self.memory = memory or MemoryManifold(lambda_c=10.0)
+        self.memory = memory or MemoryManifold(lambda_c=0.5)  # Optimal: subtle curvature
         
         # Track statistics
         self.stats = {

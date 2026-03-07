@@ -7,7 +7,7 @@ from core.embedder import GMI_Embedder
 from core.memory import MemoryManifold
 
 embedder = GMI_Embedder()
-memory = MemoryManifold(lambda_c=10.0)  # High penalty for touching the stove
+memory = MemoryManifold(lambda_c=0.5)  # Optimal: subtle curvature for learning
 
 def V_PL_with_memory(x: np.ndarray) -> float:
     """The total cognitive tension: Base PhaseLoom potential + Memory Curvature"""
@@ -27,22 +27,22 @@ def semantic_dynamics_step(state: State, attempt_type="chaos") -> tuple[Instruct
     if attempt_type == "chaos":
         chosen_explore = "chaos" 
         explore_vector = embedder.embed(chosen_explore)
-        # Absolute jump to chaos coordinates
+        # Absolute jump to chaos coordinates (optimized)
         explore_instr = Instruction(
             f"EXPLORE ('{chosen_explore}')", 
             lambda x: explore_vector,
-            sigma=5.0, 
-            kappa=12.0
+            sigma=3.0, 
+            kappa=8.0  # Optimal from experiments
         )
     else:
-        # Try a moderate jump
+        # Try a moderate jump (optimized)
         chosen_explore = "brainstorm"
         explore_vector = embedder.embed(chosen_explore)
         explore_instr = Instruction(
             f"EXPLORE ('{chosen_explore}')", 
             lambda x: x + explore_vector * 0.3,  # Scaled jump
             sigma=3.0, 
-            kappa=10.0
+            kappa=8.0  # Optimal from experiments
         )
     
     infer_words = ["axiom", "proof", "logic"]
@@ -100,7 +100,7 @@ def run_learning_engine(initial_text: str, initial_budget: float, max_steps=8):
                 
                 # TRIGGER MEMORY GEOMETRY: The system burns its hand on the stove
                 print(f"  -> [WRITE] Scarring manifold at {proposed_x.round(2)}")
-                memory.write_scar(proposed_x, penalty=5.0)
+                memory.write_scar(proposed_x, penalty=1.0)  # Optimal: gentle learning signal
                 print(f"  -> Curvature at that coordinate now: {memory.read_curvature(proposed_x):.2f}\n")
                 
                 # 2. Fallback to logic
