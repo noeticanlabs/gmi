@@ -1,7 +1,7 @@
 """
 Execution Loop for the GMI Universal Cognition Engine.
 
-The main runtime loop that executes the GMI engine with memory integration.
+The main runtime loop that executes the GMI engine with memory and hash chain integration.
 """
 
 import os
@@ -10,6 +10,8 @@ import numpy as np
 from core.state import State, Instruction, create_potential
 from core.potential import GMIPotential
 from ledger.oplax_verifier import OplaxVerifier
+from ledger.hash_chain import HashChainLedger, get_global_ledger
+from ledger.receipt import Receipt
 
 
 def dynamics_step(state: State) -> tuple[Instruction, Instruction]:
@@ -217,6 +219,158 @@ def run_gmi_engine_with_memory(
     print(f"Final State: {state.x.round(3)} | Final V_GMI: {potential.total(state.x, state.b):.2f}")
     print(f"Memory Episodes: {len(archive)}")
     print(f"Proof artifact: {artifact_file}")
+
+
+def run_gmi_engine_with_hash_chain(
+    initial_x: list[float],
+    initial_budget: float,
+    max_steps: int = 20,
+    artifact_file: str = "outputs/receipts/receipts.jsonl",
+    ledger_file: str = "outputs/receipts/ledger.json"
+):
+    """
+    GMI Engine with full hash chain ledger integration.
+    
+    This version adds:
+    - Hash-chained receipts (H_{k+1} = SHA256(H_k || receipt_k))
+    - Slab verification
+    - Offline replay capability
+    
+    Args:
+        initial_x: Initial cognitive state coordinates
+        initial_budget: Initial thermodynamic budget
+        max_steps: Maximum number of steps
+        artifact_file: Path to write receipts (JSONL)
+        ledger_file: Path to write ledger (JSON)
+    """
+    if os.path.exists(artifact_file):
+        os.remove(artifact_file)
+    
+    # Initialize components
+    potential = create_potential()
+    
+    # Create hash chain ledger
+    ledger = HashChainLedger()
+    
+    # Create verifier
+    verifier = OplaxVerifier(potential_fn=potential.base)
+    
+    state = State(initial_x, initial_budget)
+    initial_state_hash = state.hash()
+    
+    print(f"=== GMI ENGINE WITH HASH CHAIN ===")
+    print(f"Initial State: {state.x}")
+    print(f"Initial State Hash: {initial_state_hash[:32]}...")
+    print(f"Initial Tension (V): {potential.base(state.x):.2f}")
+    print(f"Initial Budget: {state.b:.2f}")
+    print(f"Genesis Hash: {HashChainLedger.GENESIS_HASH[:16]}...")
+    print()
+    
+    step = 1
+    with open(artifact_file, "a") as receipts_file:
+        while step <= max_steps and potential.base(state.x) > 0.10:
+            # Get current chain digest
+            current_digest = ledger.current_digest()
+            
+            # Generate proposals
+            explore_instr, infer_instr = dynamics_step(state)
+            
+            # Attempt Exploration
+            accepted, next_state, receipt = verifier.check(step, state, explore_instr)
+            
+            if not accepted:
+                receipts_file.write(receipt.to_json() + "\n")
+                
+                # Add to hash chain (even rejected steps)
+                ledger.append(receipt, state.hash())
+                
+                # Try inference
+                accepted, next_state, receipt = verifier.check(step, state, infer_instr)
+            
+            # Add to hash chain and write
+            receipts_file.write(receipt.to_json() + "\n")
+            
+            # Get next state hash (current if rejected)
+            next_state_hash = next_state.hash() if accepted else state.hash()
+            
+            # Append to hash chain
+            chain_digest = ledger.append(receipt, next_state_hash)
+            
+            if accepted:
+                state = next_state
+                print(f"Step {step}: [{receipt.op_code}] ACCEPTED. V: {receipt.v_after:.2f} | Budget: {state.b:.2f}")
+                print(f"         Chain: {current_digest[:16]}... -> {chain_digest.chain_digest_next[:16]}...")
+            else:
+                print(f"Step {step}: [HALT] {receipt.message}")
+                print(f"         Chain: {current_digest[:16]}... -> {chain_digest.chain_digest_next[:16]}...")
+                break
+            
+            if state.b <= 0:
+                print(f"Step {step}: [HALT] Budget exhausted.")
+                break
+            
+            step += 1
+    
+    # Verify chain integrity
+    print(f"\n=== CHAIN VERIFICATION ===")
+    chain_valid, chain_msg = ledger.verify_chain()
+    print(f"Chain valid: {chain_valid}")
+    print(f"Message: {chain_msg}")
+    
+    # Print summary
+    summary = ledger.summary()
+    print(f"\n=== RUN COMPLETE ===")
+    print(f"Final State: {state.x.round(3)}")
+    print(f"Final Tension: {potential.base(state.x):.2f}")
+    print(f"Final Chain Digest: {ledger.current_digest()[:32]}...")
+    print(f"Steps: {summary['total_steps']} | Accepted: {summary['accepted']} | Rejected: {summary['rejected']}")
+    print(f"Receipts: {artifact_file}")
+    print(f"Ledger: {ledger_file}")
+    
+    # Save ledger
+    ledger.save(ledger_file)
+    print(f"Ledger saved to {ledger_file}")
+    
+    return ledger
+
+
+def run_with_replay(
+    receipts_file: str,
+    ledger_file: str,
+    initial_state_hash: str
+):
+    """
+    Replay a previous execution from receipts.
+    
+    Args:
+        receipts_file: Path to receipts JSONL file
+        ledger_file: Path to ledger JSON file
+        initial_state_hash: Hash of initial state
+    """
+    from ledger.replay import LedgerReplay
+    from core.potential import V_PL
+    
+    print(f"=== REPLAY FROM RECEIPTS ===")
+    print(f"Loading from: {receipts_file}")
+    print(f"Initial state hash: {initial_state_hash[:32]}...")
+    
+    # Load ledger
+    ledger = HashChainLedger.load(ledger_file)
+    print(f"Loaded ledger with {len(ledger.chain)} steps")
+    
+    # Create replay engine
+    replay = LedgerReplay(initial_state_hash, V_PL)
+    
+    # Replay with chain verification
+    result = replay.replay_with_chain(ledger)
+    
+    print(f"\n=== REPLAY RESULT ===")
+    print(f"Valid: {result.is_valid}")
+    print(f"Message: {result.message}")
+    print(f"Final state hash: {result.final_state_hash[:32]}...")
+    print(f"Diagnostics: {result.diagnostics}")
+    
+    return result
 
 
 if __name__ == "__main__":
