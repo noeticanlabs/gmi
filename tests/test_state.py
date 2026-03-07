@@ -92,7 +92,7 @@ class TestCompositeInstruction:
         r1 = Instruction("A", lambda x: x, sigma=1.0, kappa=1.0)
         r2 = Instruction("B", lambda x: x, sigma=1.0, kappa=1.0)
         
-        comp = CompositeInstruction(r1, r2, sigma=2.0, kappa=2.0)
+        comp = CompositeInstruction(r1, r2, claimed_sigma=2.0, claimed_kappa=2.0)
         
         assert comp.r1 is r1
         assert comp.r2 is r2

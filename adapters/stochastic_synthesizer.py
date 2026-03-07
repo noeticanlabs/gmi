@@ -311,7 +311,7 @@ class StochasticSynthesizer:
             return 0.1
         
         # Check similarity to known operators
-        base_ops_str = " ".join(self.BASE_OPS)
+        base_ops_str = " ".join(OperatorHallucinator.BASE_OPS)
         if op_id.split("_")[0] in base_ops_str:
             return 0.5  # Somewhat similar
         

@@ -166,7 +166,7 @@ def run_gmi_evolution(initial_text="hypothesis", initial_budget=25.0, steps=10, 
         
         # 1. NPE Dreams (Wild Proposals)
         pool = npe.generate_proposals(state.x)
-        print(f"NPE Proposed: {[p['instr'].op_code for p in pool]}")
+        print(f"NPE Proposed: {[p.instruction.op_code for p in pool]}")
         
         # 2. NVE Filters (Strict Selection with efficiency-based choice)
         success, result = nve.filter_and_select(i, state, pool)
