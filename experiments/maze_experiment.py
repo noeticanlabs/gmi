@@ -251,7 +251,7 @@ def run_maze_navigation(
             # Stuck
             break
         
-        # Generate EXPLORE and INFER proposals
+        # Simple random exploration (original strategy)
         explore_move = random.choice(valid_moves)
         
         # EXPLORE: Random valid move
@@ -284,14 +284,25 @@ def run_maze_navigation(
         if accepted:
             new_pos = (int(next_state.x[0]), int(next_state.x[1]))
             
+            # INVERSE SCARRING: Only write reward when reaching the GOAL (not every step!)
+            # Writing rewards on every step creates too many sinks that trap exploration
+            if use_memory and memory and new_pos == goal_pos:
+                memory.write_reward(np.array([float(new_pos[0]), float(new_pos[1])]), strength=2.0)
+            
             # Check for key collection
             if has_key and key_pos and new_pos == key_pos:
                 config.inventory.add("key")
                 key_collected = True
+                # INVERSE SCARRING: Small reward for key (will decay)
+                if use_memory and memory:
+                    memory.write_reward(np.array([float(new_pos[0]), float(new_pos[1])]), strength=1.0)
             
-            # Check for door passage
-            if has_door and door_pos and new_pos == door_pos:
+            # Check for door passage (only if we have the key)
+            if has_door and door_pos and new_pos == door_pos and "key" in config.inventory:
                 door_passed = True
+                # INVERSE SCARRING: Larger reward for door (requires key)
+                if use_memory and memory:
+                    memory.write_reward(np.array([float(new_pos[0]), float(new_pos[1])]), strength=3.0)
             
             path.append(new_pos)
             state = next_state
@@ -302,6 +313,10 @@ def run_maze_navigation(
             
             if accepted:
                 new_pos = (int(next_state.x[0]), int(next_state.x[1]))
+                
+                # INVERSE SCARRING: Only write reward when reaching the GOAL (not every step!)
+                if use_memory and memory and new_pos == goal_pos:
+                    memory.write_reward(np.array([float(new_pos[0]), float(new_pos[1])]), strength=2.0)
                 
                 if has_key and key_pos and new_pos == key_pos:
                     config.inventory.add("key")
@@ -314,14 +329,20 @@ def run_maze_navigation(
                 state = next_state
                 budget_spent += infer_instr.sigma
             else:
-                # Record failed position in memory
-                if use_memory and memory:
+                # SMART SCARRING: Only scar failures AFTER you've found the key
+                # Before getting the key, you're still exploring - failures are expected
+                # After getting key, you know the solution path and should avoid mistakes
+                if use_memory and memory and "key" in config.inventory:
                     failed_move = explore_move
                     memory.write_scar(np.array([float(failed_move[0]), float(failed_move[1])]), 
-                                     penalty=1.0)
+                                     penalty=0.5)
                 break
         
         steps += 1
+        
+        # Advance time for memory decay
+        if use_memory and memory:
+            memory.step()
     
     # Failed to reach goal
     return MazeResult(
@@ -381,7 +402,8 @@ def run_maze_experiments():
     
     print("\n--- Simple Maze: With Memory (10 runs, shared memory) ---")
     # Create ONE memory instance that persists across all 10 runs - learns from failures
-    shared_memory_simple = MemoryManifold(lambda_c=0.5)
+    # With reward decay (0.95 per step) to prevent getting stuck at hotspots
+    shared_memory_simple = MemoryManifold(lambda_c=0.5, reward_decay=0.95)
     results_with_memory = []
     for seed in range(10):
         r = run_maze_navigation(
@@ -396,7 +418,7 @@ def run_maze_experiments():
             seed=seed
         )
         results_with_memory.append(r)
-        print(f"  Seed {seed}: {'SUCCESS' if r.success else 'FAILED'} (steps={r.steps}, memory_scars={len(shared_memory_simple.scars)})")
+        print(f"  Seed {seed}: {'SUCCESS' if r.success else 'FAILED'} (steps={r.steps}, scars={len(shared_memory_simple.scars)}, rewards={len(shared_memory_simple.rewards)})")
     
     success_mem = sum(1 for r in results_with_memory if r.success)
     print(f"\nResults (With Memory): {success_mem}/10 ({success_mem*10:.0f}%)")
@@ -444,9 +466,12 @@ def run_maze_experiments():
     print(f"  Result: {'SUCCESS' if r_kd_no_mem.success else 'FAILED'} "
           f"(steps={r_kd_no_mem.steps}, key={r_kd_no_mem.key_collected}, door={r_kd_no_mem.door_passed})")
     
-    print("\n--- Key-Door Maze: With Memory (10 runs, shared memory) ---")
-    # Create ONE memory instance that persists across all 10 runs - learns from failures
-    shared_memory_kd = MemoryManifold(lambda_c=0.5)
+    print("\n--- Key-Door Maze: With Memory (10 runs, shared memory + smart scarring) ---")
+    # Use SHARED memory but with smart scarring:
+    # - Write rewards for key/door/goal (attracts future runs)
+    # - Only write scars AFTER key is collected (don't block path to key)
+    # - With slower reward decay (0.99) so rewards persist across runs
+    shared_memory_kd = MemoryManifold(lambda_c=0.5, reward_decay=0.99)
     results_kd = []
     for seed in range(10):
         r = run_maze_navigation(
@@ -465,8 +490,9 @@ def run_maze_experiments():
             seed=seed
         )
         results_kd.append(r)
+        # Note: With independent memory, can't easily show scar/reward count - each run has its own
         print(f"  Seed {seed}: {'SUCCESS' if r.success else 'FAILED'} "
-              f"(steps={r.steps}, key={r.key_collected}, door={r.door_passed}, scars={len(shared_memory_kd.scars)})")
+              f"(steps={r.steps}, key={r.key_collected}, door={r.door_passed})")
     
     success_kd = sum(1 for r in results_kd if r.success)
     print(f"\nKey-Door Results: {success_kd}/10 successful")
