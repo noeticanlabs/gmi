@@ -402,8 +402,8 @@ def run_maze_experiments():
     
     print("\n--- Simple Maze: With Memory (10 runs, shared memory) ---")
     # Create ONE memory instance that persists across all 10 runs - learns from failures
-    # With reward decay (0.95 per step) to prevent getting stuck at hotspots
-    shared_memory_simple = MemoryManifold(lambda_c=0.5, reward_decay=0.95)
+    # With reward decay (0.99) so rewards persist across runs
+    shared_memory_simple = MemoryManifold(lambda_c=0.5, reward_decay=0.99)
     results_with_memory = []
     for seed in range(10):
         r = run_maze_navigation(
@@ -466,14 +466,13 @@ def run_maze_experiments():
     print(f"  Result: {'SUCCESS' if r_kd_no_mem.success else 'FAILED'} "
           f"(steps={r_kd_no_mem.steps}, key={r_kd_no_mem.key_collected}, door={r_kd_no_mem.door_passed})")
     
-    print("\n--- Key-Door Maze: With Memory (10 runs, shared memory + smart scarring) ---")
-    # Use SHARED memory but with smart scarring:
-    # - Write rewards for key/door/goal (attracts future runs)
-    # - Only write scars AFTER key is collected (don't block path to key)
-    # - With slower reward decay (0.99) so rewards persist across runs
-    shared_memory_kd = MemoryManifold(lambda_c=0.5, reward_decay=0.99)
+    print("\n--- Key-Door Maze: With Memory (10 runs, independent memory per run) ---")
+    # Use INDEPENDENT memory per run (not shared)
+    # Each run learns from its own key/door discoveries without cross-run interference
     results_kd = []
     for seed in range(10):
+        # Create fresh memory for each run
+        run_memory = MemoryManifold(lambda_c=0.5, reward_decay=0.99)
         r = run_maze_navigation(
             maze=key_door_maze,
             start_pos=start_kd,
@@ -486,7 +485,7 @@ def run_maze_experiments():
             door_pos=door_pos_kd,
             use_memory=True,
             memory_lambda=0.5,
-            shared_memory=shared_memory_kd,  # Share memory across runs
+            shared_memory=run_memory,  # Independent memory per run
             seed=seed
         )
         results_kd.append(r)
