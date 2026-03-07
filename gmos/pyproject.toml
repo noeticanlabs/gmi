@@ -1,6 +1,6 @@
 [project]
 name = "gmos"
-version = "0.1.0"
+version = "0.2.0"
 description = "Glyph-Manifold Operating System - Governed substrate for reflective, ledger-bound intelligence"
 readme = "README.md"
 requires-python = ">=3.11"
@@ -8,12 +8,13 @@ license = {text = "MIT"}
 authors = [
     {name = "GM-OS Contributors"}
 ]
-keywords = ["cognitive-computing", "governance", "manifold", "ledger", "thermodynamics"]
+keywords = ["cognitive-computing", "governance", "manifold", "ledger", "thermodynamics", "ai", "gmi"]
 classifiers = [
     "Development Status :: 3 - Alpha",
     "Intended Audience :: Science/Research",
     "Programming Language :: Python :: 3.11",
     "Programming Language :: Python :: 3.12",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
 ]
 
 dependencies = [
@@ -27,6 +28,15 @@ dev = [
     "black>=23.0.0",
     "mypy>=1.0.0",
 ]
+docs = [
+    "sphinx>=7.0.0",
+    "sphinx-rtd-theme>=2.0.0",
+]
+
+[project.urls]
+Homepage = "https://github.com/gmos/gmos"
+Documentation = "https://gmos.readthedocs.io"
+Repository = "https://github.com/gmos/gmos"
 
 [build-system]
 requires = ["setuptools>=68.0", "wheel"]
@@ -34,7 +44,16 @@ build-backend = "setuptools.build_meta"
 
 [tool.setuptools]
 package-dir = {"" = "src"}
-packages = ["gmos", "gmos.kernel", "gmos.memory", "gmos.sensory", "gmos.symbolic", "gmos.agents", "gmos.action"]
+packages = [
+    "gmos",
+    "gmos.kernel",
+    "gmos.memory",
+    "gmos.sensory",
+    "gmos.symbolic",
+    "gmos.agents",
+    "gmos.agents.gmi",
+    "gmos.action",
+]
 
 [tool.setuptools.package-data]
 gmos = ["py.typed"]
@@ -50,3 +69,16 @@ ignore = []
 [tool.black]
 line-length = 88
 target-version = ["py311"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+python_classes = ["Test*"]
+python_functions = ["test_*"]
+addopts = "-q --tb=short"
+
+[tool.mypy]
+python_version = "3.11"
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = false
