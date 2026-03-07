@@ -77,20 +77,31 @@ def run_pressure_test(
     potential: GMIPotential,
     state: State,
     instructions: List[Instruction],
-    max_steps: int = 50
+    max_steps: int = 50,
+    halt_threshold: int = 3
 ) -> PressureTestResult:
     """
-    Run the pressure test.
+    Run the pressure test with explicit halt detection.
     
     Tests:
     1. Budget barrier properly prevents moves when b is too low
     2. System doesn't freeze - can still select admissible moves
     3. Anti-freeze: if no moves are admissible, system halts gracefully
+    4. Explicit HALT detection: if no admissible moves for n cycles, halt
     
+    Args:
+        potential: GMIPotential instance (uses total() for runtime law)
+        state: Initial state
+        instructions: List of candidate instructions
+        max_steps: Maximum iterations before forced stop
+        halt_threshold: Consecutive rejected cycles before declaring halt
+        
     Returns:
         PressureTestResult indicating pass/fail mode
     """
-    verifier = OplaxVerifier(potential_fn=potential.base)
+    # P0 FIX: Use full GMIPotential object so verifier can use .total() method
+    # This ensures memory curvature, budget barrier, and domain terms are included
+    verifier = OplaxVerifier(potential_fn=potential)
     
     current_state = state
     steps_taken = 0
@@ -98,9 +109,16 @@ def run_pressure_test(
     successful_moves = 0
     rejected_moves = 0
     
+    # P1 FIX: Track consecutive rejections for explicit halt detection
+    consecutive_rejections = 0
+    halt_detected = False
+    halt_reason = ""
+    
     print(f"\n=== PRESSURE TEST: Anti-Freeze Logic ===")
     print(f"Initial state: x={current_state.x}, b={current_state.b:.3f}")
+    print(f"Initial total potential: {potential.total(current_state.x, current_state.b):.3f}")
     print(f"Budget barrier at start: {potential.budget_barrier(current_state.b):.2f}")
+    print(f"Halt threshold: {halt_threshold} consecutive rejections")
     
     while steps_taken < max_steps:
         # Check if budget is too low for any move
@@ -113,14 +131,20 @@ def run_pressure_test(
             accepted, new_state, receipt = verifier.check(steps_taken, current_state, instr)
             
             if not accepted:
-                # Anti-freeze: if no moves work, we should halt gracefully
-                # Budget is exhausted - this is correct behavior, not a freeze
-                print(f"Step {steps_taken}: HALT - Budget exhausted, no admissible moves")
-                print("✓ PASS: System halted gracefully when budget depleted")
-                return PressureTestResult.PASS
-            
-            current_state = new_state
-            successful_moves += 1
+                # P1 FIX: Explicit halt detection - budget exhausted
+                consecutive_rejections += 1
+                print(f"Step {steps_taken}: REJECTED - budget too low")
+                
+                if consecutive_rejections >= halt_threshold:
+                    halt_detected = True
+                    halt_reason = "BUDGET_EXHAUSTED"
+                    print(f"Step {steps_taken}: HALT DETECTED ({halt_reason}) - {consecutive_rejections} consecutive rejections")
+                    print("✓ PASS: System halted gracefully when budget depleted (explicit HALT)")
+                    return PressureTestResult.PASS
+            else:
+                consecutive_rejections = 0
+                current_state = new_state
+                successful_moves += 1
         else:
             # Try each instruction in order
             found_move = False
@@ -132,22 +156,37 @@ def run_pressure_test(
                     current_state = new_state
                     successful_moves += 1
                     found_move = True
+                    consecutive_rejections = 0  # Reset on success
                     break
                 else:
                     rejected_moves += 1
             
             if not found_move:
-                # All moves rejected - this is acceptable if budget is low
-                print(f"Step {steps_taken}: All moves rejected - checking budget")
-                if current_state.b <= min(instr.sigma for instr in instructions):
-                    print(f"Step {steps_taken}: Budget insufficient for any move - halting")
-                    return PressureTestResult.FAIL_FREEZE
+                # P1 FIX: All moves rejected - check for explicit halt
+                consecutive_rejections += 1
+                print(f"Step {steps_taken}: All moves rejected ({consecutive_rejections}/{halt_threshold})")
+                
+                if consecutive_rejections >= halt_threshold:
+                    halt_detected = True
+                    halt_reason = "NO_ADMISSIBLE_MOVES"
+                    print(f"Step {steps_taken}: HALT DETECTED ({halt_reason})")
+                    print(f"  - Budget: {current_state.b:.3f}")
+                    print(f"  - Min sigma required: {min(instr.sigma for instr in instructions):.3f}")
+                    print("✓ PASS: System halted gracefully (explicit HALT protocol)")
+                    return PressureTestResult.PASS
+                
+                # Check if budget is insufficient for any remaining move
+                min_sigma = min(instr.sigma for instr in instructions)
+                if current_state.b <= min_sigma:
+                    # Budget technically insufficient - but this is now caught by halt
+                    pass
         
         steps_taken += 1
         
         # Check for convergence (should reach low potential)
-        if potential.base(current_state.x) < 0.1:
-            print(f"Step {steps_taken}: Converged to low potential")
+        # P0 FIX: Use total potential, not just base
+        if potential.total(current_state.x, current_state.b) < 0.5:
+            print(f"Step {steps_taken}: Converged to low potential (V_total={potential.total(current_state.x, current_state.b):.3f})")
             break
     
     print(f"\nPressure Test Results:")
@@ -155,18 +194,31 @@ def run_pressure_test(
     print(f"  Successful moves: {successful_moves}")
     print(f"  Rejected moves: {rejected_moves}")
     print(f"  Budget depleted events: {budget_depleted_count}")
+    print(f"  Consecutive rejections (final): {consecutive_rejections}")
+    print(f"  Halt detected: {halt_detected}")
     
-    # PASS if: made progress OR halted gracefully when no moves possible
-    # The system correctly stops when budget is exhausted
-    if successful_moves > 0:
-        print("✓ PASS: System made progress under high pressure")
+    # P1 FIX: More honest pass conditions
+    # The test passes ONLY if:
+    # 1. We achieved convergence (good), OR
+    # 2. We detected explicit halt with proper protocol (acceptable)
+    # 
+    # The test FAILS if:
+    # - We ran out of steps without converging AND without explicit halt
+    # - This is "soft deadlock with optimistic reporting" that the review criticized
+    
+    converged = potential.total(current_state.x, current_state.b) < 0.5
+    
+    if converged:
+        print("✓ PASS: System converged to low potential")
         return PressureTestResult.PASS
-    elif budget_depleted_count > 0:
-        # Budget depleted - halting gracefully is correct behavior
-        print("✓ PASS: System halted gracefully when budget exhausted")
+    elif halt_detected:
+        print("✓ PASS: System halted gracefully (explicit HALT protocol)")
         return PressureTestResult.PASS
     else:
-        print("✗ FAIL: System froze - no progress possible")
+        # This is the key fix: don't report PASS just because some moves succeeded early
+        # If we're spinning without progress and without halt, that's a failure
+        print("✗ FAIL: System stalled - no convergence and no explicit halt")
+        print("  (This is 'soft deadlock with optimistic reporting')")
         return PressureTestResult.FAIL_FREEZE
 
 

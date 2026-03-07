@@ -21,17 +21,24 @@ import numpy as np
 @dataclass
 class Branch:
     """
-    A candidate branch from counterfactual branching.
+    P4 ENHANCEMENT: A candidate branch from counterfactual branching.
+    
+    Now includes memory costs for tighter memory-policy coupling.
     
     Contains:
     - action: Physical action u_i
     - simulation_cost: Σ(B_i) - accumulated internal simulation cost
     - expected_gain: Γ(B_i) - expected verified gain
+    - memory_cost: μ⋅C_mem(B_i) - epistemic cost from memory retrieval
     """
     branch_id: str = field(default_factory=lambda: f"branch_{uuid.uuid4().hex[:8]}")
     action: np.ndarray = None
     simulation_cost: float = 0.0
     expected_gain: float = 0.0
+    # P4: Memory-related costs
+    memory_cost: float = 0.0  # Cost of retrieving relevant memories
+    retrieval_relevance: float = 0.0  # How relevant the retrieved memories are (0-1)
+    reality_anchor_weight: float = 0.0  # Weight from reality anchors
     
     # Metadata
     parent_state_hash: str = ""
@@ -45,18 +52,42 @@ class Branch:
     @property
     def net_yield(self) -> float:
         """
-        Net expected yield: Y(B_i) = Γ(B_i) - Σ(B_i)
+        P4: Net expected yield including memory costs.
         
-        This is the key metric for selection.
+        Y(B_i) = Γ(B_i) - Σ(B_i) - μ⋅C_mem(B_i)
+        
+        This tightens memory-policy coupling by accounting for:
+        - Simulation cost
+        - Memory retrieval cost
+        - Reality anchor influence
+        
+        The policy now prefers branches that either:
+        - Have high expected gain, or
+        - Are well-supported by existing memory/anchors
         """
-        return self.expected_gain - self.simulation_cost
+        return self.expected_gain - self.simulation_cost - self.memory_cost
+    
+    @property
+    def adjusted_gain(self) -> float:
+        """
+        P4: Expected gain adjusted for memory/reality support.
+        
+        G_adj(B_i) = Γ(B_i) + α⋅retrieval_relevance + β⋅reality_anchor_weight
+        
+        This rewards branches that align with established memory traces
+        and reality anchors.
+        """
+        alpha = 0.3  # retrieval relevance weight
+        beta = 0.2   # reality anchor weight
+        return self.expected_gain + alpha * self.retrieval_relevance + beta * self.reality_anchor_weight
     
     @property
     def roi(self) -> float:
         """Return on investment: Γ(B_i) / Σ(B_i)"""
-        if self.simulation_cost <= 0:
+        total_cost = self.simulation_cost + self.memory_cost
+        if total_cost <= 0:
             return float('inf') if self.expected_gain > 0 else 0.0
-        return self.expected_gain / self.simulation_cost
+        return self.expected_gain / total_cost
     
     def hash(self) -> str:
         """Deterministic hash of branch."""
@@ -72,33 +103,58 @@ class Branch:
 
 class SelectionOperator:
     """
-    O_select: Deterministic argmax selection operator.
+    P4 ENHANCEMENT: O_select now includes memory-awareness.
     
     B* = argmax_{B_i ∈ B_k} Y(B_i)
     
-    Where Y(B_i) = Γ(B_i) - Σ(B_i)
+    Where Y(B_i) = Γ(B_i) - Σ(B_i) - μ⋅C_mem(B_i)
+    
+    P4: Now incorporates:
+    - Memory retrieval costs
+    - Reality anchor weights
+    - Retrieval relevance scores
     
     Deterministic tie-breaking:
-    1. Maximum net yield
-    2. Minimum simulation cost (preferred cheaper branches)
-    3. Minimum branch_id (lexicographic)
+    1. Maximum net yield (including memory costs)
+    2. Minimum total cost (simulation + memory)
+    3. Maximum adjusted gain (with memory/anchor boost)
+    4. Minimum branch_id (lexicographic)
     
     This ensures deterministic auditability - no probabilistic sampling.
     """
     
-    def __init__(self, allow_ties: bool = False):
+    def __init__(self, allow_ties: bool = False, memory_weight: float = 0.5):
         """
         Initialize selection operator.
         
         Args:
             allow_ties: If True, return all branches with max yield
+            memory_weight: Weight for memory costs in yield calculation (0-1)
         """
         self.allow_ties = allow_ties
+        self.memory_weight = memory_weight
         self.selection_history: List[Dict] = []
+    
+    def compute_branch_score(self, branch: Branch) -> tuple:
+        """
+        P4: Compute composite score for branch ranking.
+        
+        Returns tuple for sorting: (negative_yield, total_cost, negative_adjusted_gain, branch_id)
+        
+        This allows multi-criteria selection that balances:
+        - Raw yield (prefer high)
+        - Total cost (prefer low)
+        - Memory/anchor support (prefer high)
+        """
+        yield_score = -branch.net_yield  # Negative for ascending sort
+        total_cost = branch.simulation_cost + branch.memory_cost
+        adjusted_gain = -branch.adjusted_gain  # Negative for ascending sort
+        
+        return (yield_score, total_cost, adjusted_gain, branch.branch_id)
     
     def select(self, branches: List[Branch]) -> Branch:
         """
-        Select branch with maximum net yield.
+        P4: Select branch with maximum net yield (now memory-aware).
         
         Args:
             branches: List of candidate branches
@@ -117,11 +173,11 @@ class SelectionOperator:
             self._record_selection([selected], selected)
             return selected
         
-        # Sort by: (-net_yield, simulation_cost, branch_id)
-        # Negative net_yield for descending order
+        # P4: Sort by composite score including memory costs
+        # Uses compute_branch_score for multi-criteria ranking
         sorted_branches = sorted(
             branches,
-            key=lambda b: (-b.net_yield, b.simulation_cost, b.branch_id)
+            key=self.compute_branch_score
         )
         
         if self.allow_ties:

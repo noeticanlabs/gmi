@@ -51,14 +51,20 @@ def test_gr_solver_standalone():
     solver = GRSolver(Nx=8, Ny=8, Nz=8, dx=0.1)
     solver.init_minkowski()
     
-    print(f"Initial H constraint: {V_from_gr_fields(solver):.2e}")
+    initial_H = V_from_gr_fields(solver)
+    print(f"Initial H constraint: {initial_H:.2e}")
     
     stats = solver.run(T_max=0.05, dt_max=0.01)
     
+    final_H = stats['H_history'][-1]
     print(f"Steps: {stats['steps']}")
-    print(f"Final H: {stats['H_history'][-1]:.2e}")
+    print(f"Final H: {final_H:.2e}")
     print("✓ GR Solver working")
-    return True
+    
+    # P2 FIX: Proper assertions instead of return True
+    assert stats['steps'] > 0, "GR Solver should execute at least one step"
+    assert final_H >= 0, "Hamiltonian should be non-negative"
+    # Note: We don't assert H decreased - that's a physics property, not a test invariant
 
 
 def test_gmi_verifier_standalone():
@@ -82,13 +88,19 @@ def test_gmi_verifier_standalone():
     
     # Test rejection
     instr_bad = Instruction("ASCENT", lambda x: x + 10.0, sigma=5.0, kappa=5.0)
-    accepted, next_state, receipt = verifier.check(2, state, instr_bad)
+    accepted_bad, next_state_bad, receipt_bad = verifier.check(2, state, instr_bad)
     
-    print(f"Ascent step: accepted={accepted}")
-    print(f"Receipt: {receipt.decision}")
+    print(f"Ascent step: accepted={accepted_bad}")
+    print(f"Receipt: {receipt_bad.decision}")
     
     print("✓ GMI Verifier working")
-    return True
+    
+    # P2 FIX: Proper assertions
+    assert accepted, "Valid descent move should be accepted"
+    assert accepted_bad == False, "Ascent move should be rejected (thermodynamic inequality)"
+    assert receipt.decision == "ACCEPTED", "Receipt should show ACCEPTED decision"
+    assert receipt_bad.decision == "REJECTED", "Receipt should show REJECTED decision"
+    assert next_state.b == state.b - instr.sigma, "Budget should be reduced by sigma"
 
 
 def test_npe_synthesizer():
@@ -108,7 +120,11 @@ def test_npe_synthesizer():
         print(f"  - {p}")
     
     print("✓ NPE Synthesizer working")
-    return True
+    
+    # P2 FIX: Proper assertions
+    assert len(proposals) == 3, f"Should generate 3 proposals, got {len(proposals)}"
+    # Proposals can be objects with attributes, not just strings - check they have expected attributes
+    assert all(hasattr(p, 'novelty_score') for p in proposals), "All proposals should be proposal objects"
 
 
 def test_npe_gmi_integration():
@@ -129,7 +145,11 @@ def test_npe_gmi_integration():
     print(f"Statistics: {adapter.stats}")
     
     print("✓ NPE + GMI working")
-    return True
+    
+    # P2 FIX: Proper assertions - check actual keys in stats
+    assert state is not None, "Adapter should return a state"
+    # The stats may have different keys - check for accepted/rejected which indicates execution
+    assert adapter.stats.get('proposals_accepted', 0) > 0 or adapter.stats.get('proposals_rejected', 0) > 0, "Should have processed proposals"
 
 
 def test_cbtsv1_adapter():
@@ -153,7 +173,12 @@ def test_cbtsv1_adapter():
     print(f"dt used: {result.dt_used}")
     
     print("✓ CBTSv1 Adapter working")
-    return True
+    
+    # P2 FIX: Proper assertions
+    assert result is not None, "Should return a result"
+    assert hasattr(result, 'accepted'), "Result should have 'accepted' attribute"
+    assert hasattr(result, 'dt_used'), "Result should have 'dt_used' attribute"
+    # Note: result.accepted could be True or False depending on thermodynamics - that's valid
 
 
 def test_full_three_layer():
@@ -204,7 +229,10 @@ def test_full_three_layer():
     final_V = V_from_gr_fields(gr_solver)
     print(f"\nFinal potential: {final_V:.2e}")
     print("✓ Full three-layer integration working")
-    return True
+    
+    # P2 FIX: Proper assertions
+    assert final_V >= 0, "Final potential should be non-negative"
+    # Note: We don't assert specific values - that's testing physics, not invariants
 
 
 def main():
@@ -222,25 +250,29 @@ def main():
         ("Three-Layer", test_full_three_layer),
     ]
     
-    results = []
+    # P2 FIX: Track failures properly, don't rely on return values
+    failures = []
     for name, test_fn in tests:
         try:
-            result = test_fn()
-            results.append((name, "PASSED" if result else "FAILED"))
+            test_fn()  # If this throws, the test failed
+            print(f"✓ {name}: PASSED")
+        except AssertionError as e:
+            print(f"✗ {name}: FAILED - {e}")
+            failures.append(name)
         except Exception as e:
-            print(f"ERROR: {e}")
-            results.append((name, f"ERROR: {e}"))
+            print(f"✗ {name}: ERROR - {e}")
+            failures.append(name)
     
     print("\n" + "="*60)
     print("SUMMARY")
     print("="*60)
-    for name, status in results:
-        symbol = "✓" if status == "PASSED" else "✗"
-        print(f"{symbol} {name}: {status}")
     
-    all_passed = all(s == "PASSED" for _, s in results)
-    print("\n" + ("ALL TESTS PASSED!" if all_passed else "SOME TESTS FAILED"))
-    return all_passed
+    if failures:
+        print(f"SOME TESTS FAILED: {failures}")
+        return False
+    else:
+        print("ALL TESTS PASSED!")
+        return True
 
 
 if __name__ == "__main__":
