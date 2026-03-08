@@ -7,11 +7,6 @@
   packages = [
     pkgs.python311
     pkgs.python311Packages.pip
-    pkgs.python311Packages.numpy
-    pkgs.python311Packages.pytest
-    pkgs.ruff
-    pkgs.black
-    pkgs.mypy
   ];
   # Sets environment variables in the workspace
   env = {
@@ -35,6 +30,7 @@
     workspace = {
       # Runs when a workspace is first created
       onCreate = {
+        install-deps = "pip install -e .[dev]";
         # Open editors for the following files by default, if they exist:
         default.openFiles = [ ".idx/dev.nix" "README.md" "thermo_cognition.py" ];
       };
