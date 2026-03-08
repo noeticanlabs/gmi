@@ -10,6 +10,7 @@ __version__ = "0.1.0"
 from gmos.kernel import state_host, scheduler, budget_router, receipt_engine, macro_verifier, process_table
 from gmos.kernel import hash_chain, receipt, verifier
 from gmos.memory import relevance
+from gmos.agents.gmi import hosted_agent
 
 __all__ = [
     # Version
@@ -26,4 +27,6 @@ __all__ = [
     "verifier",
     # Memory
     "relevance",
+    # Agents
+    "hosted_agent",
 ]

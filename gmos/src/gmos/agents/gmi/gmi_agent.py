@@ -38,6 +38,7 @@ from gmos.agents.gmi import policy_selection
 from gmos.agents.gmi import evolution_loop
 from gmos.agents.gmi import execution_loop
 from gmos.agents.gmi import semantic_loop
+from gmos.agents.gmi import hosted_agent
 
 # Expose module references
 __all__ = [
@@ -51,4 +52,5 @@ __all__ = [
     'evolution_loop',
     'execution_loop',
     'semantic_loop',
+    'hosted_agent',
 ]

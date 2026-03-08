@@ -52,3 +52,9 @@ python_version = "3.11"
 warn_return_any = true
 warn_unused_configs = true
 disallow_untyped_defs = false
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+# Exclude gmos from root test discovery - it has its own pyproject.toml and tests
+# To test gmos: cd gmos && pip install -e . && pytest -q
+norecursedirs = ["gmos", "experiments", "adapters"]
