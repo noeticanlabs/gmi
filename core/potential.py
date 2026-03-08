@@ -1,6 +1,9 @@
 """
 Canonical Energy Law for the Universal Cognition Engine.
 
+Section I — Continuous Core and Geometric Governance
+Reference: docs/section_i_continuous_core.md
+
 V_GMI(z) = V_base(x) + V_memory(x, M) + V_budget(b) + V_domain(μ)
 
 This is the single source of truth for:
@@ -9,6 +12,12 @@ This is the single source of truth for:
 - Learning rewards
 - Convergence diagnostics
 - Cross-domain interoperability
+
+TAG REFERENCE:
+- [AXIOM] V: H → ℝ is proper, lower semicontinuous, convex
+- [AXIOM] Safe region C = {x: V(x) ≤ Θ}
+- [AXIOM] Extended state z = (x, b) ∈ H × ℝ_≥0
+- [PROVED] Sublevel set C = {V ≤ Θ} is closed and convex
 """
 
 import numpy as np
@@ -24,11 +33,16 @@ class GMIPotential:
     """
     Canonical energy law for the universal cognition engine.
     
+    # [AXIOM] V: H → ℝ is proper, lower semicontinuous, convex
+    # [AXIOM] Safe region C = {x: V(x) ≤ Θ}
+    
     The total potential is a sum of:
     - Base cognitive tension (coherent = 0, incoherent = high)
     - Memory curvature cost (passive structural memory)
     - Budget barrier (diverges as b → 0)
     - Domain-specific residuals
+    
+    Reference: docs/section_i_continuous_core.md §2
     """
     lambda_curvature: float = 5.0
     lambda_budget: float = 1.0
@@ -65,6 +79,9 @@ class GMIPotential:
     def budget_barrier(self, b: float) -> float:
         """
         Barrier term that diverges as b → 0.
+        
+        # [AXIOM] b ∈ ℝ_≥0 (nonnegative budget)
+        # [POLICY] b = 0 → no risk-increasing motion allowed
         
         Prevents risk-increasing motion when budget exhausted.
         The law: b = 0 → no risk-increasing motion allowed.
@@ -146,6 +163,9 @@ class GMIPotential:
     def is_admissible(self, b: float) -> bool:
         """
         Check if budget allows any motion.
+        
+        # [AXIOM] K = C × ℝ_≥0 is closed and convex
+        # [PROVED] Forward invariance: z(0) ∈ K ⇒ z(t) ∈ K
         
         b = 0 → no risk-increasing motion
         """

@@ -1,15 +1,22 @@
 """
 Hash Chain Ledger for the GMI Universal Cognition Engine.
 
+Section II — Discrete Governance and the Oplax Ledger
+Reference: docs/section_ii_discrete_governance.md
+
 Provides cryptographic execution chain where every accepted transition is chained:
 
 H_{k+1} = SHA256(H_k || receipt_k)
+
+# [CONTRACT] Canon profile: H_{n+1} = SHA256(tag | H_n | JCS(r_n))
 
 The verifier validates not only "was this step legal?" but also:
 - Does it point to the correct previous state hash?
 - Does it point to the correct previous receipt hash?
 - Is the chain deterministic under replay?
 - Can a slab summary be checked against the underlying micro receipts?
+
+Reference: docs/section_ii_discrete_governance.md §11
 """
 
 import hashlib

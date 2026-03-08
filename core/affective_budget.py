@@ -1,6 +1,9 @@
 """
 Affective Budget Law for the GMI Universal Cognition Engine.
 
+Section I — Continuous Core and Geometric Governance
+Reference: docs/section_i_continuous_core.md
+
 Module 16.2: Affective Thermodynamic Pricing
 
 χ-modulated thermodynamic pricing:
@@ -9,6 +12,11 @@ Module 16.2: Affective Thermodynamic Pricing
 Policies:
 - ∂μ_I/∂χ > 0: Imagination expensive under threat
 - ∂μ_L/∂χ < 0: Logic cheaper under threat
+
+TAG REFERENCE:
+- [POLICY] ḃ = -κ(dV/dt)_+ (budget spend law)
+- [PROVED] b = 0 ⇒ ḃ = 0 ⇒ dV/dt ≤ 0 (Theorem 7.1)
+- [PROVED] d/dt(b + κV) ≤ 0 (Proposition 8.1)
 """
 
 from dataclasses import dataclass
@@ -21,6 +29,9 @@ class AffectiveBudgetLaw:
     """
     χ-modulated thermodynamic budget law.
     
+    # [POLICY] ḃ = -κ(dV/dt)_+ (budget spend law)
+    # [PROVED] b = 0 ⇒ ḃ = 0 ⇒ dV/dt ≤ 0 (boundary collapse)
+    
     The mode field χ directly deforms the thermodynamic cost of utilizing
     the epistemic operators.
     
@@ -28,6 +39,8 @@ class AffectiveBudgetLaw:
     - Imagination (O_I) becomes MORE expensive
     - Logic (O_L) becomes CHEAPER
     - Emotion (O_E) becomes MORE expensive
+    
+    Reference: docs/section_i_continuous_core.md §6-7
     """
     # Base cost coefficients
     base_mu_imagination: float = 1.0

@@ -1,7 +1,16 @@
 """
 Receipt Module for the GMI Universal Cognition Engine.
 
+Section II — Discrete Governance and the Oplax Ledger
+Reference: docs/section_ii_discrete_governance.md
+
 Provides immutable proof artifacts for state transitions with hash chain integration.
+
+TAG REFERENCE:
+- [CONTRACT] Micro receipt schema: (id, policy, step, H_n, H_{n+1}, S_n, S_{n+1}, M, Σ)
+- [CONTRACT] Slab receipt schema: (id, policy, [m,n), MerkleRoot, H_m, H_n, Summary, Σ)
+- [CONTRACT] Canon profile: H_{n+1} = SHA256(tag | H_n | JCS(r_n))
+- [CONTRACT] Minimal reject-code set
 """
 
 import json
@@ -15,6 +24,10 @@ from typing import Optional, Dict, Any
 class Receipt:
     """
     The immutable proof artifact for a single state transition.
+    
+    # [CONTRACT] Micro receipt schema
+    # [CONTRACT] Chain digest: H_{n+1} = SHA256(tag | H_n | JCS(r_n))
+    
     Must be re-checkable without re-running the inner loop.
     
     Extended with hash chain fields:
@@ -23,6 +36,8 @@ class Receipt:
     - state_hash_prev: Hash of state before transition
     - state_hash_next: Hash of state after transition
     - decision_code: Numeric encoding (1=ACCEPTED, 0=REJECTED, -1=HALT)
+    
+    Reference: docs/section_ii_discrete_governance.md §12.1
     """
     # Core fields
     step_index: int

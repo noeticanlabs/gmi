@@ -4,6 +4,130 @@
 
 Governed Metabolic Intelligence (GMI) is a computational framework that treats cognitive processes as thermodynamic systems. The core insight is that valid cognitive operations must satisfy energy conservation constraints similar to physical thermodynamic laws.
 
+## Section I — Continuous Core and Geometric Governance
+
+> **Canonical Reference**: [`docs/section_i_continuous_core.md`](docs/section_i_continuous_core.md)
+
+The mathematical foundation of GMI is defined in **Section I**, which establishes:
+
+- **Admissible State Space**: Extended state $z = (x, b) \in \mathcal H \times \mathbb R_{\ge 0}$
+- **Violation Functional**: $V: \mathcal H \to \mathbb R$ (proper, lsc, convex)
+- **Safe Region**: $\mathcal C = \{x: V(x) \le \Theta\}$
+- **Governed Dynamics**: $\dot z \in \mathcal F(z) - N_{\mathcal K}(z)$ (Moreau sweeping)
+- **Budget Spend Law**: $\dot b = -\kappa (dV/dt)_+$
+- **Root-Clock**: $d\tau/dt = \sqrt{b + \alpha \mathcal D_a}$
+
+### Theorem Stack Summary
+
+| Theorem | Statement | Status |
+|---------|-----------|--------|
+| Theorem 5.1 | Forward invariance: $z(0) \in K \Rightarrow z(t) \in K$ | [PROVED] |
+| Theorem 7.1 | Budget boundary collapse: $b=0 \Rightarrow dV/dt \le 0$ | [PROVED] |
+| Proposition 8.1 | Monotonicity: $d/dt(b + \kappa V) \le 0$ | [PROVED] |
+| Theorem 9.1 | Governance damping: $\|u(t)\| \le e^{-\beta^2/\lambda_{max}t}\|u(0)\|$ | [PROVED] |
+| Theorem 10.1 | Minkowski interval: $d\tau^2 = dt^2 - dx^2/c^2$ | [PROVED] |
+| Theorem 11.1 | Horizon freezing: $\Lambda=0 \Rightarrow d\tau/dt=0$ | [PROVED] |
+| Theorem 12.1 | ADM lapse bridge: $N = \sqrt{b + \alpha \mathcal D_a}$ | [LEMMA-NEEDED] |
+
+### Tag Legend
+
+- **[AXIOM]** — Foundational definitions and assumptions
+- **[POLICY]** — Governing laws and dynamics
+- **[PROVED]** — Theorems with implementation verification
+- **[LEMMA-NEEDED]** — Items requiring additional proof work
+
+See [`core/section_i_theorems.py`](core/section_i_theorems.py) for formal theorem implementations.
+
+## Section II — Discrete Governance and the Oplax Ledger
+
+> **Canonical Reference**: [`docs/section_ii_discrete_governance.md`](docs/section_ii_discrete_governance.md)
+
+Section II converts the continuous viability law into a deterministic, receipt-verifiable algebra:
+
+- **PDES Projection**: Many-to-one projection $\Pi: \mathcal X \to \mathcal Y$ with hidden fiber
+- **Canonical Envelope**: $\widehat W(R) = \sup_{\xi \in \mathcal F_R} W(\xi)$
+- **Oplax Subadditivity**: $\widehat W(R_2 \odot R_1) \le \widehat W(R_1) + \widehat W(R_2)$
+- **Discrete Descent Law**: $V(x') + \text{Spend}(r) \le V(x) + \text{Defect}(r)$
+- **Budget Update**: $B_{k+1} = B_k - \kappa \widehat{\mathcal D}_k - \tau_k \ge 0$
+- **Canon Profile**: $H_{n+1} = \text{SHA256}(\text{tag} | H_n | \text{JCS}(r_n))$
+
+### Theorem Stack Summary
+
+| Theorem | Statement | Status |
+|---------|-----------|--------|
+| Oplax Subadditivity | $\widehat W(R_2 \odot R_1) \le \widehat W(R_1) + \widehat W(R_2)$ | [PROVED] |
+| Descent Consequence | $\text{Defect}(r) \le \text{Spend}(r) \Rightarrow V(x') \le V(x)$ | [PROVED] |
+| Positive Variation | $V(T) - V(0) \le \int_0^T (dV/dt)_+ dt$ | [PROVED] |
+| Finite Budget Bound | $\sum (\kappa \widehat{\mathcal D}_k + \tau_k) \le B_0$ | [PROVED] |
+| Oplax Morphism | $B.V(f(x')) + B.\text{Spend}(f(r)) \le B.V(f(x)) + B.\text{Defect}(f(r)) + \Delta_f$ | [DEFINITION] |
+| Pos-Enrichment | $f \le g \iff \Delta_f \le \Delta_g$ | [ORDER] |
+
+See [`core/section_ii_theorems.py`](core/section_ii_theorems.py) for formal theorem implementations.
+
+### Tag Legend
+
+- **[AXIOM]** — Foundational definitions and assumptions
+- **[POLICY]** — Governing laws and dynamics
+- **[DEFINITION]** — Formal definitions
+- **[PROVED]** — Theorems with implementation verification
+- **[ORDER]** — Ordering relations
+- **[CONTRACT]** — Interface contract requirements
+- **[LEMMA-NEEDED]** — Items requiring additional proof work
+- **[INSTANTIATION]** — Domain-specific solver theories
+- **[HYPOTHESIS]** — Assumptions requiring verification
+- **[CONSTITUTIVE BRIDGE]** — Structural identifications
+- **[WEAK-FIELD BRIDGE]** — Approximate relations
+
+## Section III — Domain Instantiations and Verified Solver Theories
+
+> **Canonical Reference**: [`docs/section_iii_domain_instantiations.md`](docs/section_iii_domain_instantiations.md)
+
+Section III shows how the abstract Coh machinery becomes domain-specific mathematics:
+
+- **NS-PCM**: Navier–Stokes instantiation with vorticity, enstrophy balance, boundary bleed
+- **Relativistic**: Half-log barrier → Minkowski interval → Lorentz dynamics
+- **GR Bridge**: Lawfulness power → ADM lapse → Scalar budget gravity
+
+### Theorem Stack Summary
+
+| Theorem | Statement | Status |
+|---------|-----------|--------|
+| Domain Coh Object | $S_{dom} = (X, V, Spend, Defect, RV, P)$ | [DEFINITION] |
+| Enstrophy Balance | $(1/2)d/dt\|\omega\|^2 + \nu\|\nabla\omega\|^2 = \int(S\omega)\cdot\omega$ | [PROVED] |
+| Millennium Gate | $\mathcal Q_\delta(t) < 1$ | [DIAGNOSTIC] |
+| Minkowski Interval | $d\tau^2 = dt^2 - dx^2/c^2$ | [PROVED] |
+| Relativistic Momentum | $p = \gamma_v m v$ | [PROVED] |
+| Lorentz Force | $dP/dt = q(E + v \times B)$ | [PROVED] |
+| Gravitational Lapse | $N = \sqrt{b + \alpha\mathcal D_a}$ | [CONSTITUTIVE BRIDGE] |
+| Scalar Budget Gravity | $b \approx 1 - 2GM/(rc^2)$ | [WEAK-FIELD BRIDGE] |
+
+See [`core/section_iii_theorems.py`](core/section_iii_theorems.py) for formal theorem implementations.
+
+## Section IV — Formal Verification, Implementation Contract, and System Realization
+
+> **Canonical Reference**: [`docs/section_iv_verification_contract.md`](docs/section_iv_verification_contract.md)
+
+Section IV defines the engineering standard for canon-admissible modules:
+
+- **Determinism Canon**: Same bytes → Same decision
+- **Chain Digest Law**: $H_{n+1} = \text{hash}(\text{tag} | H_n | \text{JCS}(r_n))$
+- **Trace Closure**: Legal steps compose into legal histories
+- **Reject-Code Algebra**: Typed diagnostic failures
+
+### Theorem Stack Summary
+
+| Theorem | Statement | Status |
+|---------|-----------|--------|
+| Canon Module | $M = (X, V, \Sigma, RV, C)$ | [DEFINITION] |
+| Determinism | Same bytes ⇒ Same decision | [AXIOM] |
+| Chain Digest | $H_{n+1} = \text{hash}(\text{tag} \| H_n \| \text{JCS}(r_n))$ | [DEFINITION] |
+| Trace Closure | Legal steps ⇒ Legal history | [PROVED] |
+| Reject Codes | Decision = ACCEPT ∪ {REJECT(c)} | [DEFINITION] |
+| Canon-Admissibility | $\text{CanonOK}(M) = \wedge P_i(M)$ | [CONTRACT] |
+| Lifecycle | $S_0 \to S_1 \to \cdots \to S_8$ | [REALIZATION] |
+
+See [`core/section_iv_theorems.py`](core/section_iv_theorems.py) for formal theorem implementations.
+
 ## Core Components
 
 ### 1. State Model (`core/state.py`)

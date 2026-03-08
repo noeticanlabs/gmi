@@ -1,6 +1,9 @@
 """
 Relativistic Dynamics from Convex Optimization.
 
+Section I — Continuous Core and Geometric Governance
+Reference: docs/section_i_continuous_core.md
+
 This module verifies the thesis that Special Relativity emerges from
 convex optimization constraints. A system constrained by a speed-limit
 barrier functional mathematically must exhibit hyperbolic velocity
@@ -11,6 +14,13 @@ Key mathematical objects:
 - Hessian metric: g = I/c²α + 2vvᵀ/c⁴α²  (α = 1 - ||v||²/c²)
 - Lorentz boosts on 4D hyperboloid
 - Legendre transform for energy-momentum
+
+TAG REFERENCE:
+- [AXIOM] Ṽ(v) = -½log(1 - |v|²/c²) (velocity barrier)
+- [PROVED] dτ = √(1 - |v|²/c²) dt (Theorem 10.1)
+- [PROVED] dτ² = dt² - dx²/c² (Minkowski interval)
+- [LEMMA-NEEDED] Full hyperbolic/Klein model equivalence proof
+- [LEMMA-NEEDED] ADM lapse → Einstein field equations derivation
 """
 
 import numpy as np
@@ -27,9 +37,15 @@ class RelativisticVelocitySpace:
     """
     Velocity space with hyperbolic geometry induced by speed limit barrier.
     
+    # [AXIOM] Ṽ(v) = -½log(1 - |v|²/c²) (velocity barrier)
+    # [PROVED] dτ = √(1 - |v|²/c²) dt (Minkowski interval)
+    # [LEMMA-NEEDED] Hyperbolic/Klein model equivalence
+    
     The barrier functional Ṽ(v) = -½log(1 - ||v||²/c²) creates a Riemannian
     metric on the open ball B_c = {v : ||v|| < c} that is structurally
     identical to the Beltrami-Klein model of hyperbolic space ℍ³.
+    
+    Reference: docs/section_i_continuous_core.md §10, §13
     """
     c: float = DEFAULT_C  # Speed of light (maximum velocity)
     
@@ -53,6 +69,9 @@ class RelativisticVelocitySpace:
     def barrier_potential(self, v: np.ndarray) -> float:
         """
         Velocity barrier functional: Ṽ(v) = -½log(1 - ||v||²/c²).
+        
+        # [AXIOM] Ṽ(v) = -½log(1 - |v|²/c²)
+        # [PROVED] e^(-Ṽ(v)) = √(1 - |v|²/c²) = dτ/dt
         
         This is a logarithmic barrier that diverges to +∞ as ||v|| → c.
         In optimization, such barriers penalize approach to the boundary.
@@ -78,6 +97,9 @@ class RelativisticVelocitySpace:
     def barrier_hessian(self, v: np.ndarray) -> np.ndarray:
         """
         Hessian of the barrier potential: ∇²Ṽ(v).
+        
+        # [PROVED] ∇²Ṽ(v) = (1/c²α)I + (2/c⁴α²)vvᵀ
+        # [LEMMA-NEEDED] Hyperbolic/Klein model equivalence
         
         The exact analytical result is:
         ∇²Ṽ(v) = (1/c²α)I + (2/c⁴α²)vvᵀ

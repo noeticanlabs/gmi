@@ -1,6 +1,9 @@
 """
 Constraint Projection Engine for the GMI Universal Cognition Engine.
 
+Section I — Continuous Core and Geometric Governance
+Reference: docs/section_i_continuous_core.md
+
 Transforms from "post-hoc auditor" to "projected dynamical system":
 
 ż ∈ F(z) - N_K(z)
@@ -11,6 +14,13 @@ Instead of rejecting bad moves after proposal, actively projects
 onto the constraint manifold. This is the difference between:
 - A governor standing beside the machine with a red stamp
 - A machine whose gears physically cannot spin the wrong way
+
+TAG REFERENCE:
+- [AXIOM] K = C × ℝ_≥0 is closed and convex
+- [AXIOM] T_K(z) defined via liminf dist criterion
+- [AXIOM] N_K(z) = T_K(z)° = ∂I_K(z)
+- [POLICY] ż ∈ F(z) - N_K(z) (Moreau sweeping process)
+- [PROVED] Forward invariance: z(0) ∈ K ⇒ z(t) ∈ K
 """
 
 import numpy as np
@@ -32,10 +42,17 @@ class ConstraintSet:
     """
     Defines the lawful constraint manifold K.
     
+    # [AXIOM] K = C × ℝ_≥0 is closed and convex
+    # [AXIOM] T_K(z) defined via liminf dist criterion
+    # [AXIOM] N_K(z) = T_K(z)° = ∂I_K(z)
+    # [PROVED] Forward invariance: z(0) ∈ K ⇒ z(t) ∈ K
+    
     In GMI, the primary constraints are:
     - Budget: b >= 0
     - Potential boundedness: V(z) <= V_max
     - Domain-specific: admissible state regions
+    
+    Reference: docs/section_i_continuous_core.md §4-5
     """
     # Budget constraints
     budget_min: float = 0.0
@@ -54,6 +71,10 @@ class ConstraintSet:
     def project_to_K(self, x: np.ndarray, b: float) -> Tuple[np.ndarray, float]:
         """
         Project state onto constraint manifold K.
+        
+        # [POLICY] ż ∈ F(z) - N_K(z) - Moreau sweeping process
+        
+        Projects onto the admissible set K = C × ℝ_≥0.
         
         Args:
             x: Current state coordinates
@@ -76,6 +97,10 @@ class ConstraintSet:
     def is_feasible(self, x: np.ndarray, b: float) -> bool:
         """
         Check if a state is feasible (within constraints).
+        
+        # [PROVED] Forward invariance: z(0) ∈ K ⇒ z(t) ∈ K
+        
+        Verifies state belongs to admissible set K = C × ℝ_≥0.
         
         Args:
             x: State coordinates

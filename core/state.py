@@ -1,12 +1,20 @@
 """
 Cognitive State Module for the GMI Universal Cognition Engine.
 
+Section I — Continuous Core and Geometric Governance
+Reference: docs/section_i_continuous_core.md
+
 Provides:
 - State: Legacy state representation (x, b)
 - CognitiveState: Full multi-manifold state with memory integration
 - Proposal: Materialized proposal wrapper
 - Instruction: Base transition operator
 - CompositeInstruction: Chained operators
+
+TAG REFERENCE:
+- [AXIOM] z = (x, b) ∈ H × ℝ_≥0 (extended state)
+- [AXIOM] K = C × ℝ_≥0 where C = {x: V(x) ≤ Θ}
+- [PROVED] Forward invariance: z(0) ∈ K ⇒ z(t) ∈ K
 """
 
 import numpy as np
@@ -41,10 +49,17 @@ class Proposal:
 class State:
     """
     The cognitive state mapped as a coordinate in the PhaseLoom space.
+    
+    # [AXIOM] z = (x, b) ∈ H × ℝ_≥0 (extended state)
+    # [AXIOM] K = C × ℝ_≥0 where C = {x: V(x) ≤ Θ}
+    # [PROVED] Forward invariance: z(0) ∈ K ⇒ z(t) ∈ K
+    
     z(t) = (x(t), b(t)) representing cognitive coordinates and thermodynamic budget.
     
     This is the legacy representation, kept for backward compatibility.
     For the full multi-manifold state, use CognitiveState.
+    
+    Reference: docs/section_i_continuous_core.md §2
     """
     def __init__(self, x: list[float], budget: float):
         self.x = np.array(x, dtype=float)  # Continuous cognition state

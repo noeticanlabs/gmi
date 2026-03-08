@@ -1,5 +1,8 @@
 """
-3+1 General Relativity Solver - Self-contained implementation
+3+1 General Relativity Solver - Self-contained implementation.
+
+Section III — Domain Instantiations and Verified Solver Theories
+Reference: docs/section_iii_domain_instantiations.md
 
 This is a minimal but complete 3+1 GR solver that evolves the metric tensor
 and computes Hamiltonian/momentum constraints. Based on the ADM formalism.
@@ -8,6 +11,11 @@ Key equations:
 - Hamiltonian constraint: H = R + K^2 - K_ij K^ij - 2Λ = 0
 - Momentum constraint: D_j(K^ij - γ^ij K) = 0
 - Evolution: ∂_t γ_ij = -2αK_ij + D_i β_j + D_j β_i
+
+TAG REFERENCE:
+- [INSTANTIATION] Relativistic barrier object
+- [CONSTITUTIVE BRIDGE] Gravitational lapse law: N = √(b + αD_a)
+- [WEAK-FIELD BRIDGE] Scalar budget gravity: b ≈ 1 - 2GM/(rc²)
 """
 
 import numpy as np

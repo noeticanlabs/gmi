@@ -1,3 +1,18 @@
+"""
+Oplax Verifier for the GMI Universal Cognition Engine.
+
+Section II — Discrete Governance and the Oplax Ledger
+Reference: docs/section_ii_discrete_governance.md
+
+This module implements the deterministic receipt verifier RV that enforces
+the discrete descent law: V(x') + Spend(r) ≤ V(x) + Defect(r)
+
+TAG REFERENCE:
+- [AXIOM] Discrete descent law: V(x') + Spend(r) ≤ V(x) + Defect(r)
+- [CONTRACT] Core verifier predicate
+- [PROVED] Descent consequence: Defect(r) ≤ Spend(r) ⇒ V(x') ≤ V(x)
+"""
+
 from core.state import State, CompositeInstruction, Proposal
 from ledger.receipt import Receipt
 from typing import Callable, Optional, Any
@@ -17,6 +32,11 @@ class VerifierConfig:
 class OplaxVerifier:
     """
     Enforces the geometric and thermodynamic constraints of the GMI.
+    
+    # [AXIOM] V(x') + Spend(r) ≤ V(x) + Defect(r)
+    # [CONTRACT] RV: prev_state_hash × receipt × next_state_hash × prev_digest → Decision
+    # [PROVED] Descent consequence: Defect(r) ≤ Spend(r) ⇒ V(x') ≤ V(x)
+    
     Velocity is eliminated instantly if constraints are violated.
     
     P0 FIX: Now supports both legacy callable interface and full GMIPotential:
@@ -30,6 +50,8 @@ class OplaxVerifier:
     
     This prevents "locally rational but strategically suicidal" moves that
     exhaust budget for immediate gain but destroy future viability.
+    
+    Reference: docs/section_ii_discrete_governance.md §4
     """
     def __init__(
         self, 
