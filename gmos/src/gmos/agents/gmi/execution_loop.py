@@ -7,11 +7,12 @@ The main runtime loop that executes the GMI engine with memory and hash chain in
 import os
 import numpy as np
 
-from core.state import State, Instruction, create_potential
-from core.potential import GMIPotential
-from ledger.oplax_verifier import OplaxVerifier
-from ledger.hash_chain import HashChainLedger, get_global_ledger
-from ledger.receipt import Receipt
+# Canonical imports (GM-OS)
+from gmos.agents.gmi.state import State, CognitiveState
+from gmos.agents.gmi.potential import GMIPotential, create_potential
+from gmos.kernel.verifier import OplaxVerifier
+from gmos.kernel.hash_chain import HashChainLedger, get_global_ledger
+from gmos.kernel.receipt import Receipt
 
 
 def dynamics_step(state: State) -> tuple[Instruction, Instruction]:

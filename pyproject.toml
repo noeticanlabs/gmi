@@ -34,7 +34,9 @@ requires = ["setuptools>=68.0", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [tool.setuptools]
-packages = ["core", "ledger", "runtime"]
+# Legacy packages - see CANONICAL.md
+# Canonical implementation is in gmos/src/gmos/
+packages = ["core", "memory", "ledger", "runtime", "adapters"]
 
 [tool.ruff]
 line-length = 88

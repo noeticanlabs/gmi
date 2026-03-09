@@ -222,7 +222,7 @@ class SensoryState:
     # Metadata
     timestamp: float = field(default_factory=time.time)
     source: str = "unknown"
-    
+
     def __post_init__(self):
         """Sync individual charts with bundle."""
         if self.external is None:
@@ -231,7 +231,7 @@ class SensoryState:
             self.semantic = self.bundle.semantic
         if self.internal is None:
             self.internal = self.bundle.internal
-    
+
     def to_external_chart(self, data: Dict[str, Any]) -> ExternalChart:
         """Convert raw data to external chart."""
         chart = ExternalChart()
@@ -266,7 +266,7 @@ class SensoryState:
             chart.source_tags = data["sources"]
         
         return chart
-    
+
     def to_semantic_chart(self, data: Dict[str, Any]) -> SemanticChart:
         """Convert data to semantic chart."""
         chart = SemanticChart()
@@ -294,7 +294,7 @@ class SensoryState:
         
         chart.timestamp = data.get("timestamp", time.time())
         return chart
-    
+
     def to_internal_chart(self, data: Dict[str, Any]) -> InternalChart:
         """Convert data to internal chart."""
         chart = InternalChart()
@@ -324,7 +324,7 @@ class SensoryState:
         
         chart.timestamp = data.get("timestamp", time.time())
         return chart
-    
+
     def build_sensory_state(
         self,
         external_data: Optional[Dict[str, Any]] = None,
@@ -354,6 +354,10 @@ class SensoryState:
         self.bundle = bundle
         
         return self
+
+
+# Alias for canonical naming (per spec §5)
+SensoryManifold = SensoryState
 
 
 # Convenience function

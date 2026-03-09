@@ -26,7 +26,7 @@ import time
 
 # Import existing component types
 from gmos.sensory.manifold import (
-    SensoryManifold,
+    SensoryState,
     ExternalChart,
     SemanticChart,
     InternalChart,
@@ -37,6 +37,9 @@ from gmos.kernel.state_host import StateHost, HostedState, ProcessStateFlag
 from gmos.kernel.scheduler import KernelScheduler
 from gmos.kernel.budget_router import BudgetRouter, BudgetSlice
 from gmos.kernel.hash_chain import ChainDigest
+
+# Alias for canonical naming (per spec §5)
+SensoryManifold = SensoryState
 
 
 class OperationalMode(Enum):

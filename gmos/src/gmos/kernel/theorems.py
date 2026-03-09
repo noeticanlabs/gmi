@@ -479,7 +479,162 @@ class GMOSTheorems:
         return theorem_deterministic_consensus(*args, **kwargs)
     
     @staticmethod
-    def verify_all(*args, **kwargs) -> List[TheoremResult]:
-        """Verify all theorems (placeholder)."""
-        # This would run all theorems
-        return []
+    def verify_all(
+        initial_state: Any = None,
+        dynamics_system: Any = None,
+        state_mutations: List[Dict[str, Any]] = None,
+        budget_router: Any = None,
+        q1: Any = None,
+        q2: Any = None,
+        sigma_min: float = 0.1,
+        v_before: float = 10.0,
+        v_after: float = 9.0,
+        receipts: List[Dict[str, Any]] = None,
+        state_hash: str = "test_hash",
+    ) -> List[TheoremResult]:
+        """
+        Verify all theorems in the GM-OS theorem suite.
+        
+        This runs all 8 core theorems from the GM-OS specification:
+        - Theorem 24.1: Forward Invariance
+        - Theorem 24.2: Kernel Monopoly
+        - Theorem 24.3: Budget Reserve Preservation
+        - Theorem 24.4: Anchor Dominance
+        - Theorem 24.5: Memory Loop Finiteness
+        - Theorem 24.6: Discrete Soundness
+        - Theorem 24.7: Chain Closure
+        - Theorem 24.8: Deterministic Consensus
+        
+        Args:
+            initial_state: Initial state for forward invariance theorem
+            dynamics_system: ProjectedDynamicalSystem for dynamics theorems
+            state_mutations: List of state mutations for monopoly theorem
+            budget_router: BudgetRouter instance for reserve theorem
+            q1, q2: PerceptTokens for anchor dominance theorem
+            sigma_min: Minimum sigma for memory loop theorem
+            v_before, v_after: Potential values for soundness theorem
+            receipts: List of receipts for chain closure theorem
+            state_hash: State hash for consensus theorem
+            
+        Returns:
+            List of TheoremResult for each theorem
+        """
+        results = []
+        
+        # Theorem 24.1: Forward Invariance
+        try:
+            result = theorem_forward_invariance(
+                initial_state=initial_state,
+                dynamics_system=dynamics_system,
+                T=1.0,  # Default 1 second simulation
+            )
+            results.append(result)
+        except Exception as e:
+            results.append(TheoremResult(
+                theorem_name="Forward Invariance",
+                satisfied=False,
+                message=f"Error: {str(e)}",
+                details={"error": str(e)},
+            ))
+        
+        # Theorem 24.2: Kernel Monopoly
+        try:
+            result = theorem_kernel_monopoly(
+                state_mutations=state_mutations or [],
+            )
+            results.append(result)
+        except Exception as e:
+            results.append(TheoremResult(
+                theorem_name="Kernel Monopoly",
+                satisfied=False,
+                message=f"Error: {str(e)}",
+                details={"error": str(e)},
+            ))
+        
+        # Theorem 24.3: Budget Reserve Preservation
+        try:
+            result = theorem_budget_reserve_preservation(
+                budget_router=budget_router,
+            )
+            results.append(result)
+        except Exception as e:
+            results.append(TheoremResult(
+                theorem_name="Budget Reserve Preservation",
+                satisfied=False,
+                message=f"Error: {str(e)}",
+                details={"error": str(e)},
+            ))
+        
+        # Theorem 24.4: Anchor Dominance
+        try:
+            result = theorem_anchor_dominance(
+                q1=q1,
+                q2=q2,
+            )
+            results.append(result)
+        except Exception as e:
+            results.append(TheoremResult(
+                theorem_name="Anchor Dominance",
+                satisfied=False,
+                message=f"Error: {str(e)}",
+                details={"error": str(e)},
+            ))
+        
+        # Theorem 24.5: Memory Loop Finiteness
+        try:
+            result = theorem_memory_loop_finiteness(
+                sigma_min=sigma_min,
+            )
+            results.append(result)
+        except Exception as e:
+            results.append(TheoremResult(
+                theorem_name="Memory Loop Finiteness",
+                satisfied=False,
+                message=f"Error: {str(e)}",
+                details={"error": str(e)},
+            ))
+        
+        # Theorem 24.6: Discrete Soundness
+        try:
+            result = theorem_discrete_soundness(
+                v_before=v_before,
+                v_after=v_after,
+            )
+            results.append(result)
+        except Exception as e:
+            results.append(TheoremResult(
+                theorem_name="Discrete Soundness",
+                satisfied=False,
+                message=f"Error: {str(e)}",
+                details={"error": str(e)},
+            ))
+        
+        # Theorem 24.7: Chain Closure
+        try:
+            result = theorem_chain_closure(
+                receipts=receipts or [],
+            )
+            results.append(result)
+        except Exception as e:
+            results.append(TheoremResult(
+                theorem_name="Chain Closure",
+                satisfied=False,
+                message=f"Error: {str(e)}",
+                details={"error": str(e)},
+            ))
+        
+        # Theorem 24.8: Deterministic Consensus
+        try:
+            result = theorem_deterministic_consensus(
+                state_hash=state_hash,
+            )
+            results.append(result)
+        except Exception as e:
+            results.append(TheoremResult(
+                theorem_name="Deterministic Consensus",
+                satisfied=False,
+                message=f"Error: {str(e)}",
+                details={"error": str(e)},
+            ))
+        
+        return results

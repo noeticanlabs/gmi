@@ -4,14 +4,20 @@ Consolidation for the GMI Memory System.
 Compress and maintain the episodic archive while preserving auditability.
 """
 
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from typing import List, Dict, Any, Tuple, Optional
 import numpy as np
 import hashlib
 import json
+import time
 
-from memory.archive import EpisodicArchive
-from memory.episode import Episode
+# Try canonical import first, fallback to legacy
+try:
+    from gmos.memory.archive import EpisodicArchive
+    from gmos.memory.episode import Episode
+except ImportError:
+    from memory.archive import EpisodicArchive
+    from memory.episode import Episode
 
 
 @dataclass
@@ -161,7 +167,7 @@ class Consolidator:
         Returns:
             SlabReceipt
         """
-        import time
+
         
         if start_idx < 0 or end_idx > len(self.archive):
             raise ValueError("Invalid slab range")
@@ -252,6 +258,10 @@ def get_consolidator(archive: Optional[EpisodicArchive] = None) -> Consolidator:
     """Get or create the global consolidator."""
     global _consolidator
     if _consolidator is None:
-        from memory.archive import get_global_archive
+        # Try canonical import first, fallback to legacy for compatibility
+        try:
+            from gmos.memory.archive import get_global_archive
+        except ImportError:
+            from memory.archive import get_global_archive
         _consolidator = Consolidator(archive or get_global_archive())
     return _consolidator
