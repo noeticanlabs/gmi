@@ -59,6 +59,18 @@ from gmos.kernel.reject_codes import (
     is_recoverable,
     is_fatal,
 )
+from gmos.kernel.gmi_receipts import (
+    GMIReceipt,
+    GMIReceiptType,
+    InferReceipt,
+    RetrieveReceipt,
+    RepairReceipt,
+    BranchReceipt,
+    PlanReceipt,
+    ActPrepareReceipt,
+    create_receipt,
+    validate_receipt,
+)
 
 __all__ = [
     # State hosting
@@ -121,4 +133,15 @@ __all__ = [
     "get_reject_description",
     "is_recoverable",
     "is_fatal",
+    # GMI Receipt schemas
+    "GMIReceipt",
+    "GMIReceiptType",
+    "InferReceipt",
+    "RetrieveReceipt",
+    "RepairReceipt",
+    "BranchReceipt",
+    "PlanReceipt",
+    "ActPrepareReceipt",
+    "create_receipt",
+    "validate_receipt",
 ]
