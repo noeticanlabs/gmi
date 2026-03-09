@@ -23,6 +23,7 @@ dependencies = [
 [project.optional-dependencies]
 dev = [
     "pytest>=7.0.0",
+    "pytest-cov>=4.0.0",
     "ruff>=0.1.0",
     "black>=23.0.0",
     "mypy>=1.0.0",
@@ -58,3 +59,16 @@ testpaths = ["tests"]
 # Exclude gmos from root test discovery - it has its own pyproject.toml and tests
 # To test gmos: cd gmos && pip install -e . && pytest -q
 norecursedirs = ["gmos", "experiments", "adapters"]
+
+[tool.coverage.run]
+source = ["core", "ledger", "runtime", "memory"]
+omit = ["*/tests/*", "*/experiments/*"]
+
+[tool.coverage.report]
+exclude_lines = [
+    "pragma: no cover",
+    "def __repr__",
+    "raise AssertionError",
+    "raise NotImplementedError",
+    "if __name__ == .__main__.:",
+]

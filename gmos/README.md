@@ -50,13 +50,24 @@ This is Phase 1 of GM-OS reconstruction. Current status:
   - receipt_engine.py - Kernel event receipts
   - macro_verifier.py - Slab verification
   - verifier.py - Reserve law and velocity constraints
+  - substrate_state.py - Full substrate state ξ = (x_ext,s,m,b,p,k,ℓ)
+  - continuous_dynamics.py - Moreau-projected dynamics
+  - theorems.py - Core theorems (Forward Invariance, Kernel Monopoly, etc.)
 
 - **Sensory layer**: Implemented
   - manifold.py - SensoryState, ExternalChart, InternalChart
   - projection.py - World/internal state projection
   - fusion.py - Confidence-weighted multi-source fusion
   - salience.py - Novelty, relevance, surprise scoring
-  - anchors.py - External validation tagging
+  - anchors.py - External validation tagging + AuthorityFunctional
+
+- **GMI Agent layer**: Implemented
+  - state.py - GMI state with z=(world,self,plan,act,meta) decomposition
+  - tension_law.py - Full tension law V_GMI with 8 residual components
+  - affective_budget.py - Local GMI budget management
+  - policy_selection.py - Proposal generation policy π
+  - execution_loop.py - Action preparation χ operator
+  - evolution_loop.py - Continuous local dynamics
 
 - **Symbolic layer**: Implemented
   - glyph_space.py - Glyph coordinates and embeddings
@@ -65,6 +76,11 @@ This is Phase 1 of GM-OS reconstruction. Current status:
 
 - **Memory layer**: Migrated from GMI repo
 - **Tests**: 19 tests passing
+
+### Canon Specifications
+- [`docs/gmos_canon_spec.md`](docs/gmos_canon_spec.md) - GM-OS Canon Spec v1.0.0
+- [`docs/gmi_canon_spec.md`](docs/gmi_canon_spec.md) - GMI Canon Spec v1.0.0
+- [`docs/canon_spec_index.md`](docs/canon_spec_index.md) - Specification index
 
 ### ⏳ Pending (Phase 5-7)
 - Phase 5: Connect one hosted GMI process natively

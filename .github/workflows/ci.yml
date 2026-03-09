@@ -1,0 +1,89 @@
+name: CI
+
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+    branches: [main, develop]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    
+    strategy:
+      matrix:
+        python-version: ["3.11", "3.12"]
+    
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v5
+      with:
+        python-version: ${{ matrix.python-version }}
+    
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -e ".[dev]"
+        pip install pytest-cov
+    
+    - name: Run tests with coverage
+      run: |
+        pytest --cov=core --cov=ledger --cov=runtime --cov=memory --cov-report=xml --cov-report=term-missing tests/
+    
+    - name: Upload coverage to Codecov
+      uses: codecov/codecov-action@v4
+      with:
+        file: ./coverage.xml
+        flags: unittests
+        name: gmi-core
+
+  lint:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: "3.11"
+    
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install ruff black mypy
+    
+    - name: Run Ruff
+      run: |
+        ruff check core/ ledger/ runtime/ memory/ adapters/
+    
+    - name: Run Black
+      run: |
+        black --check core/ ledger/ runtime/ memory/ adapters/
+    
+    - name: Run MyPy
+      run: |
+        mypy core/ ledger/ runtime/ memory/
+
+  gmos-test:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: "3.11"
+    
+    - name: Install GM-OS dependencies
+      run: |
+        python -m pip install --upgrade pip
+        cd gmos && pip install -e ".[dev]" && cd ..
+        pip install pytest
+    
+    - name: Run GM-OS tests
+      run: |
+        cd gmos && pytest -q

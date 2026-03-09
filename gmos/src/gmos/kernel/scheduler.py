@@ -3,12 +3,18 @@ Scheduler for GM-OS Kernel.
 
 Runs hosted processes on layered timescales, decides which process/layer
 executes next, prevents starvation of survival-critical layers.
+
+Per GM-OS Canon Spec v1 §22: Operational modes control admissible events.
+Maps between spec modes and internal scheduling.
 """
 
 from dataclasses import dataclass, field
-from typing import Dict, List, Optional
+from typing import Dict, List, Optional, Set
 from enum import Enum
 import time
+
+# Import spec modes from substrate_state
+from gmos.kernel.substrate_state import OperationalMode
 
 
 class ScheduleMode(Enum):
@@ -200,3 +206,121 @@ class KernelScheduler:
     def list_all(self) -> List[str]:
         """List all registered process IDs."""
         return list(self._processes.keys())
+    
+    
+    # === Mode Mapping (per spec §22) ===
+    
+    # Mapping from spec operational modes to allowed event classes
+    MODE_EVENT_PERMISSIONS: Dict[OperationalMode, Set[str]] = {
+        OperationalMode.OBSERVE: {"sense", "mem", "branch"},
+        OperationalMode.REPAIR: {"sense", "mem", "branch", "merge"},
+        OperationalMode.PLAN: {"sense", "mem", "branch", "plan"},
+        OperationalMode.ACT: {"sense", "mem", "branch", "plan", "act"},
+        OperationalMode.SAFE_HOLD: {"sense", "mem", "audit"},
+        OperationalMode.AUDIT: {"audit"},
+    }
+    
+    # Mapping from spec operational modes to schedule modes
+    MODE_SCHEDULE_MAPPING: Dict[OperationalMode, List[ScheduleMode]] = {
+        OperationalMode.OBSERVE: [ScheduleMode.ACTIVE],
+        OperationalMode.REPAIR: [ScheduleMode.ACTIVE, ScheduleMode.CONSOLIDATION],
+        OperationalMode.PLAN: [ScheduleMode.ACTIVE, ScheduleMode.REFLECTIVE],
+        OperationalMode.ACT: [
+            ScheduleMode.SURVIVAL_CRITICAL,
+            ScheduleMode.SAFETY,
+            ScheduleMode.ACTIVE,
+            ScheduleMode.REFLECTIVE,
+        ],
+        OperationalMode.SAFE_HOLD: [ScheduleMode.SAFETY],
+        OperationalMode.AUDIT: [],  # No process execution
+    }
+    
+    def get_allowed_events(self, mode: OperationalMode) -> Set[str]:
+        """
+        Get allowed event classes for a mode.
+        
+        Per spec §22: Mode affects admissible event classes.
+        
+        Args:
+            mode: Operational mode
+            
+        Returns:
+            Set of allowed event class names
+        """
+        return self.MODE_EVENT_PERMISSIONS.get(mode, set())
+    
+    def is_event_allowed(self, mode: OperationalMode, event_class: str) -> bool:
+        """
+        Check if event class is allowed in mode.
+        
+        Args:
+            mode: Current operational mode
+            event_class: Event class to check
+            
+        Returns:
+            True if allowed
+        """
+        return event_class in self.get_allowed_events(mode)
+    
+    def get_schedule_modes(self, mode: OperationalMode) -> List[ScheduleMode]:
+        """
+        Get schedule modes for operational mode.
+        
+        Args:
+            mode: Operational mode
+            
+        Returns:
+            List of schedule modes (priority order)
+        """
+        return self.MODE_SCHEDULE_MAPPING.get(mode, [])
+    
+    @classmethod
+    def mode_to_schedule_modes(cls, mode: OperationalMode) -> List[ScheduleMode]:
+        """Get schedule modes for operational mode (class method)."""
+        return cls.MODE_SCHEDULE_MAPPING.get(mode, [])
+    
+    @classmethod
+    def map_spec_mode_to_schedule_mode(cls, mode: OperationalMode) -> ScheduleMode:
+        """
+        Map spec mode to primary schedule mode.
+        
+        Args:
+            mode: Spec operational mode
+            
+        Returns:
+            Primary schedule mode
+        """
+        schedule_modes = cls.MODE_SCHEDULE_MAPPING.get(mode, [])
+        if schedule_modes:
+            return schedule_modes[0]
+        return ScheduleMode.IDLE
+    
+    def set_mode(self, mode: OperationalMode):
+        """
+        Set operational mode and update scheduler accordingly.
+        
+        Per spec §22: Mode affects admissible event classes, branch limits,
+        defect tolerances, action permissions, reserve floors, and authority
+        thresholds.
+        
+        Args:
+            mode: New operational mode
+        """
+        # Get primary schedule mode
+        primary = self.map_spec_mode_to_schedule_mode(mode)
+        
+        # Get allowed events
+        allowed = self.get_allowed_events(mode)
+        
+        # Update internal state if needed
+        # (In a full implementation, this would adjust scheduling priorities)
+        self._mode = mode
+        
+        # For AUDIT mode, halt all processes
+        if mode == OperationalMode.AUDIT:
+            for proc in self._processes.values():
+                proc.status = ProcessStatus.HALTED
+    
+    def get_current_mode(self) -> OperationalMode:
+        """Get current operational mode."""
+        return getattr(self, '_mode', OperationalMode.OBSERVE)

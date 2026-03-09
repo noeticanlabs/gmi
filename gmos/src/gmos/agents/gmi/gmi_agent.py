@@ -39,6 +39,7 @@ from gmos.agents.gmi import evolution_loop
 from gmos.agents.gmi import execution_loop
 from gmos.agents.gmi import semantic_loop
 from gmos.agents.gmi import hosted_agent
+from gmos.agents.gmi import tension_law
 
 # Expose module references
 __all__ = [
@@ -53,4 +54,5 @@ __all__ = [
     'execution_loop',
     'semantic_loop',
     'hosted_agent',
+    'tension_law',
 ]

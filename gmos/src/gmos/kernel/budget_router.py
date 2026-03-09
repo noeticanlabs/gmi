@@ -3,10 +3,17 @@ Budget Router for GM-OS Kernel.
 
 Manages process and layer budgets, enforces reserve law, handles lawful
 internal transfers, protects survival reserves.
+
+Per GM-OS Canon Spec v1:
+- §7.2: Reserve floors for protected channels
+- §7.3: Internal routing law with conservation Σ Δb_i = 0
+- §7.4: Spend update law with irreversible spend vector
+- §18: Absorbing budget boundary theorem
+- §24.3: Budget Reserve Preservation theorem
 """
 
 from dataclasses import dataclass, field
-from typing import Dict, Optional
+from typing import Dict, Optional, List, Tuple
 from enum import Enum
 
 
@@ -145,3 +152,132 @@ class BudgetRouter:
         if process_id in self._layer_budgets:
             return self._layer_budgets[process_id].get(layer)
         return self._process_budgets.get(process_id)
+    
+    
+    # === Absorbing Boundary Methods (per spec §18, §24.3) ===
+    
+    def is_at_boundary(self, process_id: str, layer: int) -> bool:
+        """
+        Check if budget is at reserve boundary.
+        
+        Per spec §18: When b_i = b_i,reserve, the only compatible
+        motion is zero in that protected direction.
+        
+        Args:
+            process_id: Process identifier
+            layer: Layer number
+            
+        Returns:
+            True if at boundary (budget equals reserve)
+        """
+        budget = self._get_budget(process_id, layer)
+        if not budget:
+            return False
+        return abs(budget.amount - budget.reserve) < 1e-6
+    
+    def get_boundary_channels(self) -> List[Tuple[str, int]]:
+        """
+        Get all (process, layer) pairs at boundary.
+        
+        Returns:
+            List of (process_id, layer) at reserve boundary
+        """
+        boundaries = []
+        for process_id, layers in self._layer_budgets.items():
+            for layer in layers:
+                if self.is_at_boundary(process_id, layer):
+                    boundaries.append((process_id, layer))
+        return boundaries
+    
+    def can_spend_at_boundary(
+        self, 
+        process_id: str, 
+        layer: int, 
+        amount: float
+    ) -> Tuple[bool, str]:
+        """
+        Check if spend is allowed considering absorbing boundary.
+        
+        Per spec §18: Protected channels at boundary cannot be spent.
+        Per spec §24.3: Budget Reserve Preservation - any routing or
+        spend event that would violate reserve floor is inadmissible.
+        
+        Args:
+            process_id: Process identifier
+            layer: Layer number
+            amount: Spend amount
+            
+        Returns:
+            (allowed, reason) tuple
+        """
+        budget = self._get_budget(process_id, layer)
+        if not budget:
+            return False, "No budget registered"
+        
+        # Check if protected tier at boundary
+        if budget.tier == ReserveTier.SURVIVAL:
+            if self.is_at_boundary(process_id, layer):
+                return False, f"Protected tier at absorbing boundary"
+        
+        # Standard reserve check
+        if budget.amount - amount < budget.reserve - 1e-6:
+            return False, f"Would violate reserve floor"
+        
+        return True, "allowed"
+    
+    def apply_spend_with_boundary(
+        self, 
+        process_id: str, 
+        layer: int, 
+        amount: float
+    ) -> Tuple[bool, str]:
+        """
+        Apply spend with absorbing boundary enforcement.
+        
+        Implements Theorem 24.3: Budget Reserve Preservation.
+        
+        Args:
+            process_id: Process identifier
+            layer: Layer number
+            amount: Spend amount
+            
+        Returns:
+            (success, message) tuple
+        """
+        allowed, reason = self.can_spend_at_boundary(process_id, layer, amount)
+        
+        if not allowed:
+            return False, reason
+        
+        # Apply spend
+        budget = self._get_budget(process_id, layer)
+        budget.amount -= amount
+        return True, "spend executed"
+    
+    def verify_conservation_law(
+        self, 
+        before: Dict[Tuple[str, int], float], 
+        after: Dict[Tuple[str, int], float]
+    ) -> Tuple[bool, float]:
+        """
+        Verify conservation law for routing event.
+        
+        Per spec §7.3: Σ Δb_i = 0
+        
+        Args:
+            before: Dict of (process, layer) -> amount before
+            after: Dict of (process, layer) -> amount after
+            
+        Returns:
+            (valid, delta_sum) - True if conservation holds
+        """
+        delta_sum = 0.0
+        all_keys = set(before.keys()) | set(after.keys())
+        
+        for key in all_keys:
+            before_val = before.get(key, 0.0)
+            after_val = after.get(key, 0.0)
+            delta_sum += after_val - before_val
+        
+        # Allow small floating point error
+        return abs(delta_sum) < 1e-6, delta_sum

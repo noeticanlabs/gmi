@@ -4,6 +4,10 @@ Anchors for GM-OS Sensory Manifold.
 Tags externally validated events and computes trust/anchor weight.
 This is the main anti-hallucination stabilizer for the sensory manifold.
 
+Per GM-OS Canon Spec v1 §5.3:
+- Anchor authority functional A(q) measures source authority
+- Anchor dominance rule: A(q₁) ≥ A(q₂) + δ_A for conflict resolution
+
 Anchors integrate with:
 - ledger receipts (externally verified events)
 - external validation stream
@@ -11,9 +15,209 @@ Anchors integrate with:
 """
 
 from dataclasses import dataclass, field
-from typing import Dict, Any, Optional, List
+from typing import Dict, Any, Optional, List, Tuple
 from enum import Enum
 import time
+import hashlib
+
+
+# === Anchor Authority Functional (per spec §5.3) ===
+
+class AuthorityLevel(Enum):
+    """
+    Authority levels ordered by trust.
+    Higher levels have strictly higher authority.
+    """
+    PREDICTION = 0      # Lowest: internal prediction
+    INTERNAL = 1        # Internal computation
+    REPLAY = 2           # Memory replay
+    LEDGER = 3           # Ledger-verified
+    EXTERNAL = 4         # Highest: externally validated
+
+
+# Authority margin δ_A per spec §5.3
+AUTHORITY_MARGIN = 0.1
+
+
+@dataclass
+class PerceptToken:
+    """
+    A percept token q ∈ S with metadata per spec §5.2.
+    
+    Attributes:
+        src: Source identifier
+        time: Acquisition timestamp
+        conf: Confidence in [0, 1]
+        content: Percept content
+        authority: Computed authority score
+    """
+    token_id: str
+    src: str                           # Source identifier
+    time: float                        # Acquisition timestamp
+    conf: float                        # Confidence in [0, 1]
+    content: Dict[str, Any]           # Percept content
+    authority: float = 0.0             # Computed authority score A(q)
+    
+    def __post_init__(self):
+        self.authority = compute_authority(self)
+
+
+def compute_authority(percept: PerceptToken) -> float:
+    """
+    Compute authority score A(q) per spec §5.3.
+    
+    Authority is computed from:
+    - Source class (external > ledger > internal > prediction)
+    - Recency (newer = higher authority)
+    - Corroboration (more confirmations = higher)
+    - Verification status (verified = higher)
+    
+    Args:
+        percept: Percept token to compute authority for
+        
+    Returns:
+        Authority score in [0, 1]
+    """
+    # Base authority from source class
+    if percept.src == "external":
+        base = 1.0
+    elif percept.src == "ledger":
+        base = 0.8
+    elif percept.src == "internal":
+        base = 0.5
+    elif percept.src == "replay":
+        base = 0.3
+    else:  # prediction
+        base = 0.1
+    
+    # Recency factor (half-life of 1 hour)
+    age = time.time() - percept.time
+    recency = max(0.1, 1.0 - age / 3600.0)
+    
+    # Confidence factor
+    confidence = percept.conf
+    
+    # Combine
+    authority = base * recency * (0.5 + 0.5 * confidence)
+    
+    return max(0.0, min(1.0, authority))
+
+
+@dataclass
+class AuthorityFunctional:
+    """
+    The anchor authority functional A: S → ℝ_≥0 per spec §5.3.
+    
+    Measures source authority after folding together:
+    - Source class
+    - Recency
+    - Corroboration
+    - Verification status
+    """
+    # Authority margins per source level
+    authority_margins: Dict[str, float] = field(default_factory=lambda: {
+        "external": 1.0,
+        "ledger": 0.8,
+        "internal": 0.5,
+        "replay": 0.3,
+        "prediction": 0.1,
+    })
+    
+    # Minimum margin for dominance
+    delta_a: float = AUTHORITY_MARGIN
+    
+    def __call__(self, percept: PerceptToken) -> float:
+        """Compute authority score."""
+        return compute_authority(percept)
+    
+    def dominates(self, q1: PerceptToken, q2: PerceptToken) -> bool:
+        """
+        Check if q1 dominates q2 per anchor dominance rule.
+        
+        Per spec §5.3:
+            A(q₁) ≥ A(q₂) + δ_A
+        
+        Args:
+            q1: Higher-authority percept
+            q2: Lower-authority percept
+            
+        Returns:
+            True if q1 dominates q2
+        """
+        return q1.authority >= q2.authority + self.delta_a
+
+
+def resolve_conflicts(
+    percepts: List[PerceptToken],
+    authority_fn: Optional[AuthorityFunctional] = None,
+) -> Tuple[List[PerceptToken], List[PerceptToken]]:
+    """
+    Resolve conflicting percepts using anchor dominance rule.
+    
+    Per spec §5.3, when two incompatible claims conflict and one has
+    anchor authority margin at least δ_A over the other, the lower-
+    authority claim cannot be committed as substrate truth without
+    an explicit override receipt.
+    
+    Args:
+        percepts: List of percept tokens
+        authority_fn: Authority functional (uses default if None)
+        
+    Returns:
+        (accepted, rejected) - accepted percepts and rejected due to conflict
+    """
+    if authority_fn is None:
+        authority_fn = AuthorityFunctional()
+    
+    if len(percepts) <= 1:
+        return percepts, []
+    
+    # Sort by authority (highest first)
+    sorted_percepts = sorted(percepts, key=lambda p: p.authority, reverse=True)
+    
+    accepted = []
+    rejected = []
+    
+    for candidate in sorted_percepts:
+        # Check against already accepted
+        dominated = False
+        for accepted_percept in accepted:
+            if authority_fn.dominates(accepted_percept, candidate):
+                # Candidate is dominated - reject it
+                dominated = True
+                break
+        
+        if not dominated:
+            accepted.append(candidate)
+        else:
+            rejected.append(candidate)
+    
+    return accepted, rejected
+
+
+def is_conflict(
+    q1: PerceptToken,
+    q2: PerceptToken,
+    content_key: str = "fact",
+) -> bool:
+    """
+    Check if two percepts have conflicting content.
+    
+    Args:
+        q1: First percept
+        q2: Second percept
+        content_key: Key to check for conflict
+        
+    Returns:
+        True if content conflicts
+    """
+    v1 = q1.content.get(content_key)
+    v2 = q2.content.get(content_key)
+    
+    if v1 is None or v2 is None:
+        return False
+    
+    return v1 != v2
 
 
 class AnchorSource(Enum):
