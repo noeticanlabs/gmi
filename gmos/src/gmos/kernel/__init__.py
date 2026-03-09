@@ -53,6 +53,12 @@ from gmos.kernel.continuous_dynamics import (
     create_projected_dynamics,
     create_absorbing_boundary,
 )
+from gmos.kernel.reject_codes import (
+    RejectCode,
+    get_reject_description,
+    is_recoverable,
+    is_fatal,
+)
 
 __all__ = [
     # State hosting
@@ -110,4 +116,9 @@ __all__ = [
     "theorem_chain_closure",
     "theorem_deterministic_consensus",
     "GMOSTheorems",
+    # Reject codes
+    "RejectCode",
+    "get_reject_description",
+    "is_recoverable",
+    "is_fatal",
 ]

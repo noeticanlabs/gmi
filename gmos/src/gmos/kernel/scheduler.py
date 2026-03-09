@@ -177,8 +177,42 @@ class KernelScheduler:
         if proc.wake_condition is None:
             return False
         
-        # TODO: Implement actual wake condition evaluation
-        # For now, return False - processes need explicit wake call
+        # Evaluate wake condition based on condition type
+        condition = proc.wake_condition
+        
+        # Parse condition: "budget_above_X" or "queue_nonempty" or "age_above_X"
+        if condition.startswith("budget_above_"):
+            try:
+                threshold = float(condition.split("_")[2])
+                # Would check actual budget - for now return False
+                # This requires access to budget router
+                return False
+            except (IndexError, ValueError):
+                return False
+        
+        elif condition == "queue_nonempty":
+            # Check if execution queue has items
+            return len(self._execution_queue) > 0
+        
+        elif condition.startswith("age_above_"):
+            try:
+                # Age in seconds
+                threshold = float(condition.split("_")[2])
+                import time
+                age = time.time() - proc.last_tick
+                return age > threshold
+            except (IndexError, ValueError):
+                return False
+        
+        elif condition == "repair_mode":
+            # Would check if system is in repair mode
+            return False
+        
+        elif condition == "action_ready":
+            # Would check if action preparation is ready
+            return False
+        
+        # Unknown condition - stay in torpor
         return False
     
     def _rebuild_queue(self) -> None:

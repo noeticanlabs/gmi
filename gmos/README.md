@@ -108,10 +108,10 @@ pip install -e .
 ### Run Tests
 ```bash
 cd gmos
-PYTHONPATH=$PWD/src pytest -q tests
-# Or with venv active:
 pytest -q tests
 ```
+
+Note: After `pip install -e .`, the package is installed and tests run without PYTHONPATH.
 
 ## Development
 

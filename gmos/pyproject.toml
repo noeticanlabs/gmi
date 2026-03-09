@@ -44,6 +44,10 @@ build-backend = "setuptools.build_meta"
 
 [tool.setuptools]
 package-dir = {"" = "src"}
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
 packages = [
     "gmos",
     "gmos.kernel",
@@ -53,6 +57,7 @@ packages = [
     "gmos.agents",
     "gmos.agents.gmi",
     "gmos.action",
+    "gmos.experimental",
 ]
 
 [tool.setuptools.package-data]

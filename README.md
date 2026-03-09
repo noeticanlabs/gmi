@@ -1,5 +1,9 @@
 # Governed Metabolic Intelligence (GMI)
 
+> **⚠️ Important**: The canonical implementation is now in `gmos/src/gmos/`. 
+> Root-level `core/`, `memory/`, `ledger/`, `runtime/` are legacy prototype code.
+> See [CANONICAL.md](CANONICAL.md) for details.
+
 A universal cognition engine with thermodynamic principles, cryptographic ledger discipline, and affective mode geometry.
 
 ## What is GMI?

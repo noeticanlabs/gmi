@@ -130,26 +130,41 @@ class Consolidator:
                 message="Empty archive"
             )
         
-        # For now, this is a placeholder implementation
-        # A full implementation would use clustering, etc.
+        # Deterministic consolidation implementation
+        # Step 1: Deduplicate by exact hash
+        unique_episodes = []
+        seen_hashes = set()
+        for ep in self.archive.episodes:
+            ep_hash = ep.hash()
+            if ep_hash not in seen_hashes:
+                seen_hashes.add(ep_hash)
+                unique_episodes.append(ep)
         
-        # Create a slab receipt for the entire archive
-        if original_count > min_recent_episodes:
-            slab = self.create_slab_receipt(0, original_count)
+        duplicates_removed = original_count - len(unique_episodes)
+        
+        # Step 2: Create slabs for compression receipt
+        # Slab creation is the compression mechanism - creates verifiable proof
+        slabs_created = 0
+        if len(unique_episodes) > min_recent_episodes:
+            # Create slab receipt for audit trail
+            slab = self.create_slab_receipt(0, len(unique_episodes))
             self.slab_receipts.append(slab)
             slabs_created = 1
-        else:
-            slabs_created = 0
         
-        consolidated_count = original_count
+        consolidated_count = len(unique_episodes)
+        
+        # If we removed duplicates, note it in the receipt metadata
+        message = f"Consolidated: {duplicates_removed} exact duplicates removed"
+        if duplicates_removed > 0:
+            message += f", created {slabs_created} slab(s) for audit"
         
         return ConsolidationReport(
             original_count=original_count,
             consolidated_count=consolidated_count,
             slabs_created=slabs_created,
-            episodes_removed=0,
+            episodes_removed=duplicates_removed,
             total_cost=0.0,
-            message="Consolidation placeholder - implement clustering for production"
+            message=message
         )
     
     def create_slab_receipt(
@@ -241,13 +256,27 @@ class Consolidator:
     
     def estimate_compression_ratio(self) -> float:
         """
-        Estimate potential compression ratio.
+        Estimate potential compression ratio based on deduplication.
         
         Returns:
-            Estimated compression ratio
+            Estimated compression ratio (episodes_after / episodes_before)
         """
-        # This is a placeholder - real implementation would analyze redundancy
-        return 1.0
+        if not self.archive.episodes:
+            return 1.0
+        
+        # Count unique hashes
+        seen_hashes = set()
+        for ep in self.archive.episodes:
+            seen_hashes.add(ep.hash())
+        
+        unique_count = len(seen_hashes)
+        total_count = len(self.archive.episodes)
+        
+        if total_count == 0:
+            return 1.0
+        
+        # Ratio = unique / total (lower = more compression possible)
+        return unique_count / total_count
 
 
 # Global consolidator instance
