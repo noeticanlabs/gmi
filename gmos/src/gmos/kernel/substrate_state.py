@@ -34,9 +34,16 @@ from gmos.sensory.manifold import (
 from gmos.memory.workspace import WorkspaceState
 from gmos.memory.archive import ArchiveState
 from gmos.kernel.state_host import StateHost, HostedState, ProcessStateFlag
-from gmos.kernel.scheduler import KernelScheduler
+# KernelScheduler imported lazily below to avoid circular import
 from gmos.kernel.budget_router import BudgetRouter, BudgetSlice
 from gmos.kernel.hash_chain import ChainDigest
+
+
+# Lazy import for KernelScheduler
+def _get_kernel_scheduler():
+    """Lazy import to avoid circular dependency."""
+    from gmos.kernel.scheduler import KernelScheduler
+    return KernelScheduler
 
 # Alias for canonical naming (per spec §5)
 SensoryManifold = SensoryState

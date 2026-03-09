@@ -414,3 +414,7 @@ def evaluate_branch(
     branch.expected_gain = reward_fn(branch.action)
     branch.simulation_cost = cost_fn(branch.action)
     return branch
+
+
+# Aliases for backward compatibility
+PolicySelector = SelectionOperator

@@ -15,12 +15,21 @@ import json
 from dataclasses import dataclass, field
 from typing import Dict, List, Optional, Any, TYPE_CHECKING
 
-# Import from new potential module
-from core.potential import GMIPotential, V_PL, create_potential
+# Import from canonical potential module (gmos.agents.gmi.potential)
+# This is the canonical replacement for legacy core.potential
+from gmos.agents.gmi.potential import GMIPotential, create_potential
+
+# Legacy compatibility - V_PL is kept for backward compatibility
+try:
+    from core.potential import V_PL
+except ImportError:
+    # Fallback: create a simple V_PL function
+    def V_PL(x):
+        return float(np.sum(x ** 2))
 
 if TYPE_CHECKING:
-    from memory.episode import EpisodeRef
-    from memory.workspace import WorkspaceState
+    from gmos.memory.episode import EpisodeRef
+    from gmos.memory.workspace import WorkspaceState
 
 
 @dataclass

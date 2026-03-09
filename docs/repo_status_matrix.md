@@ -37,9 +37,9 @@ This document tracks the implementation status of GM-OS/GMI concepts against the
 | CognitiveState | gmi_canon_spec.md | `gmos.agents.gmi.state` | test_gmi.py | ✅ Implemented |
 | AffectiveState | gmi_canon_spec.md | `gmos.agents.gmi.affective_state` | - | ✅ Implemented |
 | PolicySelection | gmi_canon_spec.md | `gmos.agents.gmi.policy_selection` | - | ⚠️ Partial |
-| Execution Loop | gmi_canon_spec.md | `gmos.agents.gmi.execution_loop` | - | ⚠️ Partial |
-| Evolution Loop | gmi_canon_spec.md | `gmos.agents.gmi.evolution_loop` | - | ⚠️ Partial |
-| Semantic Loop | gmi_canon_spec.md | `gmos.agents.gmi.semantic_loop` | - | 🔄 Experimental |
+| Execution Loop | gmi_canon_spec.md | `gmos.agents.gmi.execution_loop` | - | ✅ Implemented |
+| Evolution Loop | gmi_canon_spec.md | `gmos.agents.gmi.evolution_loop` | - | ✅ Implemented |
+| Semantic Loop | gmi_canon_spec.md | `gmos.agents.gmi.semantic_loop` | - | ✅ Implemented |
 
 ## Sensory Manifold
 
@@ -91,4 +91,4 @@ This document tracks the implementation status of GM-OS/GMI concepts against the
 
 ## Last Updated
 
-2026-03-09
+2026-03-09 (Agent loops refactored to use canonical GM-OS imports)

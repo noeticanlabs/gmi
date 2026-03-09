@@ -261,3 +261,7 @@ class AffectiveBudgetCalculator:
         admissible = self.law.branch_admissible(expected_gain, cost)
         
         return admissible, cost
+
+
+# Alias for backward compatibility
+AffectiveBudgetManager = AffectiveBudgetCalculator

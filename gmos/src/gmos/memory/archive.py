@@ -14,6 +14,10 @@ import numpy as np
 from memory.episode import Episode, EpisodeSummary, generate_episode_id
 
 
+# Alias for kernel compatibility
+ArchiveState = None  # Will be defined below
+
+
 @dataclass
 class EpisodicArchive:
     """
@@ -275,3 +279,24 @@ def set_global_archive(archive: EpisodicArchive) -> None:
     """Set the global episodic archive."""
     global _global_archive
     _global_archive = archive
+
+
+@dataclass
+class ArchiveState:
+    """
+    State container for the episodic archive.
+    
+    Used by kernel to track archive operational state.
+    """
+    episode_count: int = 0
+    total_size_bytes: int = 0
+    is_active: bool = True
+    last_backup_step: int = 0
+    
+    def to_archive(self) -> EpisodicArchive:
+        """Convert state to archive instance."""
+        return EpisodicArchive()
+
+
+# Update alias after class definition
+ArchiveState = ArchiveState

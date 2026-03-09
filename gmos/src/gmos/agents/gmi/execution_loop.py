@@ -8,7 +8,7 @@ import os
 import numpy as np
 
 # Canonical imports (GM-OS)
-from gmos.agents.gmi.state import State, CognitiveState
+from gmos.agents.gmi.state import State, CognitiveState, Instruction
 from gmos.agents.gmi.potential import GMIPotential, create_potential
 from gmos.kernel.verifier import OplaxVerifier
 from gmos.kernel.hash_chain import HashChainLedger, get_global_ledger

@@ -14,6 +14,7 @@ from enum import Enum
 import time
 
 # Import spec modes from substrate_state
+# Note: substrate_state doesn't import from scheduler anymore
 from gmos.kernel.substrate_state import OperationalMode
 
 

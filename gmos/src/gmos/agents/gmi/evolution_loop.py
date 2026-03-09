@@ -1,12 +1,14 @@
 import numpy as np
 import random
-from core.state import State, Instruction, Proposal
-from core.embedder import GMI_Embedder
-from core.memory import MemoryManifold
-from ledger.oplax_verifier import OplaxVerifier
+
+# Canonical imports (GM-OS)
+from gmos.agents.gmi.state import State, Instruction, Proposal
+from gmos.symbolic.glyph_embedder import GlyphEmbedder, get_default_embedder
+from gmos.kernel.verifier import OplaxVerifier
+from gmos.agents.gmi.memory_adapter import MemoryManifold, get_default_memory
 
 # Default embedder (can be overridden by passing embedder to run function)
-_default_embedder = GMI_Embedder()
+_default_embedder = get_default_embedder()
 
 def base_potential(x: np.ndarray) -> float:
     """Pure PhaseLoom potential without scars"""
