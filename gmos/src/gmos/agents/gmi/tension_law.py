@@ -3,7 +3,7 @@ GMI Tension Law v1 - Per GMI Tension Law Appendix.
 
 Implements the canonical executable tension law per the appendix:
 
-V_GMI(x) = Σ_α w_α |r^α(x)|² + Φ_B(b) + Φ_A(x)
+V_GMI(x) = Σ_α w_α |r^α(x)|² + Φ_B(b) + Φ_A(x) + V_epi(x)
 
 Where residual components are:
 - r^obs: Observation residual (reality prediction error)
@@ -17,6 +17,15 @@ Where residual components are:
 Plus barrier terms:
 - Φ_B(b): Budget barrier (diverges at reserve)
 - Φ_A(x): Anchor-authority interlock penalty
+- V_epi(x): Epistemic Shell potential (v1-v4)
+
+Epistemic Shell (V_epi):
+- V_collapse: Penalize premature fiber/hypothesis collapse (v1)
+- V_overreach: Penalize claims beyond horizon (v2)
+- V_curiosity_deficit: Penalize ignoring high-EVI observations (v3)
+- V_curiosity_mania: Penalize excessive exploration (v3)
+- V_shock: Penalize surprise exceeding capacity (v4)
+- V_gullible: Penalize trust without verification (v4)
 """
 
 from dataclasses import dataclass, field
@@ -88,6 +97,18 @@ class TensionWeights:
     zeta_auth: float = 1.0
     zeta_anchor: float = 1.0
     zeta_scope: float = 1.0
+    
+    # === Epistemic Shell weights (v1-v4) ===
+    # v1: Fiber collapse penalty
+    w_collapse: float = 0.5
+    # v2: Horizon overreach penalty
+    w_overreach: float = 0.5
+    # v3: Curiosity penalties
+    w_curiosity_def: float = 0.3  # Curiosity deficit (ignoring high-EVI)
+    w_curiosity_man: float = 0.3  # Curiosity mania (excessive exploration)
+    # v4: Trust penalties
+    w_shock: float = 0.4        # Shock from surprise > capacity
+    w_gullible: float = 0.4     # Gullibility (trust without verification)
 
 
 # === Observation Residual (Section 2) ===
@@ -569,6 +590,30 @@ class GMITensionState:
     # Authority
     authority: AuthorityState = field(default_factory=AuthorityState)
     
+    # === Epistemic Shell state (v1-v4) ===
+    # Fiber (hypothesis space) - v1
+    fiber_active: bool = False  # Is fiber tracking active?
+    fiber_hypotheses: List[str] = field(default_factory=list)  # Current hypotheses
+    fiber_beliefs: np.ndarray = field(default_factory=lambda: np.array([]))  # Belief distribution
+    
+    # Horizon (evidence bounds) - v2
+    horizon_evidence: np.ndarray = field(default_factory=lambda: np.array([]))  # H_k
+    horizon_confidence: float = 1.0  # Confidence in horizon boundary
+    
+    # Effective weight components (authority × trust × evidence) - v4
+    authority_source: str = ""  # Source identifier
+    authority_trust: float = 1.0  # Γ_trust(s,t)
+    authority_provenance: float = 1.0  # A_0(s)
+    evidence_quality: float = 1.0  # Ξ(e)
+    
+    # Curiosity metrics - v3
+    evi_observations: List[Tuple[np.ndarray, float]] = field(default_factory=list)  # (observation, EVI)
+    curiosity_expenditure: float = 0.0  # Total curiosity spend
+    
+    # Shock metrics - v4
+    surprise_history: List[float] = field(default_factory=list)  # Recent surprise values
+    adaptive_capacity: float = 1.0  # Max surprise tolerance
+    
     # Weights
     weights: TensionWeights = field(default_factory=TensionWeights)
 
@@ -715,7 +760,268 @@ class GMITensionLaw:
             self.weights.zeta_scope,
         )
         
+        # V_epi (Epistemic Shell v1-v4)
+        V += self._compute_epistemic_potential(state)
+        
         return V
+    
+    def _compute_epistemic_potential(self, state: GMITensionState) -> float:
+        """
+        Compute epistemic potential V_epi (v1-v4).
+        
+        V_epi = V_collapse + V_overreach + V_curiosity_deficit + V_curiosity_mania
+              + V_shock + V_gullible
+        
+        Args:
+            state: Tension state with epistemic fields
+            
+        Returns:
+            Epistemic potential energy
+        """
+        V_epi = 0.0
+        
+        # v1: V_collapse - don't collapse fiber prematurely
+        V_collapse = self._compute_collapse_potential(
+            state.fiber_active,
+            state.fiber_hypotheses,
+            state.fiber_beliefs,
+        )
+        V_epi += self.weights.w_collapse * V_collapse
+        
+        # v2: V_overreach - stay within horizon
+        V_overreach = self._compute_overreach_potential(
+            state.fiber_beliefs,
+            state.horizon_evidence,
+            state.horizon_confidence,
+        )
+        V_epi += self.weights.w_overreach * V_overreach
+        
+        # v3: V_curiosity - balance exploration
+        V_curiosity = self._compute_curiosity_potential(
+            state.evi_observations,
+            state.curiosity_expenditure,
+        )
+        V_epi += (self.weights.w_curiosity_def + self.weights.w_curiosity_man) * V_curiosity
+        
+        # v4: V_trust - verify authority
+        V_trust = self._compute_trust_potential(
+            state.authority_source,
+            state.authority_trust,
+            state.authority_provenance,
+            state.evidence_quality,
+            state.surprise_history,
+            state.adaptive_capacity,
+        )
+        V_epi += (self.weights.w_shock + self.weights.w_gullible) * V_trust
+        
+        return V_epi
+    
+    def _compute_collapse_potential(
+        self,
+        fiber_active: bool,
+        fiber_hypotheses: List[str],
+        fiber_beliefs: np.ndarray,
+    ) -> float:
+        """
+        v1: Penalize premature fiber/hypothesis collapse.
+        
+        If the fiber is active but has collapsed to a single hypothesis
+        with high confidence (low entropy) despite insufficient evidence,
+        apply penalty.
+        
+        Formula:
+            V_collapse = -β × (1 - H(beliefs)/H_max) × I(evidence_insufficient)
+        
+        Args:
+            fiber_active: Whether fiber tracking is active
+            fiber_hypotheses: List of active hypotheses
+            fiber_beliefs: Belief distribution over hypotheses
+            
+        Returns:
+            Collapse potential (penalty for premature commitment)
+        """
+        # No penalty if fiber not active
+        if not fiber_active:
+            return 0.0
+        
+        # Need multiple hypotheses to collapse
+        if len(fiber_hypotheses) <= 1:
+            return 0.0
+        
+        # Need belief distribution to compute entropy
+        if len(fiber_beliefs) == 0:
+            return 0.0
+        
+        # Normalize beliefs
+        beliefs = np.abs(fiber_beliefs)
+        beliefs = beliefs / (np.sum(beliefs) + 1e-10)
+        
+        # Compute entropy H = -Σ p log p
+        entropy = -np.sum(beliefs * np.log(beliefs + 1e-10))
+        
+        # Maximum entropy for n hypotheses
+        n = len(beliefs)
+        max_entropy = np.log(n) if n > 1 else 1.0
+        
+        # Normalized entropy (0 = collapsed, 1 = uniform)
+        normalized_entropy = entropy / (max_entropy + 1e-10)
+        
+        # Penalty: higher when collapsed (low entropy) but we have multiple hypotheses
+        # This penalizes being overly confident with multiple options available
+        penalty = 1.0 - normalized_entropy
+        
+        return max(0.0, penalty)
+    
+    def _compute_overreach_potential(
+        self,
+        fiber_beliefs: np.ndarray,
+        horizon_evidence: np.ndarray,
+        horizon_confidence: float,
+    ) -> float:
+        """
+        v2: Penalize claims beyond horizon evidence.
+        
+        If the belief distribution extends significantly beyond the
+        observable evidence horizon, apply penalty.
+        
+        Formula:
+            V_overreach = β × dist(support(beliefs), horizon_evidence)
+        
+        Args:
+            fiber_beliefs: Belief distribution
+            horizon_evidence: Evidence within observable bounds
+            horizon_confidence: Confidence in horizon boundary
+            
+        Returns:
+            Overreach potential (penalty for overreach beyond evidence)
+        """
+        # No penalty if no beliefs
+        if len(fiber_beliefs) == 0:
+            return 0.0
+        
+        # No penalty if no evidence (nothing to overreach from)
+        if len(horizon_evidence) == 0:
+            return 0.0
+        
+        # Compute effective support of beliefs (weighted mean position)
+        beliefs = np.abs(fiber_beliefs)
+        beliefs = beliefs / (np.sum(beliefs) + 1e-10)
+        
+        # Support is where beliefs are significant (> 10% of max)
+        threshold = 0.1 * np.max(beliefs)
+        support_indices = np.where(beliefs > threshold)[0]
+        
+        if len(support_indices) == 0:
+            return 0.0
+        
+        # Mean position in belief support
+        belief_mean = np.mean(support_indices) / max(len(beliefs), 1)
+        
+        # Mean position in horizon evidence
+        evidence_mean = np.mean(np.abs(horizon_evidence)) / (np.max(np.abs(horizon_evidence)) + 1e-10)
+        
+        # Distance between belief support and evidence
+        distance = abs(belief_mean - evidence_mean)
+        
+        # Scale by horizon confidence (less confident = more penalty)
+        penalty = distance * (1.0 - horizon_confidence)
+        
+        return max(0.0, penalty)
+    
+    def _compute_curiosity_potential(
+        self,
+        evi_observations: List[Tuple[np.ndarray, float]],
+        curiosity_expenditure: float,
+    ) -> float:
+        """
+        v3: Balance curiosity deficit vs. mania.
+        
+        - Curiosity deficit: Penalty for ignoring high-EVI observations
+        - Curiosity mania: Penalty for excessive exploration without learning
+        
+        Formula:
+            V_curiosity = β_def × max(0, EVI_threshold - avg_EVI) 
+                        + β_man × (expenditure / budget_ratio)
+        
+        Args:
+            evi_observations: List of (observation, EVI) tuples
+            curiosity_expenditure: Total spent on curiosity
+            
+        Returns:
+            Curiosity potential (penalty for imbalance)
+        """
+        # No penalty if no observations
+        if len(evi_observations) == 0:
+            return 0.0
+        
+        # Compute average EVI
+        evi_values = [evi for _, evi in evi_observations]
+        avg_evi = np.mean(evi_values)
+        
+        # Threshold for "worth investigating"
+        evi_threshold = 0.5
+        
+        # Curiosity deficit: penalize if avg EVI is low but we ignored high-EVI items
+        max_evi = max(evi_values) if evi_values else 0.0
+        deficit_penalty = max(0.0, evi_threshold - max_evi)
+        
+        # Curiosity mania: penalize if expenditure is high relative to EVI gained
+        # (Simple ratio - in practice would compare to budget)
+        mania_penalty = min(1.0, curiosity_expenditure / 10.0)  # Normalize
+        
+        # Combined: penalize either extreme
+        total_penalty = deficit_penalty + mania_penalty
+        
+        return total_penalty
+    
+    def _compute_trust_potential(
+        self,
+        authority_source: str,
+        authority_trust: float,
+        authority_provenance: float,
+        evidence_quality: float,
+        surprise_history: List[float],
+        adaptive_capacity: float,
+    ) -> float:
+        """
+        v4: Balance shock vs. gullibility.
+        
+        - Shock: Penalty for surprise exceeding adaptive capacity
+        - Gullibility: Penalty for trusting without verification
+        
+        Formula:
+            W_eff = A_0(source) × Γ_trust(source) × Ξ(evidence)
+            V_shock = β_shock × max(0, surprise - adaptive_capacity)
+            V_gullible = β_gullible × max(0, trust - W_eff)
+        
+        Args:
+            authority_source: Source identifier
+            authority_trust: Historical trust (Γ)
+            authority_provenance: Source authority (A_0)
+            evidence_quality: Evidence support (Ξ)
+            surprise_history: Recent surprise values
+            adaptive_capacity: Max tolerable surprise
+            
+        Returns:
+            Trust potential (penalty for shock/gullibility)
+        """
+        # V_shock: Compute shock penalty
+        shock_penalty = 0.0
+        if len(surprise_history) > 0:
+            # Current surprise is most recent
+            current_surprise = surprise_history[-1]
+            # Penalty if exceeds capacity
+            shock_penalty = max(0.0, current_surprise - adaptive_capacity)
+        
+        # V_gullible: Compute effective weight and compare to trust
+        # W_eff = A_0 × Γ_trust × Ξ(evidence_quality)
+        W_eff = authority_provenance * authority_trust * evidence_quality
+        
+        # Penalty if trust exceeds what evidence supports
+        # (being more trusting than warranted)
+        gullibility_penalty = max(0.0, authority_trust - W_eff)
+        
+        return shock_penalty + gullibility_penalty
     
     def compute_component_breakdown(self, state: GMITensionState) -> Dict[str, float]:
         """
