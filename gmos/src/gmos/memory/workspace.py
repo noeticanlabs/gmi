@@ -10,7 +10,7 @@ from typing import List, Dict, Any, Optional
 import numpy as np
 import time
 
-from memory.episode import Episode
+from gmos.memory.episode import Episode
 
 
 @dataclass

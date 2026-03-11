@@ -13,7 +13,7 @@ from dataclasses import dataclass, field
 from typing import Dict, Optional
 import numpy as np
 
-from core.state import CognitiveState as BaseCognitiveState
+from gmos.kernel.substrate_state import CognitiveState as BaseCognitiveState
 
 
 @dataclass

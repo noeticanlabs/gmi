@@ -4,18 +4,27 @@ This document explains the canonical source of truth in this repository.
 
 ## Decision: GM-OS is Canonical
 
-The **GM-OS package** (`gmos/src/gmos/`) is the canonical implementation.
+The **GM-OS package** (`gmos/src/gmos/`) is the **only shipped package**.
+All legacy directories are **archive-only** and should not be used for new development.
 
-## Legacy Directories
+## End-State Statement
 
-The following directories contain **deprecated prototype code**:
-- `core/` - Legacy core implementation
-- `memory/` - Legacy memory implementation  
-- `ledger/` - Legacy ledger implementation
-- `runtime/` - Legacy runtime implementation
-- `adapters/` - Legacy adapter prototypes
-- `experiments/` - Legacy experiment prototypes
-- `tests/` (root) - Legacy tests for prototype code
+As of this decision, `gmos/src/gmos/` is the canonical package. The following directories
+are **ARCHIVE ONLY** and will be removed in a future cleanup:
+
+## Legacy Directories (Archive Only)
+
+> ⚠️ **DO NOT USE** - These directories contain deprecated prototype code
+
+| Directory | Status | Notes |
+|-----------|--------|-------|
+| `core/` | Archive Only | Legacy core implementation |
+| `memory/` | Archive Only | Legacy memory implementation |
+| `ledger/` | Archive Only | Legacy ledger implementation |
+| `runtime/` | Archive Only | Legacy runtime implementation |
+| `adapters/` | Archive Only | Legacy adapter prototypes |
+| `experiments/` | Archive Only | Legacy experiment prototypes |
+| `tests/` (root) | Archive Only | Legacy tests for prototype code |
 
 Each legacy directory has a `LEGACY.md` file explaining its status.
 

@@ -14,10 +14,10 @@ from typing import List, Optional, Dict, Any, Tuple
 import numpy as np
 import time
 
-from memory.episode import Episode, EpisodeSummary, create_episode
-from memory.archive import EpisodicArchive
-from memory.workspace import Workspace, PhantomState, ComparisonResult
-from memory.budget_costs import MemoryBudgetLaw
+from gmos.memory.episode import Episode, EpisodeSummary, create_episode
+from gmos.memory.archive import EpisodicArchive
+from gmos.memory.workspace import Workspace, PhantomState, ComparisonResult
+from gmos.memory.budget_costs import MemoryBudgetLaw
 
 
 @dataclass

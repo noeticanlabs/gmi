@@ -8,7 +8,7 @@ from dataclasses import dataclass
 from typing import Dict, List, Optional
 import numpy as np
 
-from memory.workspace import PhantomState, ComparisonResult
+from gmos.memory.workspace import PhantomState, ComparisonResult
 
 
 @dataclass

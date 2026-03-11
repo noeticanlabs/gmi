@@ -7,8 +7,8 @@ Reconstructs phantom states from episodes for internal inspection.
 from typing import Optional, List
 import numpy as np
 
-from memory.episode import Episode
-from memory.workspace import Workspace, PhantomState
+from gmos.memory.episode import Episode
+from gmos.memory.workspace import Workspace, PhantomState
 
 
 class ReplayEngine:

@@ -43,59 +43,67 @@ This ensures moves cannot exhaust the budget below a protected minimum, providin
 
 ## Architecture
 
+> **⚠️ Important**: The canonical implementation is in `gmos/src/gmos/`.
+> Root-level directories (`core/`, `memory/`, `ledger/`, `runtime/`, `adapters/`) are legacy prototypes.
+
+### Canonical Structure (GM-OS)
+
 ```
-gmi/
-├── core/                      # Core computation
-│   ├── state.py              # State, CognitiveState, GMIPotential
-│   ├── potential.py          # Canonical energy law
-│   ├── constraints.py       # Constraint projection engine
-│   ├── affective_state.py    # χ-modulated state
-│   ├── affective_budget.py   # χ-modulated pricing
-│   ├── threat_modulation.py # Threat-flow dynamics
-│   ├── embedder.py          # Text-to-vector embedding
-│   └── memory.py            # Passive structural memory
-├── memory/                    # Reflective memory system
-│   ├── episode.py           # Episode schema
-│   ├── archive.py           # Episodic store
-│   ├── workspace.py         # Phantom states
-│   ├── operators.py          # Write/Read/Replay/Compare
-│   ├── budget_costs.py      # Anti-raccoon pricing
-│   ├── reality_anchors.py   # Externally grounded memory
+gmos/src/gmos/
+├── kernel/                   # Kernel (scheduler, verifier, budget, etc.)
+│   ├── substrate_state.py   # FullSubstrateState, CognitiveState
+│   ├── verifier.py          # OplaxVerifier
+│   ├── receipt.py           # Receipt with hash chain fields
+│   ├── hash_chain.py        # HashChainLedger
 │   └── ...
-├── ledger/                    # Verification & receipts
-│   ├── hash_chain.py        # H_{k+1} = SHA256(H_k || receipt_k)
-│   ├── replay.py            # Deterministic replay
-│   ├── oplax_verifier.py   # Thermodynamic checker
-│   └── receipt.py           # Immutable proofs
-├── runtime/                   # Execution engines
-│   ├── execution_loop.py     # Basic engine
-│   ├── projection.py        # Projected dynamics
-│   ├── policy_selection.py  # Deterministic argmax
-│   ├── reality_collision.py # Prediction → scarring
+├── agents/gmi/              # GMI Agent implementation
+│   ├── gmi_agent.py        # Main agent
+│   ├── tension_law.py      # Canonical energy law
+│   ├── state.py            # GMIState
 │   └── ...
-├── adapters/                  # Domain adapters
-│   └── base.py             # DomainAdapter interface
-└── experiments/             # Research demos
+├── memory/                  # Memory manifold
+│   ├── workspace.py        # Phantom states
+│   ├── archive.py          # Episodic archive
+│   ├── operators.py        # Write/Read/Replay/Compare
+│   └── ...
+├── sensory/                 # Sensory manifold
+├── symbolic/                # Symbolic reasoning
+└── action/                  # Action interfaces
+```
+
+### Legacy (Deprecated - Archive Only)
+
+```
+core/        # Legacy prototype code
+memory/      # Legacy prototype code  
+ledger/      # Legacy prototype code
+runtime/     # Legacy prototype code
+adapters/    # Legacy prototype code
 ```
 
 ## Installation
 
 ```bash
-pip install -e .
+cd gmos && pip install -e .[dev]
 ```
 
-## Usage
+## Testing
 
-### Basic Execution
+```bash
+# Run canonical package tests
+cd gmos && pytest
+
+# Run repository integration tests
+pytest tests/
+```
+
+## Usage (Canonical GM-OS)
 
 ```python
-from runtime.execution_loop import run_gmi_engine
+from gmos.agents.gmi.gmi_agent import GMIAgent
 
-run_gmi_engine(
-    initial_x=[1.0, 1.0],
-    initial_budget=15.0,
-    max_steps=20
-)
+agent = GMIAgent(budget=100.0)
+state = agent.step(initial_state)
 ```
 
 ### With Memory

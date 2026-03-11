@@ -48,18 +48,6 @@ package-dir = {"" = "src"}
 [tool.setuptools.packages.find]
 where = ["src"]
 
-packages = [
-    "gmos",
-    "gmos.kernel",
-    "gmos.memory",
-    "gmos.sensory",
-    "gmos.symbolic",
-    "gmos.agents",
-    "gmos.agents.gmi",
-    "gmos.action",
-    "gmos.experimental",
-]
-
 [tool.setuptools.package-data]
 gmos = ["py.typed"]
 

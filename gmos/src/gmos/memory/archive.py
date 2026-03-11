@@ -11,7 +11,7 @@ from typing import List, Dict, Optional, Iterator, Tuple
 from pathlib import Path
 import numpy as np
 
-from memory.episode import Episode, EpisodeSummary, generate_episode_id
+from gmos.memory.episode import Episode, EpisodeSummary, generate_episode_id
 
 
 # Alias for kernel compatibility
