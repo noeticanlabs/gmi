@@ -41,8 +41,10 @@ class Receipt:
     
     # Legacy/test compatibility aliases
     step: int = 0  # Alias for step_index
+    step_id: int = 0  # Alias for step_index (test compatibility)
     process_id: str = ""  # Legacy field
     state_hash: str = ""  # Alias for x_hash_before
+    instruction: str = ""  # Alias for op_code (test compatibility)
     
     # NEW: Hash chain fields
     chain_digest_prev: str = ""      # H_k

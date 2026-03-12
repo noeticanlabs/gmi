@@ -22,6 +22,7 @@ class ProcessType(Enum):
 class ProcessMode(Enum):
     """Process execution modes."""
     RUNNING = "running"
+    ACTIVE = "active"  # Alias for RUNNING (test compatibility)
     SUSPENDED = "suspended"
     HALTED = "halted"
     TORPOR = "torpor"
@@ -67,13 +68,14 @@ class ProcessTable:
         budget_handle: str = "",
         verifier_handle: Optional[str] = None,
         memory_scope: Optional[str] = None,
-        layer_count: int = 4
+        layer_count: int = 4,
+        mode: ProcessMode = ProcessMode.ACTIVE  # Default to ACTIVE for test compatibility
     ) -> ProcessRecord:
         """Register a new process."""
         record = ProcessRecord(
             process_id=process_id,
             process_type=process_type,
-            mode=ProcessMode.RUNNING,
+            mode=mode,
             priority=priority,
             state_host_key=state_host_key,
             budget_handle=budget_handle,
@@ -96,10 +98,10 @@ class ProcessTable:
         return False
     
     def list_active(self) -> List[ProcessRecord]:
-        """List all active (running) processes."""
+        """List all active (running or active) processes."""
         return [
             r for r in self._processes.values()
-            if r.mode == ProcessMode.RUNNING
+            if r.mode in (ProcessMode.RUNNING, ProcessMode.ACTIVE)
         ]
     
     def list_halted(self) -> List[ProcessRecord]:

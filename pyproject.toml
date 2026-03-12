@@ -57,10 +57,13 @@ warn_unused_configs = true
 disallow_untyped_defs = false
 
 [tool.pytest.ini_options]
-testpaths = ["tests"]
-# Exclude gmos from root test discovery - it has its own pyproject.toml and tests
-# To test gmos: cd gmos && pip install -e . && pytest -q
-norecursedirs = ["gmos", "experiments", "adapters"]
+testpaths = ["tests", "gmos/tests"]
+python_files = ["test_*.py"]
+python_functions = ["test_*"]
+addopts = "-q --tb=short"
+# Note: gmos tests are included here for unified discovery
+# Legacy tests in 'tests/' test the archive code
+# GM-OS tests in 'gmos/tests/' test the canonical implementation
 
 [tool.coverage.run]
 source = ["core", "ledger", "runtime", "memory"]

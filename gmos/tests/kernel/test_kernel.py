@@ -184,5 +184,115 @@ class TestMacroVerifier:
         assert mv.verify_oplax_bound(slab) is True
 
 
+class TestKernelBreathTest:
+    """
+    End-to-end "Breath Test" for GM-OS Kernel.
+    
+    This test validates that the theoretical substrate has successfully booted:
+    1. Instantiate a stub P_GMI
+    2. Register it in ProcessTable
+    3. Give it 1.0 Budget via BudgetRouter
+    4. Submit a single NOOP proposal
+    5. Verify: Scheduler picks it up → Verifier approves → Router deducts cost → Ledger emits receipt
+    """
+    
+    def test_full_kernel_breath_test(self):
+        """Test complete kernel boot sequence."""
+        from gmos.kernel import (
+            ProcessTable, ProcessType, ProcessMode,
+            BudgetRouter, ReserveTier,
+            KernelScheduler, ScheduleMode,
+            ReceiptEngine, ReceiptType,
+            HashChainLedger
+        )
+        
+        # Step 1: Create kernel components
+        process_table = ProcessTable()
+        budget_router = BudgetRouter()
+        scheduler = KernelScheduler()
+        hash_chain = HashChainLedger()
+        receipt_engine = ReceiptEngine(hash_chain)
+        
+        # Step 2: Register P_GMI stub in ProcessTable
+        gmi_record = process_table.register(
+            "P_GMI", 
+            ProcessType.GMI, 
+            priority=5
+        )
+        assert gmi_record.process_id == "P_GMI"
+        assert gmi_record.process_type == ProcessType.GMI
+        assert gmi_record.mode == ProcessMode.ACTIVE
+        
+        # Step 3: Give 1.0 Budget via BudgetRouter
+        budget = budget_router.register_process_budget(
+            process_id="P_GMI",
+            layer=1,
+            amount=1.0,
+            reserve=0.1,  # Reserve floor
+            tier=ReserveTier.ESSENTIAL
+        )
+        assert budget.amount == 1.0
+        assert budget.reserve == 0.1
+        assert budget.available == 0.9
+        
+        # Step 4: Register process in scheduler
+        scheduler.register_process("P_GMI", ScheduleMode.ACTIVE)
+        
+        # Step 5: Submit a NOOP proposal (simulating admin tick)
+        # The scheduler should pick up P_GMI
+        next_pid = scheduler.tick()
+        assert next_pid == "P_GMI"
+        
+        # Step 6: Verify budget routing - deduct admin tick cost
+        # Typical admin tick cost is small (e.g., 0.01)
+        admin_tick_cost = 0.01
+        can_spend = budget_router.can_spend("P_GMI", 1, admin_tick_cost)
+        assert can_spend is True, "Should be able to spend admin tick cost"
+        
+        spend_result = budget_router.apply_spend("P_GMI", 1, admin_tick_cost)
+        assert spend_result is True, "Spend should be applied"
+        
+        # Verify budget was deducted
+        remaining_budget = budget_router.get_budget("P_GMI", 1)
+        assert remaining_budget == 1.0 - admin_tick_cost
+        
+        # Step 7: Verify reserve is protected
+        # Try to spend more than available (would violate reserve)
+        cannot_spend_result = budget_router.can_spend("P_GMI", 1, 1.0)  # Try to spend all
+        assert cannot_spend_result is False, "Reserve should protect against overspending"
+        
+        # Step 8: Generate receipt via ReceiptEngine
+        receipt = receipt_engine.make_transition_receipt(
+            process_id="P_GMI",
+            step_index=0,
+            state_hash_prev="genesis",
+            state_hash_next="state_after_noop",
+            budget_prev=1.0,
+            budget_next=remaining_budget,
+            decision_code=1,  # Accepted
+            metadata={"proposal_type": "NOOP", "tick": 0}
+        )
+        
+        # Verify receipt fields
+        assert receipt.receipt_id is not None
+        assert receipt.process_id == "P_GMI"
+        assert receipt.step_index == 0
+        assert receipt.budget_prev == 1.0
+        assert receipt.budget_next == remaining_budget
+        assert receipt.decision_code == 1  # Accepted
+        
+        # Verify receipt can be serialized
+        receipt_dict = receipt.to_dict()
+        assert receipt_dict["receipt_type"] == "transition"
+        assert receipt_dict["process_id"] == "P_GMI"
+        
+        # Step 9: Verify process is still active in ProcessTable
+        rec = process_table.get("P_GMI")
+        assert rec is not None
+        assert rec.mode == ProcessMode.ACTIVE
+        
+        print("✓ Breath Test passed: Kernel substrate successfully booted")
+
+
 if __name__ == "__main__":
     pytest.main([__file__, "-v"])

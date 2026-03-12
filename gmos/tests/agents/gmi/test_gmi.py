@@ -77,14 +77,14 @@ class TestTensionLaw:
     
     def test_tension_law_creation(self):
         """Test creating tension law."""
-        from gmos.agents.gmi.tension_law import GMITensionLaw
+        from gmos.agents.gmi.tension_law import GMITensionLaw, GMITensionState
         import numpy as np
         
         law = GMITensionLaw()
         
-        # Test on current state
-        x = np.array([0.5, 0.5])
-        v = law.compute(x)
+        # Test on proper state object
+        state = GMITensionState(latent_state=np.array([0.5, 0.5]))
+        v = law.compute(state)
         assert isinstance(v, float)
 
 

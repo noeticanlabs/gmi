@@ -63,9 +63,11 @@ class TestGMIAgent:
     def test_affective_state(self):
         """Test affective state."""
         try:
-            from gmos.agents.gmi.affective_state import AffectiveState
+            from gmos.agents.gmi.affective_state import AffectiveCognitiveState
             
-            state = AffectiveState(
+            state = AffectiveCognitiveState(
+                rho=None,
+                theta=None,
                 valence=0.5,
                 arousal=0.3,
                 dominance=0.7
@@ -73,7 +75,7 @@ class TestGMIAgent:
             
             assert state.valence == 0.5
         except ImportError:
-            pytest.skip("AffectiveState not available")
+            pytest.skip("AffectiveCognitiveState not available")
 
 
 class TestKernel:

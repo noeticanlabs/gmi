@@ -89,8 +89,13 @@ class SemanticManifold:
     - Neighborhood queries
     """
     
-    def __init__(self, embedding_dim: int = 64):
-        self.embedding_dim = embedding_dim
+    def __init__(self, embedding_dim: int = 64, dimensions: int = None):
+        # Support both 'embedding_dim' and 'dimensions' parameter names
+        if dimensions is not None:
+            self.embedding_dim = dimensions
+        else:
+            self.embedding_dim = embedding_dim
+        self.dimensions = self.embedding_dim  # Alias for test compatibility
         self._state = SemanticState()
         self._embeddings: Dict[str, np.ndarray] = {}
     

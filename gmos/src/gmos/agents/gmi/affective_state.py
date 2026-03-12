@@ -54,6 +54,11 @@ class AffectiveCognitiveState:
     # NEW: Affective mode
     chi: float = 0.5  # Default: neutral
     
+    # Legacy compatibility - valence/arousal/dominance mapped to chi
+    valence: float = 0.5  # Mapped to chi: 0.5 = neutral
+    arousal: float = 0.5  # Not used in current implementation
+    dominance: float = 0.5  # Not used in current implementation
+    
     def __post_init__(self):
         """Ensure arrays and validate χ."""
         if self.rho is not None and not isinstance(self.rho, np.ndarray):

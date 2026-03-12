@@ -23,14 +23,20 @@ class GlyphEmbedder:
     This is the canonical replacement for the legacy GMI_Embedder.
     """
     
-    def __init__(self, dim: int = 2):
+    def __init__(self, dim: int = 2, dimensions: int = None):
         """
         Initialize the embedder.
         
         Args:
             dim: Dimension of embedding vectors (default 2)
+            dimensions: Alias for dim (test compatibility)
         """
-        self.dim = dim
+        # Support both 'dim' and 'dimensions' parameter names
+        if dimensions is not None:
+            self.dim = dimensions
+        else:
+            self.dim = dim
+        self.dimensions = self.dim  # Alias for test compatibility
         
         # The Semantic Lexicon - vocabulary with tension coordinates
         # Maps words to cognitive tension values (0=coherent, 10+=incoherent)

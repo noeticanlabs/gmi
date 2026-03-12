@@ -25,12 +25,19 @@ jobs:
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
+        # Install BOTH packages for the monorepo structure
         pip install -e ".[dev]"
+        pip install -e "./gmos"
         pip install pytest-cov
     
-    - name: Run tests with coverage
+    - name: Run legacy tests with coverage
       run: |
         pytest --cov=core --cov=ledger --cov=runtime --cov=memory --cov-report=xml --cov-report=term-missing tests/
+    
+    - name: Run GM-OS tests with coverage
+      working-directory: gmos
+      run: |
+        pytest --cov=gmos --cov-report=xml --cov-report=term-missing tests/
     
     - name: Upload coverage to Codecov
       uses: codecov/codecov-action@v4

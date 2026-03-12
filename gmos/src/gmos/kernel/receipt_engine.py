@@ -110,7 +110,7 @@ class ReceiptEngine:
         )
         
         if self._hash_chain:
-            receipt.chain_digest_next = self._hash_chain.append(receipt)
+            receipt.chain_digest_next = self._hash_chain.append(receipt, receipt.state_hash_next)
         
         return receipt
     
@@ -140,7 +140,7 @@ class ReceiptEngine:
         )
         
         if self._hash_chain:
-            receipt.chain_digest_next = self._hash_chain.append(receipt)
+            receipt.chain_digest_next = self._hash_chain.append(receipt, receipt.state_hash_next)
         
         return receipt
     

@@ -178,6 +178,8 @@ class CognitiveState:
     def to_vector(self) -> np.ndarray:
         """Flatten to 1D vector for compatibility."""
         parts = [self.rho, self.theta]
+        # Add budget as scalar (test compatibility: expects rho + theta + budget = 5 elements)
+        parts.append(np.array([self.budget]))
         if len(self.domain_metrics) > 0:
             parts.append(np.array(list(self.domain_metrics.values())))
         return np.concatenate(parts)

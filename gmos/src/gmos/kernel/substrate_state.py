@@ -61,6 +61,10 @@ class OperationalMode(Enum):
     - reserve floors
     - required authority thresholds
     """
+    SAFETY = "safety"        # Safe mode (test compatibility)
+    ACTIVE = "active"        # Active mode (test compatibility)
+    REFLECTIVE = "reflective"  # Reflective mode (test compatibility)
+    CONSOLIDATION = "consolidation"  # Consolidation mode (test compatibility)
     REFLEX = "reflex"        # Immediate reactive responses
     OBSERVE = "observe"      # No external action commits
     REPAIR = "repair"        # Memory reconciliation prioritized

@@ -186,6 +186,7 @@ class GlyphSpace:
     """
     # Space dimensions
     dimension: int = 3
+    dimensions: int = None  # Alias for dimension (test compatibility)
     
     # Coordinate bounds
     x_range: Tuple[float, float] = (-1.0, 1.0)
@@ -195,6 +196,11 @@ class GlyphSpace:
     # Space metadata
     space_type: str = "euclidean"
     embedding_dim: int = 64
+    
+    def __post_init__(self):
+        """Support both 'dimension' and 'dimensions' parameter names."""
+        if self.dimensions is not None:
+            self.dimension = self.dimensions
     
     # Glyph state
     state: GlyphState = field(default_factory=GlyphState)
