@@ -38,6 +38,18 @@ from gmos.agents.gmi.affective_budget import AffectiveBudgetManager
 from gmos.agents.gmi.affective_state import AffectiveCognitiveState
 from gmos.agents.gmi.policy_selection import PolicySelector
 
+# CharacterShell imports for threshold modulation
+from gmos.agents.gmi.character_shell import (
+    CharacterState,
+    EpistemicThresholds,
+    ModulatedThresholds,
+    compute_modulated_thresholds,
+)
+
+# Tension law imports for residual computation
+# Note: ResidualVector exists, compute_tension_residuals is stubbed below
+from gmos.agents.gmi.tension_law import ResidualVector
+
 
 class AgentStatus(Enum):
     """Agent execution status."""
@@ -59,6 +71,17 @@ class AgentConfig:
     potential_config: Dict[str, Any] = field(default_factory=dict)
     policy_config: Dict[str, Any] = field(default_factory=dict)
     affect_config: Dict[str, Any] = field(default_factory=dict)
+    # CharacterShell configuration (threshold modulation)
+    character_config: Dict[str, float] = field(default_factory=lambda: {
+        "chi_courage": 0.5,
+        "chi_discipline": 0.5,
+        "chi_patience": 0.5,
+        "chi_curiosity": 0.5,
+        "chi_restraint": 0.5,
+        "chi_persistence": 0.5,
+        "chi_laziness": 0.3,
+        "chi_humility": 0.5,
+    })
 
 
 class HostedGMIAgent:
@@ -109,6 +132,27 @@ class HostedGMIAgent:
         self.policy_selector = PolicySelector(**config.policy_config)
         self.affective_budget = AffectiveBudgetManager(**config.affect_config)
         self.affective_state = AffectiveCognitiveState()
+        
+        # CharacterShell for threshold modulation
+        self.character_state = CharacterState(
+            chi_courage=config.character_config.get("chi_courage", 0.5),
+            chi_discipline=config.character_config.get("chi_discipline", 0.5),
+            chi_patience=config.character_config.get("chi_patience", 0.5),
+            chi_curiosity=config.character_config.get("chi_curiosity", 0.5),
+            chi_restraint=config.character_config.get("chi_restraint", 0.5),
+            chi_persistence=config.character_config.get("chi_persistence", 0.5),
+            chi_laziness=config.character_config.get("chi_laziness", 0.3),
+            chi_humility=config.character_config.get("chi_humility", 0.5),
+        )
+        
+        # Base epistemic thresholds
+        self.base_thresholds = EpistemicThresholds()
+        
+        # Current modulated thresholds (computed each step)
+        self._modulated_thresholds: Optional[ModulatedThresholds] = None
+        
+        # Current residual vector (computed each step)
+        self._residual_vector: Optional[ResidualVector] = None
         
         # Agent state
         self.status = AgentStatus.ACTIVE
@@ -177,6 +221,19 @@ class HostedGMIAgent:
         # Process sensory input if provided
         if sensory_input:
             self._process_sensory(sensory_input)
+        
+        # === Compute tension residuals and character-modulated thresholds ===
+        # This is the "brain" - compute what the organism tension looks like
+        # and how character modulates the response thresholds
+        # TODO: Wire in real compute_tension_residuals when available
+        # For now, use empty residual vector
+        self._residual_vector = ResidualVector()
+        
+        # Get character-modulated thresholds
+        self._modulated_thresholds = compute_modulated_thresholds(
+            self.base_thresholds,
+            self.character_state
+        )
         
         # Propose actions
         candidates = self.propose_action()

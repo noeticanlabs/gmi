@@ -90,6 +90,20 @@ from gmos.kernel.mediator import (
     DEFAULT_RESERVE_FLOOR,
 )
 
+# Coh-IL Evaluator
+from gmos.kernel.cohil_evaluator import (
+    CohILEvaluator,
+    CohILParser,
+    CohInstruction,
+    CohInstructionType,
+    ValidationResult,
+    EvaluationResult,
+    create_evaluator,
+    to_transition_proposal,
+    COST_BASELINES,
+    DEFECT_BASELINES,
+)
+
 # Backward compatibility aliases (for tests expecting these names)
 Scheduler = KernelScheduler
 HashChain = HashChainLedger

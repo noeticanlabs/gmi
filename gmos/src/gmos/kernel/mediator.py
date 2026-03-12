@@ -24,6 +24,7 @@ from gmos.kernel.process_table import ProcessTable, ProcessType, ProcessMode
 from gmos.kernel.verifier import OplaxVerifier, Proposal as VerifierProposal
 from gmos.kernel.receipt_engine import ReceiptEngine, ReceiptType, KernelReceipt
 from gmos.kernel.hash_chain import HashChainLedger
+from gmos.kernel.cohil_evaluator import CohILEvaluator
 
 
 # === Constants ===
@@ -204,11 +205,34 @@ class KernelMediator:
         # Configuration
         self._admin_tick_cost = admin_tick_cost
         
+        # Coh-IL Evaluator configuration
+        # Set evaluator_enabled=False for backward compatibility (legacy mode)
+        # Set evaluator_strict=True to reject invalid Coh-IL instructions
+        self._evaluator: Optional[CohILEvaluator] = CohILEvaluator(passthrough=True)
+        
         # Track registered processes and their state
         self._processes: Dict[str, Any] = {}  # process_id -> process instance
         
         # Step counter
         self._step_index: int = 0
+    
+    @property
+    def evaluator(self) -> Optional[CohILEvaluator]:
+        """Get the Coh-IL evaluator."""
+        return self._evaluator
+    
+    def set_evaluator_enabled(self, enabled: bool) -> None:
+        """
+        Enable or disable the Coh-IL evaluator.
+        
+        Args:
+            enabled: If True, evaluate proposals through Coh-IL.
+                    If False, pass through directly (legacy mode).
+        """
+        if enabled:
+            self._evaluator = CohILEvaluator(passthrough=True)
+        else:
+            self._evaluator = None
     
     @property
     def scheduler(self) -> KernelScheduler:
@@ -356,13 +380,48 @@ class KernelMediator:
         
         # Get proposal from process
         try:
-            proposal = process.policy_propose(next_pid)
+            raw_proposal = process.policy_propose(next_pid)
         except Exception as e:
             return MediatorResult(
                 success=False,
                 process_id=next_pid,
                 error=f"Process policy_propose failed: {e}",
             )
+        
+        # === Step 3.5: Evaluate through Coh-IL (if enabled) ===
+        proposal = raw_proposal
+        cohil_metadata = {}
+        
+        if self._evaluator is not None:
+            # Try to evaluate through Coh-IL
+            try:
+                eval_result = self._evaluator.evaluate(raw_proposal)
+                
+                # Track Coh-IL metadata for receipts
+                cohil_metadata = {
+                    "cohil_validated": eval_result.is_valid,
+                    "cohil_instruction": eval_result.instruction.intent.value if eval_result.instruction else None,
+                    "cohil_cost": eval_result.instruction.cost_estimate if eval_result.instruction else None,
+                    "cohil_defect": eval_result.instruction.defect_estimate if eval_result.instruction else None,
+                }
+                
+                if eval_result.is_valid:
+                    # Use the evaluated proposal (with honestly computed cost/defect)
+                    proposal = eval_result.to_proposal()
+                else:
+                    # Validation failed - reject the proposal
+                    return MediatorResult(
+                        success=False,
+                        process_id=next_pid,
+                        proposal=raw_proposal,
+                        error=f"Coh-IL validation failed: {eval_result.errors}",
+                    )
+            except Exception as e:
+                # Coh-IL evaluation failed - log and continue with legacy proposal
+                cohil_metadata = {
+                    "cohil_error": str(e),
+                    "cohil_validated": False,
+                }
         
         # === Step 4: Verify the proposal ===
         decision = self._verify_proposal(proposal, next_pid, budget_after_tick)
@@ -396,7 +455,7 @@ class KernelMediator:
             state_hash_next = process.get_state_hash()
             budget_final = self._budget_router.get_budget(next_pid, 1)
             
-            # Emit receipt to ledger
+            # Emit receipt to ledger (include Coh-IL metadata)
             receipt = self._emit_receipt(
                 process_id=next_pid,
                 state_hash_prev=state_hash_prev,
@@ -405,6 +464,7 @@ class KernelMediator:
                 budget_final=budget_final,
                 decision=decision,
                 proposal=proposal,
+                metadata=cohil_metadata,
             )
             
             # Increment step counter
@@ -418,7 +478,7 @@ class KernelMediator:
                 receipt=receipt,
             )
         else:
-            # Proposal rejected - emit rejection receipt
+            # Proposal rejected - emit rejection receipt (include Coh-IL metadata)
             receipt = self._emit_receipt(
                 process_id=next_pid,
                 state_hash_prev=state_hash_prev,
@@ -427,6 +487,7 @@ class KernelMediator:
                 budget_final=budget_after_tick,
                 decision=decision,
                 proposal=proposal,
+                metadata=cohil_metadata,
             )
             
             return MediatorResult(
@@ -503,6 +564,7 @@ class KernelMediator:
         budget_final: float,
         decision: TransitionDecision,
         proposal: TransitionProposal,
+        metadata: Optional[Dict[str, Any]] = None,
     ) -> KernelReceipt:
         """
         Emit a receipt for this tick.
@@ -515,10 +577,23 @@ class KernelMediator:
             budget_final: Budget after tick
             decision: The verifier's decision
             proposal: The proposal that was executed
+            metadata: Optional additional metadata (e.g., Coh-IL info)
             
         Returns:
             The generated KernelReceipt
         """
+        # Build metadata, including optional Coh-IL info
+        receipt_metadata = {
+            "opcode": proposal.opcode.value,
+            "proposal_cost": proposal.cost,
+            "proposal_defect": proposal.defect,
+            "decision_reason": decision.reason,
+        }
+        
+        # Merge additional metadata (e.g., Coh-IL validation results)
+        if metadata:
+            receipt_metadata.update(metadata)
+        
         # Create receipt using the receipt engine
         receipt = self._receipt_engine.make_transition_receipt(
             process_id=process_id,
@@ -528,12 +603,7 @@ class KernelMediator:
             budget_prev=budget_prev,
             budget_next=budget_final,
             decision_code=decision.decision_code,
-            metadata={
-                "opcode": proposal.opcode.value,
-                "proposal_cost": proposal.cost,
-                "proposal_defect": proposal.defect,
-                "decision_reason": decision.reason,
-            },
+            metadata=receipt_metadata,
         )
         
         return receipt
