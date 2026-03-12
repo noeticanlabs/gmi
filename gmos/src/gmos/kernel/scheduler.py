@@ -9,7 +9,7 @@ Maps between spec modes and internal scheduling.
 """
 
 from dataclasses import dataclass, field
-from typing import Dict, List, Optional, Set
+from typing import Dict, List, Optional, Set, Union
 from enum import Enum
 import time
 
@@ -26,6 +26,7 @@ class ScheduleMode(Enum):
     REFLECTIVE = 4         # planning
     CONSOLIDATION = 5      # maintenance
     STRATEGIC = 6          # long-term planning
+    IDLE = 7               # idle waiting
     TORPOR = 99            # no budget
 
 
@@ -330,7 +331,7 @@ class KernelScheduler:
             return schedule_modes[0]
         return ScheduleMode.IDLE
     
-    def set_mode(self, mode: OperationalMode):
+    def set_mode(self, mode: Union[OperationalMode, ScheduleMode]):
         """
         Set operational mode and update scheduler accordingly.
         
@@ -339,23 +340,30 @@ class KernelScheduler:
         thresholds.
         
         Args:
-            mode: New operational mode
+            mode: New operational mode or schedule mode
         """
+        # Handle ScheduleMode directly
+        if isinstance(mode, ScheduleMode):
+            self._current_mode = mode
+            self._mode = None
+            return
+        
+        # Handle OperationalMode
         # Get primary schedule mode
         primary = self.map_spec_mode_to_schedule_mode(mode)
         
         # Get allowed events
         allowed = self.get_allowed_events(mode)
         
-        # Update internal state if needed
-        # (In a full implementation, this would adjust scheduling priorities)
+        # Update internal state
         self._mode = mode
+        self._current_mode = primary
         
         # For AUDIT mode, halt all processes
         if mode == OperationalMode.AUDIT:
             for proc in self._processes.values():
                 proc.status = ProcessStatus.HALTED
     
-    def get_current_mode(self) -> OperationalMode:
+    def get_current_mode(self) -> Union[OperationalMode, ScheduleMode]:
         """Get current operational mode."""
-        return getattr(self, '_mode', OperationalMode.OBSERVE)
+        return getattr(self, '_mode', getattr(self, '_current_mode', ScheduleMode.ACTIVE))

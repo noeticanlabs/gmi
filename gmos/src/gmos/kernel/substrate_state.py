@@ -61,6 +61,7 @@ class OperationalMode(Enum):
     - reserve floors
     - required authority thresholds
     """
+    REFLEX = "reflex"        # Immediate reactive responses
     OBSERVE = "observe"      # No external action commits
     REPAIR = "repair"        # Memory reconciliation prioritized
     PLAN = "plan"            # Branching allowed under capped budget

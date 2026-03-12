@@ -418,3 +418,4 @@ def evaluate_branch(
 
 # Aliases for backward compatibility
 PolicySelector = SelectionOperator
+PolicySelection = SelectionOperator

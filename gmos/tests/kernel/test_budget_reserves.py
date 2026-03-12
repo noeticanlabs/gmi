@@ -15,7 +15,8 @@ class TestBudgetReserve:
         from gmos.kernel.budget_router import BudgetRouter, BudgetSlice
         
         router = BudgetRouter(global_reserve=5.0)
-        router.register_process_budget("test_process", 10.0, 1.0)  # 10 budget, 1.0 reserve
+        # register_process_budget(process_id, layer, amount, reserve)
+        router.register_process_budget("test_process", 0, 10.0, 1.0)  # layer 0, 10 budget, 1.0 reserve
         
         # Try to spend 4.0 (should leave 6.0, above 1.0 reserve)
         can_spend = router.can_spend("test_process", 0, 4.0)
@@ -34,7 +35,7 @@ class TestBudgetReserve:
         from gmos.kernel.budget_router import BudgetRouter
         
         router = BudgetRouter(global_reserve=5.0)
-        router.register_process_budget("test_process", 10.0, 1.0)  # 10 budget, 1.0 reserve
+        router.register_process_budget("test_process", 0, 10.0, 1.0)  # layer 0, 10 budget, 1.0 reserve
         
         # Try to spend 9.5 (would leave 0.5, below 1.0 reserve)
         can_spend = router.can_spend("test_process", 0, 9.5)
@@ -45,7 +46,7 @@ class TestBudgetReserve:
         from gmos.kernel.budget_router import BudgetRouter
         
         router = BudgetRouter(global_reserve=5.0)
-        router.register_process_budget("test_process", 10.0, 1.0)
+        router.register_process_budget("test_process", 0, 10.0, 1.0)
         
         # At boundary
         is_at = router.is_at_boundary("test_process", 0)
@@ -57,7 +58,7 @@ class TestBudgetReserve:
         from gmos.kernel.budget_router import BudgetRouter
         
         router = BudgetRouter(global_reserve=5.0)
-        router.register_process_budget("test_process", 10.0, 1.0)
+        router.register_process_budget("test_process", 0, 10.0, 1.0)
         
         # Check reserve is OK
         ok = router.reserve_ok("test_process", 0)
@@ -68,7 +69,7 @@ class TestBudgetReserve:
         from gmos.kernel.budget_router import BudgetRouter
         
         router = BudgetRouter(global_reserve=5.0)
-        router.register_process_budget("test_process", 0.0, 0.0)
+        router.register_process_budget("test_process", 0, 0.0, 0.0)
         
         # Cannot spend from zero budget
         can_spend = router.can_spend("test_process", 0, 0.1)

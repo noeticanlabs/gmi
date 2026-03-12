@@ -24,20 +24,25 @@ class Receipt:
     - state_hash_next: Hash of state after transition
     - decision_code: Numeric encoding (1=ACCEPTED, 0=REJECTED, -1=HALT)
     """
-    # Core fields
-    step_index: int
-    op_code: str
-    x_hash_before: str
-    x_hash_after: str
-    v_before: float
-    v_after: float
-    sigma: float
-    kappa: float
-    budget_before: float
-    budget_after: float
-    is_composite: bool
-    decision: str       # "ACCEPTED", "REJECTED", or "HALT"
-    message: str
+    # Core fields (canonical names)
+    step_index: int = 0
+    op_code: str = ""
+    x_hash_before: str = ""
+    x_hash_after: str = ""
+    v_before: float = 0.0
+    v_after: float = 0.0
+    sigma: float = 0.0
+    kappa: float = 0.0
+    budget_before: float = 0.0
+    budget_after: float = 0.0
+    is_composite: bool = False
+    decision: str = "REJECTED"       # "ACCEPTED", "REJECTED", or "HALT"
+    message: str = ""
+    
+    # Legacy/test compatibility aliases
+    step: int = 0  # Alias for step_index
+    process_id: str = ""  # Legacy field
+    state_hash: str = ""  # Alias for x_hash_before
     
     # NEW: Hash chain fields
     chain_digest_prev: str = ""      # H_k
@@ -51,6 +56,16 @@ class Receipt:
     potential_fn_hash: str = ""      # Hash of potential function config
     
     def __post_init__(self):
+        # Sync aliases
+        if self.step == 0 and self.step_index > 0:
+            self.step = self.step_index
+        elif self.step > 0 and self.step_index == 0:
+            self.step_index = self.step
+            
+        if not self.state_hash and self.x_hash_before:
+            self.state_hash = self.x_hash_before
+        elif self.state_hash and not self.x_hash_before:
+            self.x_hash_before = self.state_hash
         """Set derived fields."""
         if not self.decision_code:
             self.decision_code = self._compute_decision_code()
@@ -62,12 +77,45 @@ class Receipt:
     
     def to_json(self) -> str:
         """Serializes the receipt for the cryptographic ledger log."""
-        return json.dumps(asdict(self), sort_keys=True)
+        return json.dumps(self.to_dict(), sort_keys=True)
+    
+    def to_dict(self) -> Dict[str, Any]:
+        """Serialize to dictionary including alias fields."""
+        return {
+            'step': self.step_index,
+            'step_index': self.step_index,
+            'process_id': self.process_id,
+            'state_hash': self.state_hash or self.x_hash_before,
+            'x_hash_before': self.x_hash_before,
+            'x_hash_after': self.x_hash_after,
+            'op_code': self.op_code,
+            'v_before': self.v_before,
+            'v_after': self.v_after,
+            'sigma': self.sigma,
+            'kappa': self.kappa,
+            'budget_before': self.budget_before,
+            'budget_after': self.budget_after,
+            'is_composite': self.is_composite,
+            'decision': self.decision,
+            'message': self.message,
+            'chain_digest_prev': self.chain_digest_prev,
+            'chain_digest_next': self.chain_digest_next,
+            'state_hash_prev': self.state_hash_prev,
+            'state_hash_next': self.state_hash_next,
+            'decision_code': self.decision_code,
+            'timestamp': self.timestamp,
+            'potential_fn_hash': self.potential_fn_hash,
+        }
     
     @classmethod
     def from_json(cls, json_str: str) -> 'Receipt':
         """Deserialize from JSON string."""
         data = json.loads(json_str)
+        return cls(**data)
+    
+    @classmethod
+    def from_dict(cls, data: Dict[str, Any]) -> 'Receipt':
+        """Deserialize from dictionary."""
         return cls(**data)
     
     def canonical_encoding(self) -> bytes:

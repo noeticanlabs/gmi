@@ -13,7 +13,7 @@ from dataclasses import dataclass, field
 from typing import Dict, Optional
 import numpy as np
 
-from gmos.kernel.substrate_state import CognitiveState as BaseCognitiveState
+from gmos.agents.gmi.state import CognitiveState as BaseCognitiveState
 
 
 @dataclass
@@ -167,3 +167,7 @@ class AffectiveStateFactory:
         return AffectiveCognitiveState(
             rho=rho, theta=theta, budget=budget, chi=0.9
         )
+
+
+# Alias for backward compatibility
+AffectiveState = AffectiveCognitiveState

@@ -85,24 +85,26 @@ class TestHashChainDeterminism:
     def test_chain_digest_determinism(self):
         """Test same input produces same digest."""
         from gmos.kernel.hash_chain import ChainDigest
+        import json
         
-        data = {"step": 1, "value": 100}
-        digest1 = ChainDigest.compute(data, "prev_hash")
-        digest2 = ChainDigest.compute(data, "prev_hash")
+        receipt_json = json.dumps({"step": 1, "value": 100})
+        digest1 = ChainDigest.compute("prev_digest", receipt_json, "state_hash_next")
+        digest2 = ChainDigest.compute("prev_digest", receipt_json, "state_hash_next")
         
-        assert digest1.chain_digest_next == digest2.chain_digest_next
+        assert digest1 == digest2
     
     def test_different_payload_different_digest(self):
         """Test different payload produces different digest."""
         from gmos.kernel.hash_chain import ChainDigest
+        import json
         
-        data1 = {"step": 1, "value": 100}
-        data2 = {"step": 1, "value": 200}
+        receipt_json1 = json.dumps({"step": 1, "value": 100})
+        receipt_json2 = json.dumps({"step": 1, "value": 200})
         
-        digest1 = ChainDigest.compute(data1, "prev_hash")
-        digest2 = ChainDigest.compute(data2, "prev_hash")
+        digest1 = ChainDigest.compute("prev_digest", receipt_json1, "state_hash_next")
+        digest2 = ChainDigest.compute("prev_digest", receipt_json2, "state_hash_next")
         
-        assert digest1.chain_digest_next != digest2.chain_digest_next
+        assert digest1 != digest2
     
     def test_chain_append(self):
         """Test appending to hash chain."""

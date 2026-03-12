@@ -35,7 +35,7 @@ class TestGMIPotential:
         
         potential = GMIPotential()
         assert potential.is_admissible(10.0) is True
-        assert potential.is_admissible(0.0) is True
+        assert potential.is_admissible(0.0) is False  # b=0 means no motion possible
 
 
 class TestCognitiveState:
@@ -52,19 +52,19 @@ class TestCognitiveState:
         from gmos.agents.gmi.state import CognitiveState
         import numpy as np
         
-        state = CognitiveState(x=np.array([0.5, 0.5]), budget=10.0)
+        state = CognitiveState(rho=np.array([0.5, 0.5]), theta=np.array([0.0, 0.0]), budget=10.0)
         assert state.budget == 10.0
-        assert len(state.x) == 2
+        assert len(state.rho) == 2
     
     def test_to_vector(self):
         """Test converting state to vector."""
         from gmos.agents.gmi.state import CognitiveState
         import numpy as np
         
-        state = CognitiveState(x=np.array([0.5, 0.5]), budget=10.0)
+        state = CognitiveState(rho=np.array([0.5, 0.5]), theta=np.array([0.0, 0.0]), budget=10.0)
         vec = state.to_vector()
         assert isinstance(vec, np.ndarray)
-        assert len(vec) == 3  # x + budget
+        assert len(vec) == 5  # rho + theta + budget
 
 
 class TestTensionLaw:

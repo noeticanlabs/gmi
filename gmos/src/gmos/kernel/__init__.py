@@ -71,6 +71,14 @@ from gmos.kernel.gmi_receipts import (
     create_receipt,
     validate_receipt,
 )
+from gmos.kernel.hash_chain import (
+    HashChainLedger,
+    ChainDigest,
+    get_global_ledger,
+    set_global_ledger,
+)
+from gmos.kernel.receipt import Receipt
+from gmos.kernel.verifier import OplaxVerifier
 
 __all__ = [
     # State hosting
@@ -144,4 +152,13 @@ __all__ = [
     "ActPrepareReceipt",
     "create_receipt",
     "validate_receipt",
+    # Hash chain
+    "HashChainLedger",
+    "ChainDigest",
+    "get_global_ledger",
+    "set_global_ledger",
+    # Receipt
+    "Receipt",
+    # Verifier
+    "OplaxVerifier",
 ]
