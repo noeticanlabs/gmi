@@ -15,10 +15,21 @@ from gmos.sensory import salience
 from gmos.sensory import sensory_connector
 from gmos.sensory import anchors
 
+# Export commonly used classes
+from gmos.sensory.sensory_connector import SensoryConnector, SensoryState, ProcessedPercept
+from gmos.sensory.salience import SalienceScore
+from gmos.sensory.manifold import SensoryState as ManifoldSensoryState
+
 __all__ = [
     "manifold",
     "projection", 
     "salience",
     "sensory_connector",
     "anchors",
+    # Exported classes
+    "SensoryConnector",
+    "SensoryState", 
+    "ProcessedPercept",
+    "SalienceScore",
+    "ManifoldSensoryState",
 ]

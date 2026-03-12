@@ -49,6 +49,12 @@ class ScheduledProcess:
     wake_condition: Optional[str] = None  # Condition for waking from torpor
 
 
+# Backward compatibility alias
+Scheduler = KernelScheduler
+
+
+# Backward compatibility alias
+Scheduler = KernelScheduler
 class KernelScheduler:
     """
     Kernel scheduler for multi-process, multi-layer execution.

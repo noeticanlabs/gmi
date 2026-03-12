@@ -15,10 +15,22 @@ from gmos.symbolic import semantic_manifold
 from gmos.symbolic import binding
 from gmos.symbolic import symbolic_connector
 
+# Export commonly used classes
+from gmos.symbolic.glyph_space import GlyphSpace, GlyphCoordinate, GlyphEmbedding, GlyphState
+from gmos.symbolic.glyph_embedder import GlyphEmbedder
+from gmos.symbolic.semantic_manifold import SemanticManifold
+
 __all__ = [
     "glyph_space",
     "glyph_embedder",
     "semantic_manifold",
     "binding",
     "symbolic_connector",
+    # Exported classes
+    "GlyphSpace",
+    "GlyphCoordinate", 
+    "GlyphEmbedding",
+    "GlyphState",
+    "GlyphEmbedder",
+    "SemanticManifold",
 ]

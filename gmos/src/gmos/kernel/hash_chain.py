@@ -444,3 +444,7 @@ def set_global_ledger(ledger: HashChainLedger) -> None:
     """Set the global hash chain ledger."""
     global _global_ledger
     _global_ledger = ledger
+
+
+# Backward compatibility alias
+HashChain = HashChainLedger

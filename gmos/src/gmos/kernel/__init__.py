@@ -80,6 +80,11 @@ from gmos.kernel.hash_chain import (
 from gmos.kernel.receipt import Receipt
 from gmos.kernel.verifier import OplaxVerifier
 
+# Backward compatibility aliases (for tests expecting these names)
+Scheduler = KernelScheduler
+HashChain = HashChainLedger
+KernelVerifier = OplaxVerifier
+
 __all__ = [
     # State hosting
     "StateHost",
@@ -89,6 +94,10 @@ __all__ = [
     "KernelScheduler",
     "ScheduleMode",
     "ScheduledProcess",
+    # Backward compatibility aliases
+    "Scheduler",
+    "HashChain",
+    "KernelVerifier",
     # Budget routing
     "BudgetRouter",
     "BudgetSlice",

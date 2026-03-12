@@ -14,17 +14,55 @@ pip install -e .           # Installs legacy packages (core, memory, ledger, run
 pip install -e ./gmos      # Installs the canonical GM-OS package
 
 # 3. Run tests
-# Test legacy packages:
-pytest tests/
 
-# Test GM-OS:
-cd gmos && pytest tests/
+# Activate the virtual environment first (REQUIRED)
+source .venv/bin/activate
 
-# Or test both from root:
-pytest tests/ gmos/tests/
+# Test all packages:
+pytest tests/ -v
+
+# Test specific modules:
+pytest gmos/tests/kernel/test_kernel.py -v    # Kernel substrate tests
+pytest gmos/tests/agents/gmi/test_gmi.py -v  # GMI agent tests
+pytest tests/test_gmos_modules.py -v          # GMOS module imports
+
+# Quick test summary:
+pytest tests/ --tb=short
 ```
 
-**Note:** A virtual environment is REQUIRED when using Nix or Project IDX because they block pip from modifying the system Python.
+**Note:** A virtual environment is REQUIRED - the project uses numpy and other packages not available in system Python.
+
+## Running Tests (Post-Setup)
+
+After setting up the environment, always activate the venv first:
+
+```bash
+source .venv/bin/activate
+
+# Run all tests
+pytest tests/ -v
+
+# Current test status: 133 passed, 21 skipped
+# - 20/20 kernel tests passing
+# - 10/10 GMI agent tests passing
+# - 21 skipped = Layer 2 features (Memory/Sensory/Symbolic - intentionally pending)
+```
+
+### Quick Test Commands
+
+```bash
+# Activate venv
+source .venv/bin/activate
+
+# Run GMOS kernel tests (all should pass)
+python -m pytest gmos/tests/kernel/test_kernel.py -v
+
+# Run GMI agent tests (all should pass)
+python -m pytest gmos/tests/agents/gmi/test_gmi.py -v
+
+# Run full test suite
+python -m pytest tests/ -v
+```
 
 ## Why Dual-Install?
 

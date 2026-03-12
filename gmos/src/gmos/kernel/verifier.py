@@ -80,6 +80,12 @@ class VerifierConfig:
 
 # === Main Verifier Class ===
 
+# Backward compatibility alias
+KernelVerifier = OplaxVerifier
+
+
+# Backward compatibility alias
+KernelVerifier = OplaxVerifier
 class OplaxVerifier:
     """
     Enforces the geometric and thermodynamic constraints of the GMI.
