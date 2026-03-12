@@ -79,6 +79,16 @@ from gmos.kernel.hash_chain import (
 )
 from gmos.kernel.receipt import Receipt
 from gmos.kernel.verifier import OplaxVerifier
+from gmos.kernel.mediator import (
+    KernelMediator,
+    TransitionProposal,
+    TransitionDecision,
+    TransitionOpcode,
+    MediatorResult,
+    HostedProcessProtocol,
+    ADMIN_TICK_COST,
+    DEFAULT_RESERVE_FLOOR,
+)
 
 # Backward compatibility aliases (for tests expecting these names)
 Scheduler = KernelScheduler
@@ -109,6 +119,15 @@ __all__ = [
     # Verification
     "MacroVerifier",
     "SlabReceipt",
+    # Kernel Mediator (Master Causal Loop)
+    "KernelMediator",
+    "TransitionProposal",
+    "TransitionDecision",
+    "TransitionOpcode",
+    "MediatorResult",
+    "HostedProcessProtocol",
+    "ADMIN_TICK_COST",
+    "DEFAULT_RESERVE_FLOOR",
     # Process management
     "ProcessTable",
     "ProcessRecord",

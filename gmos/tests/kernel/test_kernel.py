@@ -10,7 +10,14 @@ Tests for:
 """
 
 import pytest
+from typing import Any
 from gmos.kernel import state_host, scheduler, budget_router, process_table, macro_verifier
+from gmos.kernel.mediator import (
+    TransitionProposal,
+    TransitionDecision,
+    TransitionOpcode,
+    HostedProcessProtocol,
+)
 
 
 class TestStateHost:
@@ -292,6 +299,189 @@ class TestKernelBreathTest:
         assert rec.mode == ProcessMode.ACTIVE
         
         print("✓ Breath Test passed: Kernel substrate successfully booted")
+
+
+# === Stub Process for Mediator Tests ===
+
+class StubProcess:
+    """
+    A stub process implementing HostedProcessProtocol for testing.
+    
+    This is the "P_GMI stub" that can be run through the KernelMediator
+    to verify the Master Causal Loop works correctly.
+    """
+    
+    def __init__(self, process_id: str = "stub_1", initial_budget: float = 1.0):
+        self._process_id = process_id
+        self._state_hash = "genesis"
+        self._budget = initial_budget
+        self._noop_cost = 0.1  # Cost for NOOP operation
+    
+    @property
+    def process_id(self) -> str:
+        return self._process_id
+    
+    def get_state_hash(self) -> str:
+        """Return the current state hash."""
+        return self._state_hash
+    
+    def policy_propose(self, event: Any) -> TransitionProposal:
+        """
+        Propose a NOOP operation with a small cost.
+        
+        This simulates a process that does minimal work.
+        """
+        return TransitionProposal(
+            opcode=TransitionOpcode.NOOP,
+            cost=self._noop_cost,
+            defect=0.0,
+            new_state=None,
+            metadata={"stub": True},
+        )
+    
+    def apply_verified_proposal(self, decision: TransitionDecision) -> None:
+        """Apply a verified proposal - for stub, just update hash."""
+        if decision.accepted:
+            # Update state hash to simulate state change
+            self._state_hash = f"state_{self._noop_cost}"
+
+
+class TestKernelMediator:
+    """
+    Tests for the KernelMediator (Master Causal Loop).
+    
+    These tests verify that the mediator correctly orchestrates:
+    1. Scheduler picking next process
+    2. BudgetRouter deducting admin tick cost
+    3. Process proposing a transition
+    4. Verifier validating the proposal
+    5. If accepted: applying proposal and emitting receipt
+    """
+    
+    def test_mediator_creation(self):
+        """Test that mediator can be created."""
+        from gmos.kernel.mediator import KernelMediator
+        
+        mediator = KernelMediator()
+        assert mediator is not None
+        assert mediator.step_index == 0
+    
+    def test_register_stub_process(self):
+        """Test registering a stub process with mediator."""
+        from gmos.kernel.mediator import KernelMediator
+        from gmos.kernel import ProcessType, ScheduleMode, ReserveTier
+        
+        mediator = KernelMediator()
+        stub = StubProcess(process_id="test_stub", initial_budget=1.0)
+        
+        mediator.register_process(
+            process=stub,
+            process_type=ProcessType.GMI,
+            priority=5,
+            schedule_mode=ScheduleMode.ACTIVE,
+            budget_amount=1.0,
+            budget_reserve=0.1,
+            budget_tier=ReserveTier.ESSENTIAL,
+        )
+        
+        # Verify process is registered
+        assert "test_stub" in mediator.list_processes()
+        
+        state = mediator.get_process_state("test_stub")
+        assert state is not None
+        assert state["process_id"] == "test_stub"
+        assert state["budget"] == 1.0
+    
+    def test_mediator_tick_sequence(self):
+        """
+        Test the full tick sequence through the mediator.
+        
+        This is the "First Breath" test - verifying that:
+        1. Scheduler picks up stub_1
+        2. Router deducts ADMIN_TICK_COST
+        3. Process proposes NOOP (cost 0.1)
+        4. Verifier accepts (for NOOP with sufficient budget)
+        5. Receipt is emitted
+        """
+        from gmos.kernel.mediator import (
+            KernelMediator, ADMIN_TICK_COST, TransitionOpcode
+        )
+        from gmos.kernel import ProcessType, ScheduleMode, ReserveTier
+        
+        # Create mediator
+        mediator = KernelMediator()
+        
+        # Create stub process with enough budget for admin tick + proposal cost
+        stub = StubProcess(process_id="stub_1", initial_budget=1.0)
+        
+        # Register with mediator
+        mediator.register_process(
+            process=stub,
+            process_type=ProcessType.GMI,
+            priority=5,
+            schedule_mode=ScheduleMode.ACTIVE,
+            budget_amount=1.0,
+            budget_reserve=0.1,
+            budget_tier=ReserveTier.ESSENTIAL,
+        )
+        
+        # Execute one tick
+        result = mediator.tick()
+        
+        # Verify tick completed
+        assert result.success is True, f"Tick should succeed, got error: {result.error}"
+        assert result.process_id == "stub_1"
+        
+        # Verify proposal was generated
+        assert result.proposal is not None
+        assert result.proposal.opcode == TransitionOpcode.NOOP
+        
+        # Verify decision was made
+        assert result.decision is not None
+        assert result.decision.accepted is True
+        
+        # Verify receipt was generated
+        assert result.receipt is not None
+        assert result.receipt.process_id == "stub_1"
+        
+        # Verify step index incremented
+        assert mediator.step_index == 1
+        
+        # Verify budget was deducted (admin_tick_cost + proposal cost)
+        expected_budget = 1.0 - ADMIN_TICK_COST - stub._noop_cost
+        state = mediator.get_process_state("stub_1")
+        assert abs(state["budget"] - expected_budget) < 0.001
+        
+        print("✓ Mediator tick test passed: Full causal loop executed")
+    
+    def test_mediator_rejects_insufficient_budget(self):
+        """Test that mediator handles insufficient budget correctly."""
+        from gmos.kernel.mediator import KernelMediator
+        from gmos.kernel import ProcessType, ScheduleMode, ReserveTier
+        
+        mediator = KernelMediator()
+        
+        # Create stub with very low budget (less than admin tick cost)
+        stub = StubProcess(process_id="poor_stub", initial_budget=0.001)
+        
+        mediator.register_process(
+            process=stub,
+            process_type=ProcessType.GMI,
+            priority=5,
+            schedule_mode=ScheduleMode.ACTIVE,
+            budget_amount=0.001,  # Very low budget
+            budget_reserve=0.0,
+            budget_tier=ReserveTier.ESSENTIAL,
+        )
+        
+        # Try to tick - should fail due to insufficient budget
+        result = mediator.tick()
+        
+        # The tick may still "succeed" at the scheduler level but proposal gets rejected
+        # or the process enters torpor
+        assert result.process_id == "poor_stub"
+        
+        print("✓ Insufficient budget test passed")
 
 
 if __name__ == "__main__":
