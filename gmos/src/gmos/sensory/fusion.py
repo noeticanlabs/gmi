@@ -220,3 +220,251 @@ def fuse_external_with_internal(
         "external": fuse_modalities(external_sources),
         "internal": fuse_modalities(internal_sources)
     }
+
+
+# === Extended Fusion Law with Provenance (per spec §10) ===
+
+from dataclasses import dataclass, field
+from typing import Dict, Any, List, Optional, Tuple
+import hashlib
+import json
+
+
+@dataclass
+class ProvenanceTrace:
+    """
+    Provenance trace for fused percepts.
+    
+    Per spec §10: Fusion combines content but keeps provenance
+    as a multiset or trace. This prevents the agent from
+    silently equating external observation with internal memory.
+    """
+    source_tags: List[str] = field(default_factory=list)
+    authority_weights: List[float] = field(default_factory=list)
+    content_hashes: List[str] = field(default_factory=list)
+    fusion_order: List[int] = field(default_factory=list)
+    
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "source_tags": self.source_tags,
+            "authority_weights": self.authority_weights,
+            "content_hashes": self.content_hashes,
+            "fusion_order": self.fusion_order,
+        }
+    
+    def compute_trace_hash(self) -> str:
+        """Compute hash of the entire provenance trace."""
+        trace_str = json.dumps(self.to_dict(), sort_keys=True, separators=(',', ':'))
+        return hashlib.sha256(trace_str.encode()).hexdigest()
+
+
+@dataclass 
+class FusedPerceptWithProvenance:
+    """
+    A fused percept with provenance preservation.
+    
+    Per spec §10: The fusion law must fuse internal and external
+    sensing without erasing provenance.
+    """
+    # Fused content
+    content: Dict[str, Any]
+    fused_confidence: float
+    fused_authority: float
+    
+    # Provenance trace
+    provenance: ProvenanceTrace
+    
+    # Conflict markers
+    conflicts: List[Tuple[str, str]] = field(default_factory=list)
+    
+    # Metadata
+    timestamp: float = field(default_factory=time.time)
+    fusion_trace_hash: str = ""
+    
+    def __post_init__(self):
+        self.fusion_trace_hash = self.provenance.compute_trace_hash()
+
+
+def fuse_with_provenance(
+    percepts: List[Dict[str, Any]],
+    weights: Optional[List[float]] = None
+) -> FusedPerceptWithProvenance:
+    """
+    Fuse percepts while preserving provenance.
+    
+    Per spec §10:
+    F_fuse(s₁, ..., s_n) = (∑ᵢ wᵢ φᵢ, {provᵢ}, {authᵢ}, {conflictᵢⱼ})
+    
+    Where weights:
+    wᵢ = aᵢ qᵢ / ∑ⱼ aⱼ qⱼ
+    
+    This ensures the agent cannot later pretend that an
+    internal guess came from the external world.
+    
+    Args:
+        percepts: List of percept dictionaries
+        weights: Optional explicit weights
+        
+    Returns:
+        FusedPerceptWithProvenance with full provenance trace
+    """
+    if not percepts:
+        return FusedPerceptWithProvenance(
+            content={},
+            fused_confidence=0.0,
+            fused_authority=0.0,
+            provenance=ProvenanceTrace(),
+        )
+    
+    if len(percepts) == 1:
+        # Single percept - just wrap with provenance
+        p = percepts[0]
+        return FusedPerceptWithProvenance(
+            content=p.get("content", {}),
+            fused_confidence=p.get("confidence", 0.0),
+            fused_authority=p.get("authority", 0.0),
+            provenance=ProvenanceTrace(
+                source_tags=[p.get("source", "unknown")],
+                authority_weights=[p.get("authority", 0.0)],
+                content_hashes=[p.get("content_hash", "")],
+                fusion_order=[0],
+            ),
+        )
+    
+    # Extract authorities and qualities
+    authorities = [p.get("authority", 0.5) for p in percepts]
+    qualities = [p.get("quality", p.get("confidence", 0.5)) for p in percepts]
+    
+    # Compute weights: w_i = a_i * q_i / sum(a_j * q_j)
+    if weights is None:
+        products = [a * q for a, q in zip(authorities, qualities)]
+        total = sum(products)
+        weights = [p / total if total > 0 else 1.0 / len(percepts) for p in products]
+    
+    # Fuse content
+    fused_content = _fuse_provenance_content(percepts, weights)
+    
+    # Compute fused confidence
+    fused_confidence = sum(w * q for w, q in zip(weights, qualities))
+    
+    # Compute fused authority
+    fused_authority = sum(w * a for w, a in zip(weights, authorities))
+    
+    # Build provenance trace
+    provenance = ProvenanceTrace(
+        source_tags=[p.get("source", "unknown") for p in percepts],
+        authority_weights=authorities,
+        content_hashes=[p.get("content_hash", "") for p in percepts],
+        fusion_order=list(range(len(percepts))),
+    )
+    
+    return FusedPerceptWithProvenance(
+        content=fused_content,
+        fused_confidence=fused_confidence,
+        fused_authority=fused_authority,
+        provenance=provenance,
+    )
+
+
+def _fuse_provenance_content(
+    percepts: List[Dict[str, Any]],
+    weights: List[float]
+) -> Dict[str, Any]:
+    """Fuse content fields with provenance awareness."""
+    if not percepts:
+        return {}
+    
+    # Collect all keys
+    all_keys = set()
+    for p in percepts:
+        if "content" in p:
+            all_keys.update(p["content"].keys())
+    
+    fused = {}
+    for key in all_keys:
+        values = []
+        wts = []
+        
+        for p, w in zip(percepts, weights):
+            if "content" in p and key in p["content"]:
+                values.append(p["content"][key])
+                wts.append(w)
+        
+        if not values:
+            continue
+        
+        # Fuse numeric values
+        if all(isinstance(v, (int, float)) for v in values):
+            total_w = sum(wts)
+            fused[key] = sum(v * w for v, w in zip(values, wts)) / total_w if total_w > 0 else 0.0
+        else:
+            # For non-numeric, pick highest weight
+            best_idx = max(range(len(wts)), key=lambda i: wts[i])
+            fused[key] = values[best_idx]
+    
+    return fused
+
+
+class FusionEngineWithProvenance:
+    """
+    Extended fusion engine with provenance preservation.
+    
+    Per spec §10: Fusion must preserve provenance so the agent
+    cannot hallucinate reality without paying.
+    """
+    
+    def __init__(self):
+        self.fusion_history: List[FusedPerceptWithProvenance] = []
+    
+    def fuse(
+        self,
+        percepts: List[Dict[str, Any]],
+        weights: Optional[List[float]] = None
+    ) -> FusedPerceptWithProvenance:
+        """
+        Fuse percepts with provenance preservation.
+        
+        Args:
+            percepts: List of percepts to fuse
+            weights: Optional weights override
+            
+        Returns:
+            FusedPerceptWithProvenance
+        """
+        result = fuse_with_provenance(percepts, weights)
+        self.fusion_history.append(result)
+        return result
+    
+    def get_provenance_trace(self, index: int) -> Optional[ProvenanceTrace]:
+        """Get provenance trace for a past fusion."""
+        if 0 <= index < len(self.fusion_history):
+            return self.fusion_history[index].provenance
+        return None
+    
+    def verify_provenance_distinction(
+        self,
+        fused: FusedPerceptWithProvenance
+    ) -> Tuple[bool, str]:
+        """
+        Verify that provenance distinguishes external from internal.
+        
+        Per spec §7: This prevents the GMI from silently equating:
+        - external observation
+        - internal memory
+        - imagined simulation
+        - policy suggestion
+        """
+        sources = fused.provenance.source_tags
+        
+        has_external = "ext" in sources
+        has_internal = any(s in ["int", "mem", "sim"] for s in sources)
+        
+        if has_external and has_internal:
+            # Mixed - this is valid but should be flagged
+            return True, "Mixed provenance fusion"
+        elif has_external:
+            return True, "Pure external fusion"
+        elif has_internal:
+            return True, "Pure internal fusion"
+        else:
+            return False, "Unknown provenance sources"
