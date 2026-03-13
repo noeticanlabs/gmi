@@ -28,6 +28,8 @@ from gmos.sensory import tension_bounds
 from gmos.sensory import verifier
 from gmos.sensory import fusion
 from gmos.sensory import conflict
+from gmos.sensory import curvature
+from gmos.sensory import trauma
 
 # Export commonly used classes
 from gmos.sensory.sensory_connector import SensoryConnector, SensoryState, ProcessedPercept
@@ -68,6 +70,18 @@ from gmos.sensory.conflict import (
     ConflictStrategy,
     ConflictResult,
     ConflictSet,
+)
+from gmos.sensory.curvature import (
+    CurvatureField,
+    CurvatureField2D,
+    CurvatureParameters,
+)
+from gmos.sensory.trauma import (
+    TraumaMemory,
+    AdaptiveTraumaMemory,
+    TraumaSeverity,
+    TraumaEvent,
+    AvoidanceDecision,
 )
 
 __all__ = [
@@ -120,4 +134,13 @@ __all__ = [
     "ConflictStrategy",
     "ConflictResult",
     "ConflictSet",
+    # Curvature and trauma
+    "CurvatureField",
+    "CurvatureField2D",
+    "CurvatureParameters",
+    "TraumaMemory",
+    "AdaptiveTraumaMemory",
+    "TraumaSeverity",
+    "TraumaEvent",
+    "AvoidanceDecision",
 ]

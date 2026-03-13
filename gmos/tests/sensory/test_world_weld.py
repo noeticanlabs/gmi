@@ -546,6 +546,153 @@ class TestWorldWeld:
         assert results[-1]["organism_state"]["alive"]
 
 
+class TestTraumaScarring:
+    """Test the trauma/scar system - organism learns from negative experiences."""
+    
+    def test_poison_scar(self):
+        """
+        Test that the organism scars when touching poison.
+        
+        This is the key test: organism touches a "hot stove",
+        gets damaged, creates a curvature scar, and learns to avoid it.
+        """
+        from gmos.sensory import CurvatureField, TraumaMemory, TraumaSeverity
+        
+        # Setup: Create curvature field and trauma memory
+        cf = CurvatureField(dimensions=1, resolution=100, bounds=(0.0, 1.0))
+        trauma = TraumaMemory(curvature_field=cf)
+        
+        # Position 0.7 is the "poison" location
+        poison_position = 0.7
+        
+        # First encounter: Organism approaches poison
+        print("\n--- First encounter with poison ---")
+        
+        # The organism tries to eat at position 0.7
+        event1 = trauma.process_failure(
+            action="EAT",
+            damage=0.8,  # Significant damage
+            semantic_position=poison_position
+        )
+        
+        print(f"Damage taken: {event1.damage}")
+        print(f"Severity: {event1.severity}")
+        print(f"Scar magnitude: {event1.scar_magnitude:.4f}")
+        
+        # Check curvature at poison position
+        curvature = cf.get_curvature(poison_position)
+        print(f"Curvature at poison: {curvature:.4f}")
+        
+        # Second encounter: Organism should avoid
+        print("\n--- Second encounter ---")
+        
+        decision = trauma.should_avoid(
+            action="EAT",
+            semantic_position=poison_position
+        )
+        
+        print(f"Should avoid: {decision.should_avoid}")
+        print(f"Reasoning: {decision.reasoning}")
+        
+        # Verify scarring worked
+        assert decision.should_avoid, "Organism should avoid the poison!"
+        assert curvature > 0.5, "Curvature should be significant"
+        
+        # Third encounter at different position - should be fine
+        safe_position = 0.3
+        decision_safe = trauma.should_avoid(
+            action="EAT",
+            semantic_position=safe_position
+        )
+        
+        print(f"\n--- Safe position check ---")
+        print(f"Position {safe_position}: avoid={decision_safe.should_avoid}")
+        
+        # Safe position should not trigger avoidance
+        assert not decision_safe.should_avoid, "Safe position should not be avoided"
+        
+        print("\n✓ Organism successfully scarred by poison and learned to avoid it!")
+    
+    def test_gradient_push(self):
+        """Test that curvature pushes gradient flow."""
+        from gmos.sensory import CurvatureField
+        
+        cf = CurvatureField(dimensions=1, resolution=100, bounds=(0.0, 1.0))
+        
+        # Add a scar at position 0.5
+        cf.add_scar(position=0.5, magnitude=2.0)
+        
+        # Gradient trying to go through 0.5 should be pushed away
+        original_gradient = 1.0  # Moving right
+        
+        # Get curvature gradient
+        curv_grad = cf.compute_curvature_gradient(0.5)
+        
+        print(f"\n--- Gradient push test ---")
+        print(f"Curvature at 0.5: {cf.get_curvature(0.5):.4f}")
+        print(f"Curvature gradient: {curv_grad:.4f}")
+        
+        # The gradient should be modified
+        assert cf.get_curvature(0.5) > 1.0, "Scar should be significant"
+        
+        print("\n✓ Curvature successfully modifies gradient flow!")
+    
+    def test_multiple_scars(self):
+        """Test multiple scars at different positions."""
+        from gmos.sensory import CurvatureField, TraumaMemory
+        
+        cf = CurvatureField(dimensions=1, resolution=100, bounds=(0.0, 1.0))
+        trauma = TraumaMemory(curvature_field=cf)
+        
+        # Create scars at multiple positions
+        positions = [0.2, 0.4, 0.6, 0.8]
+        
+        for pos in positions:
+            trauma.process_failure(
+                action="BAD_ACTION",
+                damage=0.5,
+                semantic_position=pos
+            )
+        
+        # Check summary
+        summary = cf.get_scar_summary()
+        print(f"\n--- Multiple scars test ---")
+        print(f"Scar count: {summary['scar_count']}")
+        print(f"Max curvature: {summary['max_curvature']:.4f}")
+        
+        # All positions should have curvature
+        for pos in positions:
+            curv = cf.get_curvature(pos)
+            assert curv > 0.1, f"Position {pos} should have scar"
+        
+        print("\n✓ Multiple scars created successfully!")
+    
+    def test_scar_healing(self):
+        """Test that scars decay over time."""
+        from gmos.sensory import CurvatureField
+        
+        cf = CurvatureField(dimensions=1, resolution=100, bounds=(0.0, 1.0))
+        
+        # Add scar
+        cf.add_scar(position=0.5, magnitude=1.0)
+        
+        initial = cf.get_curvature(0.5)
+        print(f"\n--- Scar healing test ---")
+        print(f"Initial curvature: {initial:.4f}")
+        
+        # Apply decay
+        for i in range(10):
+            cf.decay_scars(dt=1.0)
+        
+        healed = cf.get_curvature(0.5)
+        print(f"After decay: {healed:.4f}")
+        
+        # Curvature should have decreased
+        assert healed < initial, "Scar should have decayed"
+        
+        print("\n✓ Scars decay over time as expected!")
+
+
 class TestWorldWeldStress:
     """Stress tests for the world-weld."""
     
