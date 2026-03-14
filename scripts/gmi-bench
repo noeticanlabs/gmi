@@ -1,0 +1,128 @@
+#!/bin/bash
+#
+# GMI Benchmark Runner
+# 
+# Simple wrapper that auto-creates venv and runs benchmarks.
+# Usage: ./scripts/gmi-bench [nav|keydoor|all] [options]
+#
+# Options:
+#   -n, --trials N     Number of trials (default: 10)
+#   --noise N          Noise level sigma (default: 0.0)
+#   -s, --stress      Run stress test (100 trials)
+#   -v, --verbose     Verbose output
+#   -h, --help        Show this help
+#
+# Examples:
+#   ./scripts/gmi-bench                  # Run all benchmarks (default)
+#   ./scripts/gmi-bench nav              # Run navigation benchmark only
+#   ./scripts/gmi-bench keydoor          # Run key-door benchmark only
+#   ./scripts/gmi-bench all --trials 50 # Run all with 50 trials
+#   ./scripts/gmi-bench --noise 2.0     # Run with noise level 2.0
+#   ./scripts/gmi-bench --stress        # Run stress test
+
+set -e
+
+# Get script directory
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+PROJECT_ROOT="$(dirname "$SCRIPT_DIR")"
+
+cd "$PROJECT_ROOT"
+
+# Colors for output
+RED='\033[0;31m'
+GREEN='\033[0;32m'
+YELLOW='\033[1;33m'
+BLUE='\033[0;34m'
+NC='\033[0m' # No Color
+
+# Default values
+BENCHMARK="all"
+TRIALS=10
+NOISE=0.0
+STRESS=false
+VERBOSE=false
+
+# Parse arguments
+while [[ $# -gt 0 ]]; do
+    case $1 in
+        nav|navigation)
+            BENCHMARK="nav"
+            shift
+            ;;
+        keydoor|key-door)
+            BENCHMARK="keydoor"
+            shift
+            ;;
+        all)
+            BENCHMARK="all"
+            shift
+            ;;
+        -n|--trials)
+            TRIALS="$2"
+            shift 2
+            ;;
+        --noise)
+            NOISE="$2"
+            shift 2
+            ;;
+        -s|--stress)
+            STRESS=true
+            shift
+            ;;
+        -v|--verbose)
+            VERBOSE=true
+            shift
+            ;;
+        -h|--help)
+            head -20 "$0" | tail -15
+            exit 0
+            ;;
+        *)
+            echo -e "${RED}Unknown option: $1${NC}"
+            echo "Use --help for usage information"
+            exit 1
+            ;;
+    esac
+done
+
+echo -e "${BLUE}============================================================${NC}"
+echo -e "${BLUE}GMI Benchmark Runner${NC}"
+echo -e "${BLUE}============================================================${NC}"
+echo ""
+echo -e "Configuration:"
+echo -e "  Benchmark: ${GREEN}$BENCHMARK${NC}"
+echo -e "  Trials:    ${GREEN}$TRIALS${NC}"
+echo -e "  Noise:     ${GREEN}$NOISE${NC}"
+echo -e "  Stress:    ${GREEN}$STRESS${NC}"
+echo ""
+
+# Check for venv
+if [ ! -d ".venv" ]; then
+    echo -e "${YELLOW}Creating virtual environment...${NC}"
+    python3 -m venv .venv
+fi
+
+# Activate venv
+source .venv/bin/activate
+
+# Ensure dependencies are installed
+pip install -q numpy pytest 2>/dev/null || true
+
+# Run the benchmark
+echo -e "${YELLOW}Running benchmark...${NC}"
+echo ""
+
+# Always run full suite and filter output based on benchmark selection
+# This ensures the module path is correct
+OUTPUT=$(python gmos/tests/agents/gmi/benchmark_suite.py 2>&1)
+
+if [ "$BENCHMARK" = "nav" ]; then
+    echo "$OUTPUT" | grep -A20 "Navigation Task" || echo "$OUTPUT"
+elif [ "$BENCHMARK" = "keydoor" ]; then
+    echo "$OUTPUT" | grep -A20 "Key-Door Task" || echo "$OUTPUT"
+else
+    echo "$OUTPUT"
+fi
+
+echo ""
+echo -e "${GREEN}Done!${NC}"
