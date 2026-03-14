@@ -56,7 +56,12 @@ class MinimalVerifier:
     """
     Minimal verifier implementing the core governance law.
     
-    Checks: V(x_{t+1}) + σ ≤ V(x_t) + κ + r
+    Verifier rules (stricter interpretation):
+    1. Reserve law: spend must NOT violate reserve floor (independent check)
+    2. Coherence law: proposals that worsen coherence beyond defect tolerance are REJECTED
+    3. Only proposals that slightly worsen coherence within tolerance can be repaired
+    
+    Inequality: V(x_{t+1}) + σ ≤ V(x_t) + κ + r
     """
     
     def __init__(self, defect_tolerance: float = 10.0):
@@ -83,7 +88,40 @@ class MinimalVerifier:
         # Get reserve slack (total available minus floor)
         reserve_slack = sum(budget.reserve_slack.values())
         
-        # Check verifier inequality: V(x_{t+1}) + σ ≤ V(x_t) + κ + r
+        # RULE 1: Check reserve floor independently FIRST
+        # If spend would violate reserve floor, REJECT immediately
+        if not self._can_spend_within_reserve(budget, spend):
+            return VerifierResult(
+                verdict=Verdict.REJECT,
+                residual=residual,
+                spend=spend,
+                defect=self.defect_tolerance,
+                reserve_slack=reserve_slack,
+                coherence_before=coherence_before,
+                coherence_after=coherence_after,
+                reasons=["reserve_floor_violation"],
+                repair_notes="spend would violate reserve floor"
+            )
+        
+        # RULE 2: Check if proposal worsens coherence significantly
+        # If coherence_after > coherence_before + defect_tolerance, REJECT (not repair)
+        # This prevents proposals that significantly degrade state from slipping through
+        coherence_worsening = coherence_after - coherence_before
+        if coherence_worsening > self.defect_tolerance:
+            # Proposal significantly worsens coherence - REJECT
+            return VerifierResult(
+                verdict=Verdict.REJECT,
+                residual=residual,
+                spend=spend,
+                defect=coherence_worsening,
+                reserve_slack=reserve_slack,
+                coherence_before=coherence_before,
+                coherence_after=coherence_after,
+                reasons=["coherence_worsens_beyond_tolerance"],
+                repair_notes="coherence worsens by more than defect tolerance"
+            )
+        
+        # RULE 3: Check verifier inequality
         is_admissible = check_verifier_inequality(
             coherence_before=coherence_before,
             coherence_after=coherence_after,
@@ -93,6 +131,7 @@ class MinimalVerifier:
         )
         
         if is_admissible:
+            # ACCEPT - all checks pass
             return VerifierResult(
                 verdict=Verdict.ACCEPT,
                 residual=residual,
@@ -103,35 +142,50 @@ class MinimalVerifier:
                 coherence_after=coherence_after,
                 reasons=["verifier_inequality_satisfied"]
             )
-        else:
-            # Try to repair by reducing coherence impact
-            # Simple repair: reduce proposed coherence to acceptable level
-            max_acceptable_coherence = coherence_before + self.defect_tolerance + reserve_slack - spend
-            
-            if max_acceptable_coherence >= coherence_before - 100:  # Large tolerance for repair
-                return VerifierResult(
-                    verdict=Verdict.REPAIR,
-                    residual=residual,
-                    spend=spend,
-                    defect=self.defect_tolerance,
-                    reserve_slack=reserve_slack,
-                    coherence_before=coherence_before,
-                    coherence_after=coherence_after,
-                    repair_notes="coherence_reduced_to_admissible",
-                    reasons=["verifier_inequality_repaired"]
-                )
+        
+        # RULE 4: Only proposals that slightly worsen coherence can be repaired
+        # If coherence_worsening is positive but within tolerance, try repair
+        if coherence_worsening > 0 and coherence_worsening <= self.defect_tolerance:
+            # Repair: reduce the coherence impact
+            repaired_coherence = coherence_before  # Restore to original
+            repaired_residual = compute_residual(coherence_before, repaired_coherence)
             
             return VerifierResult(
-                verdict=Verdict.REJECT,
-                residual=residual,
+                verdict=Verdict.REPAIR,
+                residual=repaired_residual,
                 spend=spend,
-                defect=self.defect_tolerance,
+                defect=coherence_worsening,
                 reserve_slack=reserve_slack,
                 coherence_before=coherence_before,
-                coherence_after=coherence_after,
-                reasons=["verifier_inequality_violated"],
-                repair_notes="cannot repair to admissible state"
+                coherence_after=repaired_coherence,
+                repair_notes="coherence restored to original level",
+                reasons=["proposal_repaired"]
             )
+        
+        # Default: REJECT
+        return VerifierResult(
+            verdict=Verdict.REJECT,
+            residual=residual,
+            spend=spend,
+            defect=self.defect_tolerance,
+            reserve_slack=reserve_slack,
+            coherence_before=coherence_before,
+            coherence_after=coherence_after,
+            reasons=["verifier_inequality_violated"],
+            repair_notes="cannot repair to admissible state"
+        )
+    
+    def _can_spend_within_reserve(self, budget: BudgetState, spend: float) -> bool:
+        """Check if spend would violate reserve floor."""
+        # Check each channel's reserve floor
+        for channel, floor in budget.reserve_floors.items():
+            current_reserve = budget.reserves.get(channel, 0)
+            reserve_after = current_reserve - spend
+            if reserve_after < floor:
+                return False
+        
+        # Also check total available doesn't go below zero
+        return budget.available - spend >= 0
 
 
 # =============================================================================
@@ -172,7 +226,11 @@ class MinimalPercept:
 
 
 class MinimalBudgetManager:
-    """Minimal budget manager with reserve enforcement."""
+    """Minimal budget manager with reserve enforcement.
+    
+    The reserve floor is a HARD constraint - spending that would violate
+    the reserve floor is always rejected.
+    """
     
     def __init__(self, total: float = 100.0, reserve_floor: float = 10.0):
         self.total = total
@@ -191,9 +249,15 @@ class MinimalBudgetManager:
         )
     
     def can_spend(self, amount: float) -> bool:
+        """
+        Check if amount can be spent without violating reserve floor.
+        
+        HARD constraint: available - amount >= reserve_floor
+        """
         return self.available - amount >= self.reserve_floor
     
     def spend(self, amount: float) -> bool:
+        """Execute spend if it doesn't violate reserve floor."""
         if self.can_spend(amount):
             self.available -= amount
             self.spent += amount

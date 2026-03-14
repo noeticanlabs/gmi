@@ -129,10 +129,10 @@ This document tracks the implementation status of all Phase 1 deliverables. Each
 | Test 1 | Vocabulary closure - core terms have one canonical definition | ✅ PASS |
 | Test 2 | Package truth - one obvious canonical code path | ⚠️ PARTIAL |
 | Test 3 | Honest surface - stubs not exported as production | ✅ PASS |
-| Test 4 | Lawful minimal run - toy loop produces percept→proposal→verifier→receipt→action | ❌ FAIL |
-| Test 5 | Guarded failure - over-budget proposals repaired/rejected correctly | ❌ FAIL |
+| Test 4 | Lawful minimal run - toy loop produces percept→proposal→verifier→receipt→action | ✅ PASS |
+| Test 5 | Guarded failure - over-budget proposals repaired/rejected correctly | ✅ PASS |
 | Test 6 | Reproducible setup - fresh clone setup works cleanly | ⚠️ PARTIAL |
-| Test 7 | Receipt continuity - every step has valid receipt trail | ❌ FAIL |
+| Test 7 | Receipt continuity - every step has valid receipt trail | ✅ PASS |
 
 ---
 
@@ -208,6 +208,28 @@ This document tracks the implementation status of all Phase 1 deliverables. Each
 | **TOTAL** | **96** | **96** | **100%** |
 
 ✅ **Primary KPI: 100% achieved**
+
+---
+
+## Recent Fixes (Post-Initial Implementation)
+
+The following issues were identified and fixed after initial Phase 1 implementation:
+
+1. **Verifier Semantics Fixed**: The minimal verifier now correctly rejects proposals that significantly worsen coherence (beyond defect tolerance), not just proposals that violate the inequality.
+
+2. **Reserve Law Made Load-Bearing**: The reserve floor check is now enforced independently (not just via inequality bookkeeping). Proposals that would violate the reserve floor are rejected immediately.
+
+3. **Verifier Rules** (updated `gmos/src/gmos/runtime/minimal_loop.py`):
+   - Rule 1: Reserve floor check FIRST - reject if spend violates reserve
+   - Rule 2: Reject proposals that worsen coherence beyond defect tolerance
+   - Rule 3: Check verifier inequality
+   - Rule 4: Only slightly-worsening proposals can be repaired
+
+**Test Results After Fixes**:
+- ✅ Accepts lawful proposals (improve coherence, within budget)
+- ✅ Rejects over-budget proposals (violate reserve)
+- ✅ Rejects coherence-worsening proposals (beyond tolerance)
+- ✅ Repairs slightly-worsening proposals within tolerance
 
 ---
 
