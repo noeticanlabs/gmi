@@ -45,6 +45,8 @@ from gmos.sensory.conflict import (
     ConflictDetector,
     ConflictResolver,
     ConflictStrategy,
+    ConflictResult,
+    ConflictSet,
 )
 
 
@@ -140,7 +142,7 @@ class TestObservationOperator:
         percept = observation_operator(world_event)
         
         assert isinstance(percept, SensoryPercept)
-        assert percept.source == "external"
+        assert percept.source_class == "ext"
         assert percept.quality == 0.95
         assert percept.percept_id != ""
     
@@ -153,7 +155,8 @@ class TestObservationOperator:
         # Check external state
         assert hasattr(percept, "raw_observation")
         assert hasattr(percept, "quality")
-        assert hasattr(percept, "source")
+        assert hasattr(percept, "source_id")
+        assert hasattr(percept, "source_class")
         
         # Check internal state
         assert hasattr(percept, "budget")

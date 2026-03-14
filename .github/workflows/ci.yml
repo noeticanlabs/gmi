@@ -22,22 +22,20 @@ jobs:
       with:
         python-version: ${{ matrix.python-version }}
     
+    - name: Create virtual environment
+      run: python -m venv .venv
+    
     - name: Install dependencies
       run: |
-        python -m pip install --upgrade pip
+        .venv/bin/pip install --upgrade pip
         # Install BOTH packages for the monorepo structure
-        pip install -e ".[dev]"
-        pip install -e "./gmos"
-        pip install pytest-cov
+        .venv/bin/pip install -e ".[dev]"
+        .venv/bin/pip install -e "./gmos[dev]"
+        .venv/bin/pip install pytest-cov
     
     - name: Run legacy tests with coverage
       run: |
-        pytest --cov=core --cov=ledger --cov=runtime --cov=memory --cov-report=xml --cov-report=term-missing tests/
-    
-    - name: Run GM-OS tests with coverage
-      working-directory: gmos
-      run: |
-        pytest --cov=gmos --cov-report=xml --cov-report=term-missing tests/
+        .venv/bin/pytest --cov=core --cov=ledger --cov=runtime --cov=memory --cov=gmos --cov-report=xml --cov-report=term-missing tests/ gmos/tests/
     
     - name: Upload coverage to Codecov
       uses: codecov/codecov-action@v4
@@ -57,40 +55,22 @@ jobs:
       with:
         python-version: "3.11"
     
+    - name: Create virtual environment
+      run: python -m venv .venv
+    
     - name: Install dependencies
       run: |
-        python -m pip install --upgrade pip
-        pip install ruff black mypy
+        .venv/bin/pip install --upgrade pip
+        .venv/bin/pip install ruff black mypy
     
     - name: Run Ruff
       run: |
-        ruff check core/ ledger/ runtime/ memory/ adapters/
+        .venv/bin/ruff check core/ ledger/ runtime/ memory/ adapters/ gmos/src/
     
     - name: Run Black
       run: |
-        black --check core/ ledger/ runtime/ memory/ adapters/
+        .venv/bin/black --check core/ ledger/ runtime/ memory/ adapters/ gmos/src/
     
     - name: Run MyPy
       run: |
-        mypy core/ ledger/ runtime/ memory/
-
-  gmos-test:
-    runs-on: ubuntu-latest
-    
-    steps:
-    - uses: actions/checkout@v4
-    
-    - name: Set up Python
-      uses: actions/setup-python@v5
-      with:
-        python-version: "3.11"
-    
-    - name: Install GM-OS dependencies
-      run: |
-        python -m pip install --upgrade pip
-        cd gmos && pip install -e ".[dev]" && cd ..
-        pip install pytest
-    
-    - name: Run GM-OS tests
-      run: |
-        cd gmos && pytest -q
+        .venv/bin/mypy core/ ledger/ runtime/ memory/ gmos/src/

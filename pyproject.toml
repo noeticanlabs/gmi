@@ -66,7 +66,7 @@ addopts = "-q --tb=short"
 # GM-OS tests in 'gmos/tests/' test the canonical implementation
 
 [tool.coverage.run]
-source = ["core", "ledger", "runtime", "memory"]
+source = ["core", "ledger", "runtime", "memory", "gmos"]
 omit = ["*/tests/*", "*/experiments/*"]
 
 [tool.coverage.report]

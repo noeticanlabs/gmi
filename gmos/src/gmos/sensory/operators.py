@@ -46,7 +46,8 @@ class SensoryPercept:
     raw_observation: Any = None
     topology: Optional[Dict[str, Any]] = None
     quality: float = 1.0
-    source: str = ""
+    source_id: str = ""  # Device/sensor ID (e.g., "sensor_1")
+    source_class: str = "ext"  # Provenance class: "ext" | "int" | "mem" | "sim"
     
     # Internal state (X_int)
     budget: float = 1.0
@@ -78,7 +79,8 @@ class SensoryPercept:
             "raw_observation": str(self.raw_observation) if self.raw_observation else None,
             "topology": self.topology,
             "quality": self.quality,
-            "source": self.source,
+            "source_id": self.source_id,
+            "source_class": self.source_class,
             "budget": self.budget,
             "tension": self.tension,
             "curvature": self.curvature,
@@ -299,9 +301,64 @@ class ObservationOperator:
             return self._custom_anchor_fn(external, internal)
         
         # Default anchoring
-        source = external.get("source", "external")
+        source_raw = external.get("source", "external")
         
-        # Authority based on source
+        # Determine source_class from raw source
+        source_class = self._determine_source_class(source_raw)
+        
+        # Authority based on source_class
+        authority_map = {
+            "ext": 1.0,    # External - highest authority
+            "int": 0.5,    # Internal - medium authority
+            "mem": 0.3,    # Memory - lower authority
+            "sim": 0.1,   # Simulation - lowest authority
+        }
+        
+        authority = authority_map.get(source_class, 0.5)
+        
+        return {
+            **external,
+            "source_class": source_class,
+            "provenance": source_class,
+            "authority": authority,
+            "conflict_markers": [],
+        }
+    
+    def _determine_source_class(self, source_raw: str) -> str:
+        """
+        Determine source_class (provenance) from raw source string.
+        
+        Maps device/sensor IDs to provenance classes:
+        - "sensor_*", "environment_*", "external" → "ext"
+        - "internal", "budget", "affect" → "int"
+        - "memory", "replay" → "mem"
+        - "simulation", "imagine" → "sim"
+        """
+        if not source_raw:
+            return "ext"
+        
+        source_lower = source_raw.lower()
+        
+        # External sources
+        if any(x in source_lower for x in ["sensor", "environment", "external", "vision", "audio", "tool"]):
+            return "ext"
+        
+        # Internal sources
+        if any(x in source_lower for x in ["internal", "budget", "affect", "tension", "health"]):
+            return "int"
+        
+        # Memory sources
+        if any(x in source_lower for x in ["memory", "replay", "archive"]):
+            return "mem"
+        
+        # Simulation sources
+        if any(x in source_lower for x in ["simulation", "sim", "imagine", "predict"]):
+            return "sim"
+        
+        # Default to external
+        return "ext"
+
+    # REMOVED: Old authority logic below
         authority_map = {
             "external": 1.0,
             "ledger": 0.8,
@@ -330,20 +387,28 @@ class ObservationOperator:
         content_str = json.dumps(anchored, sort_keys=True)
         percept_id = hashlib.sha256(content_str.encode()).hexdigest()[:16]
         
+        # Get source_id (device ID) and source_class (provenance)
+        source_raw = raw.get("source", "external")
+        source_id = source_raw if source_raw else "unknown"
+        
+        # Determine source_class from raw source
+        source_class = self._determine_source_class(source_raw)
+        
         return SensoryPercept(
             percept_id=percept_id,
             raw_observation=anchored.get("raw_observation"),
             topology=anchored.get("topology"),
             quality=anchored.get("quality", 1.0),
-            source=anchored.get("source", "external"),
+            source_id=source_id,
+            source_class=source_class,
             budget=anchored.get("budget", 1.0),
             tension=anchored.get("tension", 0.0),
             curvature=anchored.get("curvature", 0.0),
             shell_stability=anchored.get("shell_stability", 1.0),
             health=anchored.get("health", 1.0),
             memory_pressure=anchored.get("memory_pressure", 0.0),
-            provenance=anchored.get("provenance", ""),
-            authority=anchored.get("authority", 0.5),
+            provenance=anchored.get("provenance", source_class),
+            authority=anchored.get("authority", 0.9),  # Default to high for external
             conflict_markers=anchored.get("conflict_markers", []),
         )
 
@@ -527,10 +592,10 @@ class SemanticBridge:
             self.type_mapping = type_mapping
         else:
             self.type_mapping = {
-                "external": "observation",
-                "internal": "interoception",
-                "replay": "recollection",
-                "simulation": "imagination",
+                "ext": "observation",
+                "int": "interoception",
+                "mem": "recollection",
+                "sim": "imagination",
             }
     
     def __call__(self, percept: SensoryPercept) -> NoeticType:
@@ -562,25 +627,25 @@ class SemanticBridge:
     def _default_mapping(self) -> Dict[str, str]:
         """Default mapping from source to type."""
         return {
-            "external": "observation",
-            "internal": "interoception",
-            "memory": "recollection",
-            "simulation": "imagination",
+            "ext": "observation",
+            "int": "interoception",
+            "mem": "recollection",
+            "sim": "imagination",
         }
     
     def _determine_type(self, percept: SensoryPercept) -> str:
         """Determine the Noetic type from percept."""
-        source = percept.source
+        source = percept.source_class
         
         if self.type_mapping and source in self.type_mapping:
             return self.type_mapping[source]
         
-        # Default mapping
+        # Default mapping (use short codes)
         default_map = {
-            "external": "observation",
-            "internal": "interoception", 
-            "replay": "recollection",
-            "simulation": "imagination",
+            "ext": "observation",
+            "int": "interoception", 
+            "mem": "recollection",
+            "sim": "imagination",
         }
         
         return default_map.get(source, "unknown")
