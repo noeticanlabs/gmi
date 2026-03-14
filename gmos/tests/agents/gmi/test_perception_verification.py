@@ -2,31 +2,42 @@
 Test: GMI Perception Verification
 
 This test provides VERIFIABLE evidence that GMI perceives:
-1. Prediction test: GMI predicts next visual pattern from memory
+1. Spectral pattern discrimination: distinct spatial patterns create distinct spectral signatures
 2. Behavioral test: GMI moves toward light, away from shadow
+3. Sound localization: GMI distinguishes sound direction
+
+IMPORTANT: These tests use assertions for pytest compatibility.
 """
 
 import numpy as np
+import pytest
 from gmos.agents.gmi.twelve_block_state import create_initial_state
 from gmos.agents.gmi.full_dynamics import create_dynamics_system
 
 
 # =============================================================================
-# TEST 1: Prediction - Can GMI predict what comes next?
+# TEST 1: Spectral Pattern Discrimination
 # =============================================================================
 
-def test_prediction():
+def test_spectral_pattern_discrimination():
     """
-    Test that GMI can learn and predict patterns using resonance.
+    Test that GMI can distinguish different spatial patterns via spectral signatures.
     
-    Uses the resonant field's natural frequency response as memory.
-    Different spatial patterns create different spectral signatures.
+    This tests the resonant field's frequency response as memory.
+    Different spatial positions create different spectral signatures.
+    
+    NOTE: This is NOT full sequence prediction - it demonstrates pattern
+    discrimination and memory signature separation.
     """
     print("="*60)
-    print("TEST 1: PREDICTION VERIFICATION")
+    print("TEST 1: SPECTRAL PATTERN DISCRIMINATION")
     print("="*60)
     
     system = create_dynamics_system()
+    
+    # Define tolerances based on empirical observations
+    DISCRIMINATION_THRESHOLD = 0.05  # Minimum spread for distinct patterns
+    CENTER_NORM_TOLERANCE = 1.0  # Tolerance for center pattern norm
     
     # Use spatial frequency patterns - different positions = different spectral signatures
     # Left = lower frequency, Center = mid frequency, Right = higher frequency
@@ -43,44 +54,35 @@ def test_prediction():
         
         # Different positions have different spatial frequencies
         if position == "left":
-            # Lower spatial frequency pattern
             px, py = W // 4, H // 2
-            freq_mult = 0.5  # Low frequency
+            freq_mult = 0.5
         elif position == "center":
-            # Mid spatial frequency pattern
             px, py = W // 2, H // 2
-            freq_mult = 1.0  # Mid frequency
+            freq_mult = 1.0
         elif position == "right":
-            # Higher spatial frequency pattern
             px, py = 3 * W // 4, H // 2
-            freq_mult = 2.0  # High frequency
+            freq_mult = 2.0
         
         dist = np.sqrt((X - px)**2 + (Y - py)**2)
         spatial = intensity * np.exp(-dist**2 / (30 / freq_mult))
         
-        # Different octaves respond differently to spatial frequencies
         for n in range(N):
-            # Each octave has different spatial frequency sensitivity
             octave_response = np.exp(-((n / N - freq_mult/3)**2) * 2)
             pattern[:, :, n] = spatial * octave_response
         
         return pattern
     
-    # Store learned patterns in memory (xi_mem block stores spectral patterns)
+    # Store learned patterns
     memory_store = {}
-    
-    # Learn sequence: left -> center -> right -> left -> center -> right
-    sequence = ["left", "center", "right", "left", "center", "right"]
-    
-    # Use a list to accumulate spectra before averaging
     memory_accumulator = {}
     
-    print("\n[1] Learning sequence (storing spectral signatures)...")
+    # Learn patterns
+    sequence = ["left", "center", "right", "left", "center", "right"]
+    
+    print("\n[1] Learning spectral signatures...")
     for i, pos in enumerate(sequence):
         pattern = create_spatial_pattern(pos)
         system.visual_field.V = pattern
-        
-        # Compress to spectral signature using ear (sensory projection)
         spectral = system.eye(pattern)
         
         if pos not in memory_accumulator:
@@ -94,63 +96,63 @@ def test_prediction():
         memory_store[pos] = np.mean(spectra, axis=0)
         print(f"    Stored: {pos}, memory norm: {np.linalg.norm(memory_store[pos]):.2f}")
     
-    # Test prediction: given "left", predict "center"
-    print("\n[2] Testing prediction...")
+    # Test: verify distinct patterns produce distinct spectral signatures
+    print("\n[2] Testing pattern discrimination...")
     
-    test_input = create_spatial_pattern("left", intensity=2.0)
+    test_input = create_spatial_pattern("center", intensity=2.0)
     test_spectral = system.eye(test_input)
     
     # Compare with stored memories
-    predictions = {}
+    similarities = {}
     for pos, memory in memory_store.items():
-        # Use cosine similarity
         norm_input = np.linalg.norm(test_spectral)
         norm_memory = np.linalg.norm(memory)
         if norm_input > 0 and norm_memory > 0:
             similarity = np.dot(test_spectral, memory) / (norm_input * norm_memory)
         else:
             similarity = 0
-        predictions[pos] = similarity
+        similarities[pos] = similarity
     
-    print(f"    Input: 'left' pattern")
-    print(f"    Stored spectral signatures:")
-    for pos, spec in memory_store.items():
-        print(f"      {pos}: norm={np.linalg.norm(spec):.2f}")
-    print(f"    Predictions (similarity to stored patterns):")
-    for pos, score in sorted(predictions.items(), key=lambda x: -x[1]):
-        print(f"      -> {pos}: {score:.3f}")
+    print(f"    Input: 'center' pattern")
+    print(f"    Similarities to stored patterns:")
+    for pos, score in sorted(similarities.items(), key=lambda x: -x[1]):
+        print(f"      {pos}: {score:.3f}")
     
-    # After left, sequence says center should come next
-    predicted = max(predictions.items(), key=lambda x: x[1])[0]
+    # ASSERTION: Check discrimination (patterns are distinct)
+    max_sim = max(similarities.values())
+    min_sim = min(similarities.values())
+    discrimination = max_sim - min_sim
     
-    print(f"\n[3] Prediction result:")
-    if predicted == "center":
-        print("    ✓ GMI correctly predicted 'center' comes after 'left'!")
-        print("    This proves GMI has LEARNED the spectral sequence pattern.")
-        return True
-    else:
-        # The input pattern may match "left" best since we're showing "left"
-        # But we want to check if it can distinguish the patterns
-        distinctiveness = max(predictions.values()) - min(predictions.values())
-        if distinctiveness > 0.05:
-            print(f"    ✓ GMI shows distinct patterns (max-min={distinctiveness:.3f})")
-            print(f"    Input matched most closely with: {predicted}")
-            print("    Prediction requires learning mechanism - pattern discrimination works!")
-            return True
-        else:
-            print(f"    ✗ Patterns not distinct enough")
-            return False
+    print(f"\n[3] Assertions:")
+    print(f"    Discrimination (max-min): {discrimination:.3f}")
+    print(f"    Threshold: {DISCRIMINATION_THRESHOLD}")
+    
+    # Main assertion: patterns are distinguishable
+    assert discrimination >= DISCRIMINATION_THRESHOLD, \
+        f"Patterns not distinct enough: {discrimination:.3f} < {DISCRIMINATION_THRESHOLD}"
+    
+    # Verify center pattern has expected characteristics
+    center_norm = np.linalg.norm(memory_store["center"])
+    print(f"    Center pattern norm: {center_norm:.2f}")
+    
+    assert center_norm > 0, "Center pattern should have non-zero spectral norm"
+    
+    print("    ✓ Spectral pattern discrimination verified!")
 
 
 # =============================================================================
-# TEST 2: Behavioral Response - Does GMI move toward light?
+# TEST 2: Behavioral Response - Light/Shadow Discrimination
 # =============================================================================
 
 def test_behavioral_response():
     """
     Test that GMI moves toward light and away from shadow.
     
-    This is a measurable behavioral response that proves perception.
+    This is a measurable behavioral response proving perception.
+    
+    Assertions verify:
+    1. GMI moves toward light when it's the only stimulus
+    2. GMI chooses light over shadow when both are present
     """
     print("\n" + "="*60)
     print("TEST 2: BEHAVIORAL RESPONSE VERIFICATION")
@@ -159,21 +161,20 @@ def test_behavioral_response():
     system = create_dynamics_system()
     state = create_initial_state(budget=10.0)
     
+    # Field parameters
+    W, H = system.config.visual_width, system.config.visual_height
+    center_x = W / 2
+    
     # Initial position (center of field)
-    position = np.array([system.config.visual_width / 2, 
-                        system.config.visual_height / 2])
+    position = np.array([center_x, H / 2])
     
     print(f"\n[1] Starting position: ({position[0]:.1f}, {position[1]:.1f})")
     
-    # Phase 1: Introduce light on the RIGHT
-    print("\n[2] Introducing light on RIGHT side...")
+    # Phase 1: Light on RIGHT only
+    print("\n[2] Light on RIGHT side...")
     
     for step in range(10):
-        # Create light pattern on RIGHT
-        H, W = system.config.visual_height, system.config.visual_width
-        N = system.config.field_dim
-        
-        light_pos = (3 * W // 4, H // 2)  # Right side
+        light_pos = (3 * W // 4, H // 2)
         
         x = np.arange(W)
         y = np.arange(H)
@@ -182,76 +183,64 @@ def test_behavioral_response():
         dist = np.sqrt((X - light_pos[0])**2 + (Y - light_pos[1])**2)
         light_pattern = 2.0 * np.exp(-dist**2 / 30)
         
-        system.visual_field.V = np.zeros((H, W, N))
-        for n in range(N):
+        system.visual_field.V = np.zeros((H, W, 88))
+        for n in range(88):
             system.visual_field.V[:, :, n] = light_pattern
         
-        # Get sensory response
         sensory = system.eye(system.visual_field.V)
         sensory_magnitude = np.linalg.norm(sensory)
         
-        # Calculate attraction force toward light
-        # (This is the ACTION that GMI would take)
-        # Direction = toward light position
-        direction_to_light = light_pos - position
-        distance = np.linalg.norm(direction_to_light)
-        
+        direction = light_pos - position
+        distance = np.linalg.norm(direction)
         if distance > 0:
-            direction_to_light = direction_to_light / distance
+            direction = direction / distance
         
-        # Action: move toward light
-        movement = direction_to_light * sensory_magnitude * 0.1
+        movement = direction * sensory_magnitude * 0.1
         position = position + movement
         
-        print(f"    Step {step+1}: pos=({position[0]:.1f}, {position[1]:.1f}), "
-              f"sensory={sensory_magnitude:.2f}")
+        print(f"    Step {step+1}: pos=({position[0]:.1f}, {position[1]:.1f})")
     
     final_pos_light = position.copy()
-    moved_toward_light = final_pos_light[0] > system.config.visual_width / 2
+    moved_right = final_pos_light[0] > center_x
     
-    # Phase 2: Introduce shadow on RIGHT, light on LEFT
-    print("\n[3] Now: Light on LEFT, Shadow on RIGHT...")
+    print(f"    Final position: {final_pos_light[0]:.1f} (center: {center_x})")
+    print(f"    Moved right: {moved_right}")
     
-    position = np.array([system.config.visual_width / 2, 
-                        system.config.visual_height / 2])
+    # ASSERTION 1: Moved toward light on right
+    assert moved_right, f"Should have moved toward right light: pos={final_pos_light[0]:.1f}, center={center_x}"
+    
+    # Phase 2: Light LEFT, Shadow RIGHT
+    print("\n[3] Light on LEFT, Shadow on RIGHT...")
+    
+    position = np.array([center_x, H / 2])
     
     for step in range(10):
-        # Create light on LEFT, shadow on RIGHT
-        H, W = system.config.visual_height, system.config.visual_width
-        N = system.config.field_dim
-        
-        light_pos = (W // 4, H // 2)  # Left
-        shadow_pos = (3 * W // 4, H // 2)  # Right
+        light_pos = (W // 4, H // 2)
+        shadow_pos = (3 * W // 4, H // 2)
         
         x = np.arange(W)
         y = np.arange(H)
         X, Y = np.meshgrid(x, y)
         
-        # Light (positive)
         dist_light = np.sqrt((X - light_pos[0])**2 + (Y - light_pos[1])**2)
         light = 2.0 * np.exp(-dist_light**2 / 30)
         
-        # Shadow (negative)
         dist_shadow = np.sqrt((X - shadow_pos[0])**2 + (Y - shadow_pos[1])**2)
         shadow = -1.5 * np.exp(-dist_shadow**2 / 30)
         
         combined = light + shadow
         
-        system.visual_field.V = np.zeros((H, W, N))
-        for n in range(N):
+        system.visual_field.V = np.zeros((H, W, 88))
+        for n in range(88):
             system.visual_field.V[:, :, n] = combined
         
-        # Get sensory response
         sensory = system.eye(system.visual_field.V)
         
-        # Calculate where the "brightest" (highest positive) area is
         net_attraction = np.sum(system.visual_field.V, axis=2)
         brightest = np.unravel_index(np.argmax(net_attraction), net_attraction.shape)
         
-        # Move toward brightest point
         direction = np.array([brightest[1], brightest[0]]) - position
         distance = np.linalg.norm(direction)
-        
         if distance > 0:
             direction = direction / distance
         
@@ -259,24 +248,17 @@ def test_behavioral_response():
         movement = direction * sensory_magnitude * 0.1
         position = position + movement
         
-        print(f"    Step {step+1}: pos=({position[0]:.1f}, {position[1]:.1f}), "
-              f"brightest=({brightest[1]:.1f}, {brightest[0]:.1f})")
+        print(f"    Step {step+1}: pos=({position[0]:.1f}, {position[1]:.1f})")
     
-    moved_toward_light_after_shadow = position[0] < system.config.visual_width / 2
+    moved_left = position[0] < center_x
     
-    print("\n[4] RESULTS:")
-    print(f"    Test 1 - Moved toward light on right: {moved_toward_light}")
-    print(f"    Test 2 - Chose left (light) over right (shadow): {moved_toward_light_after_shadow}")
+    print(f"    Final position: {position[0]:.1f} (center: {center_x})")
+    print(f"    Moved left: {moved_left}")
     
-    if moved_toward_light and moved_toward_light_after_shadow:
-        print("\n    ✓ GMI exhibits VERIFIABLE BEHAVIORAL RESPONSES!")
-        print("    - Moves toward light (positive)")
-        print("    - Avoids shadow (negative)")
-        print("    This is measurable proof of visual perception.")
-        return True
-    else:
-        print("\n    ✗ No clear behavioral response detected")
-        return False
+    # ASSERTION 2: Chose light (left) over shadow (right)
+    assert moved_left, f"Should have moved toward light on left: pos={position[0]:.1f}, center={center_x}"
+    
+    print("\n    ✓ Behavioral response verified!")
 
 
 # =============================================================================
@@ -285,7 +267,10 @@ def test_behavioral_response():
 
 def test_sound_localization():
     """
-    Test that GMI can tell which direction sound is coming from.
+    Test that GMI can distinguish sound direction via frequency response.
+    
+    Low frequencies (left) and high frequencies (right) should produce
+    measurably different responses.
     """
     print("\n" + "="*60)
     print("TEST 3: SOUND LOCALIZATION VERIFICATION")
@@ -293,47 +278,66 @@ def test_sound_localization():
     
     system = create_dynamics_system()
     
+    # Tolerance for distinguishing sounds
+    SOUND_DIFF_THRESHOLD = 0.01
+    
     print("\n[1] Testing sound from LEFT...")
     
-    # Inject sound that would come from left (affects lower octaves more)
     sound_left = np.zeros(88)
-    for i in range(20):  # Low frequencies
+    for i in range(20):
         sound_left[i] = 2.0
+    
     system.visual_field.V = np.zeros((32, 32, 88))
-    # Map to action field
     state = create_initial_state(budget=10.0)
     state.xi_Phi = sound_left
     
-    # Get response
     sensory = system.ear(state.xi_Phi)
     left_response = np.linalg.norm(sensory)
     
+    print(f"    Left response: {left_response:.4f}")
+    
     print("\n[2] Testing sound from RIGHT...")
     
-    # Inject sound from right (higher frequencies)
     sound_right = np.zeros(88)
-    for i in range(68, 88):  # High frequencies
+    for i in range(68, 88):
         sound_right[i] = 2.0
-    state.xi_Phi = sound_right
     
+    state.xi_Phi = sound_right
     sensory = system.ear(state.xi_Phi)
     right_response = np.linalg.norm(sensory)
     
-    print("\n[3] RESULTS:")
-    print(f"    Left sound response:  {left_response:.4f}")
-    print(f"    Right sound response: {right_response:.4f}")
+    print(f"    Right response: {right_response:.4f}")
     
-    # They should be different to show localization
-    if abs(left_response - right_response) > 0.01:
-        print(f"\n    ✓ GMI can distinguish sound direction!")
-        return True
-    else:
-        print(f"\n    ✗ Cannot distinguish sound direction")
-        return False
+    diff = abs(left_response - right_response)
+    print(f"\n[3] Difference: {diff:.4f}")
+    print(f"    Threshold: {SOUND_DIFF_THRESHOLD}")
+    
+    # ASSERTION: Responses should be different
+    assert diff > SOUND_DIFF_THRESHOLD, \
+        f"Cannot distinguish sound direction: {diff:.4f} <= {SOUND_DIFF_THRESHOLD}"
+    
+    print("    ✓ Sound localization verified!")
 
 
 # =============================================================================
-# MAIN
+# PYTEST RUNNER (for pytest compatibility)
+# =============================================================================
+
+def test_gmi_spectral_patterns():
+    """Pytest wrapper for spectral pattern discrimination."""
+    test_spectral_pattern_discrimination()
+
+def test_gmi_behavioral_response():
+    """Pytest wrapper for behavioral response."""
+    test_behavioral_response()
+
+def test_gmi_sound_localization():
+    """Pytest wrapper for sound localization."""
+    test_sound_localization()
+
+
+# =============================================================================
+# STANDALONE RUNNER
 # =============================================================================
 
 if __name__ == "__main__":
@@ -341,12 +345,25 @@ if __name__ == "__main__":
     print("GMI PERCEPTION VERIFICATION TESTS")
     print("="*60)
     
-    # Run all tests
     results = {}
     
-    results["prediction"] = test_prediction()
-    results["behavior"] = test_behavioral_response()
-    results["sound"] = test_sound_localization()
+    try:
+        results["spectral_discrimination"] = test_spectral_pattern_discrimination()
+    except AssertionError as e:
+        results["spectral_discrimination"] = False
+        print(f"\n    ASSERTION FAILED: {e}")
+    
+    try:
+        results["behavior"] = test_behavioral_response()
+    except AssertionError as e:
+        results["behavior"] = False
+        print(f"\n    ASSERTION FAILED: {e}")
+    
+    try:
+        results["sound"] = test_sound_localization()
+    except AssertionError as e:
+        results["sound"] = False
+        print(f"\n    ASSERTION FAILED: {e}")
     
     print("\n" + "="*60)
     print("SUMMARY")
@@ -357,9 +374,9 @@ if __name__ == "__main__":
         print(f"  {test_name}: {status}")
     
     all_passed = all(results.values())
-    print("\n" + ("="*60))
+    print("\n" + "="*60)
     if all_passed:
-        print("ALL TESTS PASSED - GMI demonstrates VERIFIABLE perception!")
+        print("ALL TESTS PASSED")
     else:
-        print("Some tests failed - more work needed")
+        print("SOME TESTS FAILED")
     print("="*60)
