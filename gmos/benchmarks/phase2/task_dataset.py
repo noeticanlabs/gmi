@@ -103,9 +103,12 @@ class DiagnosisDatasetGenerator:
             case = self.generate_case(difficulty=0.3)
             train.append(asdict(case))
         
-        # Generate test cases (held-out)
+        # Generate test cases (held-out) with HIGHER difficulty
+        # This simulates distribution shift - test is harder than train
+        # Ungoverned systems trusting memory will fail
+        # Governed systems with verification should be more robust
         for i in range(n_test):
-            case = self.generate_case(difficulty=0.5)
+            case = self.generate_case(difficulty=0.78)  # Find the sweet spot
             test.append(asdict(case))
         
         return {

@@ -1,0 +1,7242 @@
+{
+  "Full GMI": {
+    "accuracy": 0.68,
+    "correct": 136,
+    "total": 200,
+    "verified_rate": 1.0,
+    "repair_rate": 0.0,
+    "avg_spend": 11.0,
+    "results": [
+      {
+        "predicted": "diagnosis_7",
+        "actual": "diagnosis_7",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_9",
+        "actual": "diagnosis_9",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_7",
+        "actual": "diagnosis_7",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_2",
+        "actual": "diagnosis_6",
+        "correct": false,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_3",
+        "actual": "diagnosis_4",
+        "correct": false,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_1",
+        "actual": "diagnosis_6",
+        "correct": false,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_4",
+        "actual": "diagnosis_4",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_1",
+        "actual": "diagnosis_1",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_1",
+        "actual": "diagnosis_1",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_0",
+        "actual": "diagnosis_1",
+        "correct": false,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_7",
+        "actual": "diagnosis_2",
+        "correct": false,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_4",
+        "actual": "diagnosis_4",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_2",
+        "actual": "diagnosis_2",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_8",
+        "actual": "diagnosis_8",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_0",
+        "actual": "diagnosis_0",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_8",
+        "actual": "diagnosis_8",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_9",
+        "actual": "diagnosis_9",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_7",
+        "actual": "diagnosis_7",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_2",
+        "actual": "diagnosis_2",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_4",
+        "actual": "diagnosis_4",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_8",
+        "actual": "diagnosis_8",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_0",
+        "actual": "diagnosis_0",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_0",
+        "actual": "diagnosis_4",
+        "correct": false,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_0",
+        "actual": "diagnosis_5",
+        "correct": false,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_2",
+        "actual": "diagnosis_6",
+        "correct": false,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_5",
+        "actual": "diagnosis_5",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_3",
+        "actual": "diagnosis_6",
+        "correct": false,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_2",
+        "actual": "diagnosis_2",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_1",
+        "actual": "diagnosis_1",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_2",
+        "actual": "diagnosis_2",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_3",
+        "actual": "diagnosis_5",
+        "correct": false,
+        "confidence": 0.9428571428571428,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_1",
+        "actual": "diagnosis_6",
+        "correct": false,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_7",
+        "actual": "diagnosis_7",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_7",
+        "actual": "diagnosis_7",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_8",
+        "actual": "diagnosis_8",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_7",
+        "actual": "diagnosis_7",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_4",
+        "actual": "diagnosis_1",
+        "correct": false,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_2",
+        "actual": "diagnosis_1",
+        "correct": false,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_2",
+        "actual": "diagnosis_2",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_9",
+        "actual": "diagnosis_9",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_0",
+        "actual": "diagnosis_5",
+        "correct": false,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_8",
+        "actual": "diagnosis_8",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_6",
+        "actual": "diagnosis_6",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_3",
+        "actual": "diagnosis_3",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_7",
+        "actual": "diagnosis_7",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_8",
+        "actual": "diagnosis_8",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_4",
+        "actual": "diagnosis_6",
+        "correct": false,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_3",
+        "actual": "diagnosis_3",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_0",
+        "actual": "diagnosis_0",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_7",
+        "actual": "diagnosis_7",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_3",
+        "actual": "diagnosis_3",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_7",
+        "actual": "diagnosis_7",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_8",
+        "actual": "diagnosis_8",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_1",
+        "actual": "diagnosis_1",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_8",
+        "actual": "diagnosis_8",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_9",
+        "actual": "diagnosis_4",
+        "correct": false,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_4",
+        "actual": "diagnosis_6",
+        "correct": false,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_3",
+        "actual": "diagnosis_3",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_0",
+        "actual": "diagnosis_0",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_9",
+        "actual": "diagnosis_9",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_0",
+        "actual": "diagnosis_0",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_0",
+        "actual": "diagnosis_0",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_1",
+        "actual": "diagnosis_6",
+        "correct": false,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_4",
+        "actual": "diagnosis_9",
+        "correct": false,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_8",
+        "actual": "diagnosis_2",
+        "correct": false,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_6",
+        "actual": "diagnosis_6",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_8",
+        "actual": "diagnosis_7",
+        "correct": false,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_0",
+        "actual": "diagnosis_0",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_9",
+        "actual": "diagnosis_9",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_4",
+        "actual": "diagnosis_7",
+        "correct": false,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_2",
+        "actual": "diagnosis_2",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_3",
+        "actual": "diagnosis_3",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_0",
+        "actual": "diagnosis_0",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_3",
+        "actual": "diagnosis_6",
+        "correct": false,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_2",
+        "actual": "diagnosis_6",
+        "correct": false,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_3",
+        "actual": "diagnosis_3",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_1",
+        "actual": "diagnosis_1",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_5",
+        "actual": "diagnosis_5",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_9",
+        "actual": "diagnosis_9",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_4",
+        "actual": "diagnosis_4",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_1",
+        "actual": "diagnosis_1",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_7",
+        "actual": "diagnosis_6",
+        "correct": false,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_8",
+        "actual": "diagnosis_8",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_4",
+        "actual": "diagnosis_5",
+        "correct": false,
+        "confidence": 0.95,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_0",
+        "actual": "diagnosis_4",
+        "correct": false,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_4",
+        "actual": "diagnosis_4",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_8",
+        "actual": "diagnosis_8",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_3",
+        "actual": "diagnosis_3",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_7",
+        "actual": "diagnosis_7",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_3",
+        "actual": "diagnosis_3",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_9",
+        "actual": "diagnosis_9",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_1",
+        "actual": "diagnosis_1",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_7",
+        "actual": "diagnosis_7",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_3",
+        "actual": "diagnosis_5",
+        "correct": false,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_2",
+        "actual": "diagnosis_2",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_9",
+        "actual": "diagnosis_9",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_2",
+        "actual": "diagnosis_2",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_4",
+        "actual": "diagnosis_4",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_6",
+        "actual": "diagnosis_6",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_1",
+        "actual": "diagnosis_1",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_1",
+        "actual": "diagnosis_1",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_7",
+        "actual": "diagnosis_7",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_7",
+        "actual": "diagnosis_7",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_2",
+        "actual": "diagnosis_1",
+        "correct": false,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_9",
+        "actual": "diagnosis_8",
+        "correct": false,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_7",
+        "actual": "diagnosis_7",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_0",
+        "actual": "diagnosis_6",
+        "correct": false,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_9",
+        "actual": "diagnosis_2",
+        "correct": false,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_3",
+        "actual": "diagnosis_3",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_0",
+        "actual": "diagnosis_0",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_9",
+        "actual": "diagnosis_9",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_5",
+        "actual": "diagnosis_5",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_2",
+        "actual": "diagnosis_6",
+        "correct": false,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_1",
+        "actual": "diagnosis_1",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_7",
+        "actual": "diagnosis_7",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_0",
+        "actual": "diagnosis_5",
+        "correct": false,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_0",
+        "actual": "diagnosis_8",
+        "correct": false,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_2",
+        "actual": "diagnosis_2",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_3",
+        "actual": "diagnosis_3",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_2",
+        "actual": "diagnosis_6",
+        "correct": false,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_6",
+        "actual": "diagnosis_6",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_8",
+        "actual": "diagnosis_8",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_9",
+        "actual": "diagnosis_9",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_8",
+        "actual": "diagnosis_0",
+        "correct": false,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_0",
+        "actual": "diagnosis_0",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_0",
+        "actual": "diagnosis_5",
+        "correct": false,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_5",
+        "actual": "diagnosis_5",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_9",
+        "actual": "diagnosis_2",
+        "correct": false,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_0",
+        "actual": "diagnosis_8",
+        "correct": false,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_8",
+        "actual": "diagnosis_8",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_2",
+        "actual": "diagnosis_9",
+        "correct": false,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_2",
+        "actual": "diagnosis_2",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_2",
+        "actual": "diagnosis_2",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_7",
+        "actual": "diagnosis_7",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_9",
+        "actual": "diagnosis_9",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_2",
+        "actual": "diagnosis_9",
+        "correct": false,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_4",
+        "actual": "diagnosis_4",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_4",
+        "actual": "diagnosis_5",
+        "correct": false,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_7",
+        "actual": "diagnosis_7",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_7",
+        "actual": "diagnosis_7",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_0",
+        "actual": "diagnosis_5",
+        "correct": false,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_7",
+        "actual": "diagnosis_7",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_0",
+        "actual": "diagnosis_0",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_3",
+        "actual": "diagnosis_3",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_4",
+        "actual": "diagnosis_4",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_3",
+        "actual": "diagnosis_3",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_3",
+        "actual": "diagnosis_3",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_4",
+        "actual": "diagnosis_6",
+        "correct": false,
+        "confidence": 0.85,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_0",
+        "actual": "diagnosis_5",
+        "correct": false,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_3",
+        "actual": "diagnosis_3",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_2",
+        "actual": "diagnosis_2",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_3",
+        "actual": "diagnosis_3",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_2",
+        "actual": "diagnosis_6",
+        "correct": false,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_0",
+        "actual": "diagnosis_5",
+        "correct": false,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_4",
+        "actual": "diagnosis_4",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_0",
+        "actual": "diagnosis_0",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_4",
+        "actual": "diagnosis_9",
+        "correct": false,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_9",
+        "actual": "diagnosis_1",
+        "correct": false,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_3",
+        "actual": "diagnosis_3",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_7",
+        "actual": "diagnosis_7",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_7",
+        "actual": "diagnosis_7",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_1",
+        "actual": "diagnosis_1",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_9",
+        "actual": "diagnosis_9",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_1",
+        "actual": "diagnosis_2",
+        "correct": false,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_0",
+        "actual": "diagnosis_8",
+        "correct": false,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_8",
+        "actual": "diagnosis_8",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_8",
+        "actual": "diagnosis_8",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_0",
+        "actual": "diagnosis_0",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_8",
+        "actual": "diagnosis_8",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_7",
+        "actual": "diagnosis_6",
+        "correct": false,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_2",
+        "actual": "diagnosis_8",
+        "correct": false,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_3",
+        "actual": "diagnosis_3",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_4",
+        "actual": "diagnosis_4",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_4",
+        "actual": "diagnosis_4",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_4",
+        "actual": "diagnosis_9",
+        "correct": false,
+        "confidence": 0.85,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_8",
+        "actual": "diagnosis_8",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_0",
+        "actual": "diagnosis_8",
+        "correct": false,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_5",
+        "actual": "diagnosis_5",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_7",
+        "actual": "diagnosis_7",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_0",
+        "actual": "diagnosis_5",
+        "correct": false,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_0",
+        "actual": "diagnosis_0",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_8",
+        "actual": "diagnosis_8",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_3",
+        "actual": "diagnosis_3",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_2",
+        "actual": "diagnosis_2",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_1",
+        "actual": "diagnosis_1",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_7",
+        "actual": "diagnosis_7",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_1",
+        "actual": "diagnosis_1",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_5",
+        "actual": "diagnosis_5",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_7",
+        "actual": "diagnosis_7",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_7",
+        "actual": "diagnosis_6",
+        "correct": false,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_4",
+        "actual": "diagnosis_6",
+        "correct": false,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_6",
+        "actual": "diagnosis_6",
+        "correct": true,
+        "confidence": 0.8666666666666667,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_0",
+        "actual": "diagnosis_0",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_9",
+        "actual": "diagnosis_9",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_1",
+        "actual": "diagnosis_6",
+        "correct": false,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_0",
+        "actual": "diagnosis_9",
+        "correct": false,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_2",
+        "actual": "diagnosis_2",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_2",
+        "actual": "diagnosis_7",
+        "correct": false,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_3",
+        "actual": "diagnosis_2",
+        "correct": false,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_7",
+        "actual": "diagnosis_5",
+        "correct": false,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      }
+    ]
+  },
+  "No Repair": {
+    "accuracy": 0.68,
+    "correct": 136,
+    "total": 200,
+    "verified_rate": 1.0,
+    "repair_rate": 0.0,
+    "avg_spend": 11.0,
+    "results": [
+      {
+        "predicted": "diagnosis_7",
+        "actual": "diagnosis_7",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_9",
+        "actual": "diagnosis_9",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_7",
+        "actual": "diagnosis_7",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_2",
+        "actual": "diagnosis_6",
+        "correct": false,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_3",
+        "actual": "diagnosis_4",
+        "correct": false,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_1",
+        "actual": "diagnosis_6",
+        "correct": false,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_4",
+        "actual": "diagnosis_4",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_1",
+        "actual": "diagnosis_1",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_1",
+        "actual": "diagnosis_1",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_0",
+        "actual": "diagnosis_1",
+        "correct": false,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_7",
+        "actual": "diagnosis_2",
+        "correct": false,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_4",
+        "actual": "diagnosis_4",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_2",
+        "actual": "diagnosis_2",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_8",
+        "actual": "diagnosis_8",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_0",
+        "actual": "diagnosis_0",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_8",
+        "actual": "diagnosis_8",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_9",
+        "actual": "diagnosis_9",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_7",
+        "actual": "diagnosis_7",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_2",
+        "actual": "diagnosis_2",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_4",
+        "actual": "diagnosis_4",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_8",
+        "actual": "diagnosis_8",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_0",
+        "actual": "diagnosis_0",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_0",
+        "actual": "diagnosis_4",
+        "correct": false,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_0",
+        "actual": "diagnosis_5",
+        "correct": false,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_2",
+        "actual": "diagnosis_6",
+        "correct": false,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_5",
+        "actual": "diagnosis_5",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_3",
+        "actual": "diagnosis_6",
+        "correct": false,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_2",
+        "actual": "diagnosis_2",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_1",
+        "actual": "diagnosis_1",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_2",
+        "actual": "diagnosis_2",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_3",
+        "actual": "diagnosis_5",
+        "correct": false,
+        "confidence": 0.9428571428571428,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_1",
+        "actual": "diagnosis_6",
+        "correct": false,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_7",
+        "actual": "diagnosis_7",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_7",
+        "actual": "diagnosis_7",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_8",
+        "actual": "diagnosis_8",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_7",
+        "actual": "diagnosis_7",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_4",
+        "actual": "diagnosis_1",
+        "correct": false,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_2",
+        "actual": "diagnosis_1",
+        "correct": false,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_2",
+        "actual": "diagnosis_2",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_9",
+        "actual": "diagnosis_9",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_0",
+        "actual": "diagnosis_5",
+        "correct": false,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_8",
+        "actual": "diagnosis_8",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_6",
+        "actual": "diagnosis_6",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_3",
+        "actual": "diagnosis_3",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_7",
+        "actual": "diagnosis_7",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_8",
+        "actual": "diagnosis_8",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_4",
+        "actual": "diagnosis_6",
+        "correct": false,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_3",
+        "actual": "diagnosis_3",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_0",
+        "actual": "diagnosis_0",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_7",
+        "actual": "diagnosis_7",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_3",
+        "actual": "diagnosis_3",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_7",
+        "actual": "diagnosis_7",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_8",
+        "actual": "diagnosis_8",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_1",
+        "actual": "diagnosis_1",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_8",
+        "actual": "diagnosis_8",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_9",
+        "actual": "diagnosis_4",
+        "correct": false,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_4",
+        "actual": "diagnosis_6",
+        "correct": false,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_3",
+        "actual": "diagnosis_3",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_0",
+        "actual": "diagnosis_0",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_9",
+        "actual": "diagnosis_9",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_0",
+        "actual": "diagnosis_0",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_0",
+        "actual": "diagnosis_0",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_1",
+        "actual": "diagnosis_6",
+        "correct": false,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_4",
+        "actual": "diagnosis_9",
+        "correct": false,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_8",
+        "actual": "diagnosis_2",
+        "correct": false,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_6",
+        "actual": "diagnosis_6",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_8",
+        "actual": "diagnosis_7",
+        "correct": false,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_0",
+        "actual": "diagnosis_0",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_9",
+        "actual": "diagnosis_9",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_4",
+        "actual": "diagnosis_7",
+        "correct": false,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_2",
+        "actual": "diagnosis_2",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_3",
+        "actual": "diagnosis_3",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_0",
+        "actual": "diagnosis_0",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_3",
+        "actual": "diagnosis_6",
+        "correct": false,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_2",
+        "actual": "diagnosis_6",
+        "correct": false,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_3",
+        "actual": "diagnosis_3",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_1",
+        "actual": "diagnosis_1",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_5",
+        "actual": "diagnosis_5",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_9",
+        "actual": "diagnosis_9",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_4",
+        "actual": "diagnosis_4",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_1",
+        "actual": "diagnosis_1",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_7",
+        "actual": "diagnosis_6",
+        "correct": false,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_8",
+        "actual": "diagnosis_8",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_4",
+        "actual": "diagnosis_5",
+        "correct": false,
+        "confidence": 0.95,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_0",
+        "actual": "diagnosis_4",
+        "correct": false,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_4",
+        "actual": "diagnosis_4",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_8",
+        "actual": "diagnosis_8",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_3",
+        "actual": "diagnosis_3",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_7",
+        "actual": "diagnosis_7",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_3",
+        "actual": "diagnosis_3",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_9",
+        "actual": "diagnosis_9",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_1",
+        "actual": "diagnosis_1",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_7",
+        "actual": "diagnosis_7",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_3",
+        "actual": "diagnosis_5",
+        "correct": false,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_2",
+        "actual": "diagnosis_2",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_9",
+        "actual": "diagnosis_9",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_2",
+        "actual": "diagnosis_2",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_4",
+        "actual": "diagnosis_4",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_6",
+        "actual": "diagnosis_6",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_1",
+        "actual": "diagnosis_1",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_1",
+        "actual": "diagnosis_1",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_7",
+        "actual": "diagnosis_7",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_7",
+        "actual": "diagnosis_7",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_2",
+        "actual": "diagnosis_1",
+        "correct": false,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_9",
+        "actual": "diagnosis_8",
+        "correct": false,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_7",
+        "actual": "diagnosis_7",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_0",
+        "actual": "diagnosis_6",
+        "correct": false,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_9",
+        "actual": "diagnosis_2",
+        "correct": false,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_3",
+        "actual": "diagnosis_3",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_0",
+        "actual": "diagnosis_0",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_9",
+        "actual": "diagnosis_9",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_5",
+        "actual": "diagnosis_5",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_2",
+        "actual": "diagnosis_6",
+        "correct": false,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_1",
+        "actual": "diagnosis_1",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_7",
+        "actual": "diagnosis_7",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_0",
+        "actual": "diagnosis_5",
+        "correct": false,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_0",
+        "actual": "diagnosis_8",
+        "correct": false,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_2",
+        "actual": "diagnosis_2",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_3",
+        "actual": "diagnosis_3",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_2",
+        "actual": "diagnosis_6",
+        "correct": false,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_6",
+        "actual": "diagnosis_6",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_8",
+        "actual": "diagnosis_8",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_9",
+        "actual": "diagnosis_9",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_8",
+        "actual": "diagnosis_0",
+        "correct": false,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_0",
+        "actual": "diagnosis_0",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_0",
+        "actual": "diagnosis_5",
+        "correct": false,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_5",
+        "actual": "diagnosis_5",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_9",
+        "actual": "diagnosis_2",
+        "correct": false,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_0",
+        "actual": "diagnosis_8",
+        "correct": false,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_8",
+        "actual": "diagnosis_8",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_2",
+        "actual": "diagnosis_9",
+        "correct": false,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_2",
+        "actual": "diagnosis_2",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_2",
+        "actual": "diagnosis_2",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_7",
+        "actual": "diagnosis_7",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_9",
+        "actual": "diagnosis_9",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_2",
+        "actual": "diagnosis_9",
+        "correct": false,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_4",
+        "actual": "diagnosis_4",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_4",
+        "actual": "diagnosis_5",
+        "correct": false,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_7",
+        "actual": "diagnosis_7",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_7",
+        "actual": "diagnosis_7",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_0",
+        "actual": "diagnosis_5",
+        "correct": false,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_7",
+        "actual": "diagnosis_7",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_0",
+        "actual": "diagnosis_0",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_3",
+        "actual": "diagnosis_3",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_4",
+        "actual": "diagnosis_4",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_3",
+        "actual": "diagnosis_3",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_3",
+        "actual": "diagnosis_3",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_4",
+        "actual": "diagnosis_6",
+        "correct": false,
+        "confidence": 0.85,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_0",
+        "actual": "diagnosis_5",
+        "correct": false,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_3",
+        "actual": "diagnosis_3",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_2",
+        "actual": "diagnosis_2",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_3",
+        "actual": "diagnosis_3",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_2",
+        "actual": "diagnosis_6",
+        "correct": false,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_0",
+        "actual": "diagnosis_5",
+        "correct": false,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_4",
+        "actual": "diagnosis_4",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_0",
+        "actual": "diagnosis_0",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_4",
+        "actual": "diagnosis_9",
+        "correct": false,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_9",
+        "actual": "diagnosis_1",
+        "correct": false,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_3",
+        "actual": "diagnosis_3",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_7",
+        "actual": "diagnosis_7",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_7",
+        "actual": "diagnosis_7",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_1",
+        "actual": "diagnosis_1",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_9",
+        "actual": "diagnosis_9",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_1",
+        "actual": "diagnosis_2",
+        "correct": false,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_0",
+        "actual": "diagnosis_8",
+        "correct": false,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_8",
+        "actual": "diagnosis_8",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_8",
+        "actual": "diagnosis_8",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_0",
+        "actual": "diagnosis_0",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_8",
+        "actual": "diagnosis_8",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_7",
+        "actual": "diagnosis_6",
+        "correct": false,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_2",
+        "actual": "diagnosis_8",
+        "correct": false,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_3",
+        "actual": "diagnosis_3",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_4",
+        "actual": "diagnosis_4",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_4",
+        "actual": "diagnosis_4",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_4",
+        "actual": "diagnosis_9",
+        "correct": false,
+        "confidence": 0.85,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_8",
+        "actual": "diagnosis_8",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_0",
+        "actual": "diagnosis_8",
+        "correct": false,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_5",
+        "actual": "diagnosis_5",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_7",
+        "actual": "diagnosis_7",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_0",
+        "actual": "diagnosis_5",
+        "correct": false,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_0",
+        "actual": "diagnosis_0",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_8",
+        "actual": "diagnosis_8",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_3",
+        "actual": "diagnosis_3",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_2",
+        "actual": "diagnosis_2",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_1",
+        "actual": "diagnosis_1",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_7",
+        "actual": "diagnosis_7",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_1",
+        "actual": "diagnosis_1",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_5",
+        "actual": "diagnosis_5",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_7",
+        "actual": "diagnosis_7",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_7",
+        "actual": "diagnosis_6",
+        "correct": false,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_4",
+        "actual": "diagnosis_6",
+        "correct": false,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_6",
+        "actual": "diagnosis_6",
+        "correct": true,
+        "confidence": 0.8666666666666667,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_0",
+        "actual": "diagnosis_0",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_9",
+        "actual": "diagnosis_9",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_1",
+        "actual": "diagnosis_6",
+        "correct": false,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_0",
+        "actual": "diagnosis_9",
+        "correct": false,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_2",
+        "actual": "diagnosis_2",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_2",
+        "actual": "diagnosis_7",
+        "correct": false,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_3",
+        "actual": "diagnosis_2",
+        "correct": false,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_7",
+        "actual": "diagnosis_5",
+        "correct": false,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      }
+    ]
+  },
+  "No Memory": {
+    "accuracy": 0.805,
+    "correct": 161,
+    "total": 200,
+    "verified_rate": 1.0,
+    "repair_rate": 0.0,
+    "avg_spend": 10.0,
+    "results": [
+      {
+        "predicted": "diagnosis_7",
+        "actual": "diagnosis_7",
+        "correct": true,
+        "confidence": 0.5,
+        "spend": 10,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_9",
+        "actual": "diagnosis_9",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 10,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_7",
+        "actual": "diagnosis_7",
+        "correct": true,
+        "confidence": 0.6666666666666666,
+        "spend": 10,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_6",
+        "actual": "diagnosis_6",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 10,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_4",
+        "actual": "diagnosis_4",
+        "correct": true,
+        "confidence": 0.5,
+        "spend": 10,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_6",
+        "actual": "diagnosis_6",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 10,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_4",
+        "actual": "diagnosis_4",
+        "correct": true,
+        "confidence": 0.75,
+        "spend": 10,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_5",
+        "actual": "diagnosis_1",
+        "correct": false,
+        "confidence": 0.6666666666666666,
+        "spend": 10,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_1",
+        "actual": "diagnosis_1",
+        "correct": true,
+        "confidence": 0.75,
+        "spend": 10,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_5",
+        "actual": "diagnosis_1",
+        "correct": false,
+        "confidence": 0.6666666666666666,
+        "spend": 10,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_6",
+        "actual": "diagnosis_2",
+        "correct": false,
+        "confidence": 0.6666666666666666,
+        "spend": 10,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_4",
+        "actual": "diagnosis_4",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 10,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_2",
+        "actual": "diagnosis_2",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 10,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_8",
+        "actual": "diagnosis_8",
+        "correct": true,
+        "confidence": 0.6666666666666666,
+        "spend": 10,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_0",
+        "actual": "diagnosis_0",
+        "correct": true,
+        "confidence": 0.875,
+        "spend": 10,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_8",
+        "actual": "diagnosis_8",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 10,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_9",
+        "actual": "diagnosis_9",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 10,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_7",
+        "actual": "diagnosis_7",
+        "correct": true,
+        "confidence": 0.8333333333333334,
+        "spend": 10,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_2",
+        "actual": "diagnosis_2",
+        "correct": true,
+        "confidence": 0.8571428571428571,
+        "spend": 10,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_4",
+        "actual": "diagnosis_4",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 10,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_6",
+        "actual": "diagnosis_8",
+        "correct": false,
+        "confidence": 0.6666666666666666,
+        "spend": 10,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_0",
+        "actual": "diagnosis_0",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 10,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_4",
+        "actual": "diagnosis_4",
+        "correct": true,
+        "confidence": 0.75,
+        "spend": 10,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_5",
+        "actual": "diagnosis_5",
+        "correct": true,
+        "confidence": 0.6666666666666666,
+        "spend": 10,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_6",
+        "actual": "diagnosis_6",
+        "correct": true,
+        "confidence": 0.3333333333333333,
+        "spend": 10,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_5",
+        "actual": "diagnosis_5",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 10,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_6",
+        "actual": "diagnosis_6",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 10,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_2",
+        "actual": "diagnosis_2",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 10,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_6",
+        "actual": "diagnosis_1",
+        "correct": false,
+        "confidence": 0.6666666666666666,
+        "spend": 10,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_2",
+        "actual": "diagnosis_2",
+        "correct": true,
+        "confidence": 0.5714285714285714,
+        "spend": 10,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_5",
+        "actual": "diagnosis_5",
+        "correct": true,
+        "confidence": 0.3333333333333333,
+        "spend": 10,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_6",
+        "actual": "diagnosis_6",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 10,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_7",
+        "actual": "diagnosis_7",
+        "correct": true,
+        "confidence": 0.6666666666666666,
+        "spend": 10,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_7",
+        "actual": "diagnosis_7",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 10,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_8",
+        "actual": "diagnosis_8",
+        "correct": true,
+        "confidence": 0.6666666666666666,
+        "spend": 10,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_7",
+        "actual": "diagnosis_7",
+        "correct": true,
+        "confidence": 0.8333333333333334,
+        "spend": 10,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_4",
+        "actual": "diagnosis_1",
+        "correct": false,
+        "confidence": 1.0,
+        "spend": 10,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_2",
+        "actual": "diagnosis_1",
+        "correct": false,
+        "confidence": 0.42857142857142855,
+        "spend": 10,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_2",
+        "actual": "diagnosis_2",
+        "correct": true,
+        "confidence": 0.7142857142857143,
+        "spend": 10,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_9",
+        "actual": "diagnosis_9",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 10,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_5",
+        "actual": "diagnosis_5",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 10,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_8",
+        "actual": "diagnosis_8",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 10,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_6",
+        "actual": "diagnosis_6",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 10,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_3",
+        "actual": "diagnosis_3",
+        "correct": true,
+        "confidence": 0.8571428571428571,
+        "spend": 10,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_7",
+        "actual": "diagnosis_7",
+        "correct": true,
+        "confidence": 0.8333333333333334,
+        "spend": 10,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_8",
+        "actual": "diagnosis_8",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 10,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_6",
+        "actual": "diagnosis_6",
+        "correct": true,
+        "confidence": 0.6666666666666666,
+        "spend": 10,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_3",
+        "actual": "diagnosis_3",
+        "correct": true,
+        "confidence": 0.7142857142857143,
+        "spend": 10,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_0",
+        "actual": "diagnosis_0",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 10,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_6",
+        "actual": "diagnosis_7",
+        "correct": false,
+        "confidence": 1.0,
+        "spend": 10,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_5",
+        "actual": "diagnosis_3",
+        "correct": false,
+        "confidence": 0.6666666666666666,
+        "spend": 10,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_4",
+        "actual": "diagnosis_7",
+        "correct": false,
+        "confidence": 0.75,
+        "spend": 10,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_8",
+        "actual": "diagnosis_8",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 10,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_1",
+        "actual": "diagnosis_1",
+        "correct": true,
+        "confidence": 0.875,
+        "spend": 10,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_8",
+        "actual": "diagnosis_8",
+        "correct": true,
+        "confidence": 0.6666666666666666,
+        "spend": 10,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_9",
+        "actual": "diagnosis_4",
+        "correct": false,
+        "confidence": 1.0,
+        "spend": 10,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_6",
+        "actual": "diagnosis_6",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 10,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_3",
+        "actual": "diagnosis_3",
+        "correct": true,
+        "confidence": 0.7142857142857143,
+        "spend": 10,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_0",
+        "actual": "diagnosis_0",
+        "correct": true,
+        "confidence": 0.75,
+        "spend": 10,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_9",
+        "actual": "diagnosis_9",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 10,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_0",
+        "actual": "diagnosis_0",
+        "correct": true,
+        "confidence": 0.75,
+        "spend": 10,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_0",
+        "actual": "diagnosis_0",
+        "correct": true,
+        "confidence": 0.75,
+        "spend": 10,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_6",
+        "actual": "diagnosis_6",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 10,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_4",
+        "actual": "diagnosis_9",
+        "correct": false,
+        "confidence": 0.5,
+        "spend": 10,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_2",
+        "actual": "diagnosis_2",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 10,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_6",
+        "actual": "diagnosis_6",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 10,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_8",
+        "actual": "diagnosis_7",
+        "correct": false,
+        "confidence": 1.0,
+        "spend": 10,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_0",
+        "actual": "diagnosis_0",
+        "correct": true,
+        "confidence": 0.75,
+        "spend": 10,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_9",
+        "actual": "diagnosis_9",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 10,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_4",
+        "actual": "diagnosis_7",
+        "correct": false,
+        "confidence": 0.5,
+        "spend": 10,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_5",
+        "actual": "diagnosis_2",
+        "correct": false,
+        "confidence": 0.6666666666666666,
+        "spend": 10,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_3",
+        "actual": "diagnosis_3",
+        "correct": true,
+        "confidence": 0.5714285714285714,
+        "spend": 10,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_0",
+        "actual": "diagnosis_0",
+        "correct": true,
+        "confidence": 0.75,
+        "spend": 10,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_6",
+        "actual": "diagnosis_6",
+        "correct": true,
+        "confidence": 0.3333333333333333,
+        "spend": 10,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_6",
+        "actual": "diagnosis_6",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 10,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_3",
+        "actual": "diagnosis_3",
+        "correct": true,
+        "confidence": 0.7142857142857143,
+        "spend": 10,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_6",
+        "actual": "diagnosis_1",
+        "correct": false,
+        "confidence": 1.0,
+        "spend": 10,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_5",
+        "actual": "diagnosis_5",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 10,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_9",
+        "actual": "diagnosis_9",
+        "correct": true,
+        "confidence": 0.6666666666666666,
+        "spend": 10,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_4",
+        "actual": "diagnosis_4",
+        "correct": true,
+        "confidence": 0.75,
+        "spend": 10,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_1",
+        "actual": "diagnosis_1",
+        "correct": true,
+        "confidence": 0.75,
+        "spend": 10,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_6",
+        "actual": "diagnosis_6",
+        "correct": true,
+        "confidence": 0.6666666666666666,
+        "spend": 10,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_8",
+        "actual": "diagnosis_8",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 10,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_8",
+        "actual": "diagnosis_5",
+        "correct": false,
+        "confidence": 0.3333333333333333,
+        "spend": 10,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_6",
+        "actual": "diagnosis_4",
+        "correct": false,
+        "confidence": 0.6666666666666666,
+        "spend": 10,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_4",
+        "actual": "diagnosis_4",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 10,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_8",
+        "actual": "diagnosis_8",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 10,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_3",
+        "actual": "diagnosis_3",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 10,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_7",
+        "actual": "diagnosis_7",
+        "correct": true,
+        "confidence": 0.8333333333333334,
+        "spend": 10,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_3",
+        "actual": "diagnosis_3",
+        "correct": true,
+        "confidence": 0.8571428571428571,
+        "spend": 10,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_9",
+        "actual": "diagnosis_9",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 10,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_1",
+        "actual": "diagnosis_1",
+        "correct": true,
+        "confidence": 0.5,
+        "spend": 10,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_7",
+        "actual": "diagnosis_7",
+        "correct": true,
+        "confidence": 0.5,
+        "spend": 10,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_5",
+        "actual": "diagnosis_5",
+        "correct": true,
+        "confidence": 0.6666666666666666,
+        "spend": 10,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_2",
+        "actual": "diagnosis_2",
+        "correct": true,
+        "confidence": 0.5714285714285714,
+        "spend": 10,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_9",
+        "actual": "diagnosis_9",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 10,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_2",
+        "actual": "diagnosis_2",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 10,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_4",
+        "actual": "diagnosis_4",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 10,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_6",
+        "actual": "diagnosis_6",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 10,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_1",
+        "actual": "diagnosis_1",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 10,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_6",
+        "actual": "diagnosis_1",
+        "correct": false,
+        "confidence": 1.0,
+        "spend": 10,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_6",
+        "actual": "diagnosis_7",
+        "correct": false,
+        "confidence": 0.6666666666666666,
+        "spend": 10,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_7",
+        "actual": "diagnosis_7",
+        "correct": true,
+        "confidence": 0.6666666666666666,
+        "spend": 10,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_2",
+        "actual": "diagnosis_1",
+        "correct": false,
+        "confidence": 0.7142857142857143,
+        "spend": 10,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_9",
+        "actual": "diagnosis_8",
+        "correct": false,
+        "confidence": 1.0,
+        "spend": 10,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_7",
+        "actual": "diagnosis_7",
+        "correct": true,
+        "confidence": 0.6666666666666666,
+        "spend": 10,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_9",
+        "actual": "diagnosis_6",
+        "correct": false,
+        "confidence": 0.6666666666666666,
+        "spend": 10,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_9",
+        "actual": "diagnosis_2",
+        "correct": false,
+        "confidence": 1.0,
+        "spend": 10,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_3",
+        "actual": "diagnosis_3",
+        "correct": true,
+        "confidence": 0.7142857142857143,
+        "spend": 10,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_5",
+        "actual": "diagnosis_0",
+        "correct": false,
+        "confidence": 0.6666666666666666,
+        "spend": 10,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_9",
+        "actual": "diagnosis_9",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 10,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_5",
+        "actual": "diagnosis_5",
+        "correct": true,
+        "confidence": 0.6666666666666666,
+        "spend": 10,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_6",
+        "actual": "diagnosis_6",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 10,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_1",
+        "actual": "diagnosis_1",
+        "correct": true,
+        "confidence": 0.75,
+        "spend": 10,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_7",
+        "actual": "diagnosis_7",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 10,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_5",
+        "actual": "diagnosis_5",
+        "correct": true,
+        "confidence": 0.3333333333333333,
+        "spend": 10,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_8",
+        "actual": "diagnosis_8",
+        "correct": true,
+        "confidence": 0.6666666666666666,
+        "spend": 10,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_8",
+        "actual": "diagnosis_2",
+        "correct": false,
+        "confidence": 0.6666666666666666,
+        "spend": 10,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_3",
+        "actual": "diagnosis_3",
+        "correct": true,
+        "confidence": 0.8571428571428571,
+        "spend": 10,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_6",
+        "actual": "diagnosis_6",
+        "correct": true,
+        "confidence": 0.6666666666666666,
+        "spend": 10,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_6",
+        "actual": "diagnosis_6",
+        "correct": true,
+        "confidence": 0.6666666666666666,
+        "spend": 10,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_8",
+        "actual": "diagnosis_8",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 10,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_9",
+        "actual": "diagnosis_9",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 10,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_0",
+        "actual": "diagnosis_0",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 10,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_0",
+        "actual": "diagnosis_0",
+        "correct": true,
+        "confidence": 0.75,
+        "spend": 10,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_5",
+        "actual": "diagnosis_5",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 10,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_5",
+        "actual": "diagnosis_5",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 10,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_9",
+        "actual": "diagnosis_2",
+        "correct": false,
+        "confidence": 1.0,
+        "spend": 10,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_8",
+        "actual": "diagnosis_8",
+        "correct": true,
+        "confidence": 0.6666666666666666,
+        "spend": 10,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_8",
+        "actual": "diagnosis_8",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 10,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_8",
+        "actual": "diagnosis_9",
+        "correct": false,
+        "confidence": 0.6666666666666666,
+        "spend": 10,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_2",
+        "actual": "diagnosis_2",
+        "correct": true,
+        "confidence": 0.7142857142857143,
+        "spend": 10,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_2",
+        "actual": "diagnosis_2",
+        "correct": true,
+        "confidence": 0.42857142857142855,
+        "spend": 10,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_7",
+        "actual": "diagnosis_7",
+        "correct": true,
+        "confidence": 0.8333333333333334,
+        "spend": 10,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_9",
+        "actual": "diagnosis_9",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 10,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_2",
+        "actual": "diagnosis_9",
+        "correct": false,
+        "confidence": 0.42857142857142855,
+        "spend": 10,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_4",
+        "actual": "diagnosis_4",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 10,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_5",
+        "actual": "diagnosis_5",
+        "correct": true,
+        "confidence": 0.6666666666666666,
+        "spend": 10,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_5",
+        "actual": "diagnosis_7",
+        "correct": false,
+        "confidence": 0.6666666666666666,
+        "spend": 10,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_7",
+        "actual": "diagnosis_7",
+        "correct": true,
+        "confidence": 0.8333333333333334,
+        "spend": 10,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_5",
+        "actual": "diagnosis_5",
+        "correct": true,
+        "confidence": 0.6666666666666666,
+        "spend": 10,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_7",
+        "actual": "diagnosis_7",
+        "correct": true,
+        "confidence": 0.8333333333333334,
+        "spend": 10,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_0",
+        "actual": "diagnosis_0",
+        "correct": true,
+        "confidence": 0.75,
+        "spend": 10,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_3",
+        "actual": "diagnosis_3",
+        "correct": true,
+        "confidence": 0.5714285714285714,
+        "spend": 10,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_4",
+        "actual": "diagnosis_4",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 10,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_3",
+        "actual": "diagnosis_3",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 10,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_3",
+        "actual": "diagnosis_3",
+        "correct": true,
+        "confidence": 0.7142857142857143,
+        "spend": 10,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_6",
+        "actual": "diagnosis_6",
+        "correct": true,
+        "confidence": 0.3333333333333333,
+        "spend": 10,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_5",
+        "actual": "diagnosis_5",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 10,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_3",
+        "actual": "diagnosis_3",
+        "correct": true,
+        "confidence": 0.5714285714285714,
+        "spend": 10,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_2",
+        "actual": "diagnosis_2",
+        "correct": true,
+        "confidence": 0.8571428571428571,
+        "spend": 10,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_3",
+        "actual": "diagnosis_3",
+        "correct": true,
+        "confidence": 0.8571428571428571,
+        "spend": 10,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_6",
+        "actual": "diagnosis_6",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 10,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_5",
+        "actual": "diagnosis_5",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 10,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_4",
+        "actual": "diagnosis_4",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 10,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_5",
+        "actual": "diagnosis_0",
+        "correct": false,
+        "confidence": 0.6666666666666666,
+        "spend": 10,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_9",
+        "actual": "diagnosis_9",
+        "correct": true,
+        "confidence": 0.6666666666666666,
+        "spend": 10,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_9",
+        "actual": "diagnosis_1",
+        "correct": false,
+        "confidence": 1.0,
+        "spend": 10,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_3",
+        "actual": "diagnosis_3",
+        "correct": true,
+        "confidence": 0.8571428571428571,
+        "spend": 10,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_7",
+        "actual": "diagnosis_7",
+        "correct": true,
+        "confidence": 0.6666666666666666,
+        "spend": 10,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_7",
+        "actual": "diagnosis_7",
+        "correct": true,
+        "confidence": 0.8333333333333334,
+        "spend": 10,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_1",
+        "actual": "diagnosis_1",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 10,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_9",
+        "actual": "diagnosis_9",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 10,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_1",
+        "actual": "diagnosis_2",
+        "correct": false,
+        "confidence": 0.75,
+        "spend": 10,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_8",
+        "actual": "diagnosis_8",
+        "correct": true,
+        "confidence": 0.6666666666666666,
+        "spend": 10,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_8",
+        "actual": "diagnosis_8",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 10,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_8",
+        "actual": "diagnosis_8",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 10,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_0",
+        "actual": "diagnosis_0",
+        "correct": true,
+        "confidence": 0.75,
+        "spend": 10,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_8",
+        "actual": "diagnosis_8",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 10,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_5",
+        "actual": "diagnosis_6",
+        "correct": false,
+        "confidence": 0.6666666666666666,
+        "spend": 10,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_8",
+        "actual": "diagnosis_8",
+        "correct": true,
+        "confidence": 0.6666666666666666,
+        "spend": 10,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_3",
+        "actual": "diagnosis_3",
+        "correct": true,
+        "confidence": 0.42857142857142855,
+        "spend": 10,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_4",
+        "actual": "diagnosis_4",
+        "correct": true,
+        "confidence": 0.75,
+        "spend": 10,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_4",
+        "actual": "diagnosis_4",
+        "correct": true,
+        "confidence": 0.75,
+        "spend": 10,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_5",
+        "actual": "diagnosis_9",
+        "correct": false,
+        "confidence": 0.3333333333333333,
+        "spend": 10,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_8",
+        "actual": "diagnosis_8",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 10,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_8",
+        "actual": "diagnosis_8",
+        "correct": true,
+        "confidence": 0.6666666666666666,
+        "spend": 10,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_5",
+        "actual": "diagnosis_5",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 10,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_7",
+        "actual": "diagnosis_7",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 10,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_5",
+        "actual": "diagnosis_5",
+        "correct": true,
+        "confidence": 0.6666666666666666,
+        "spend": 10,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_0",
+        "actual": "diagnosis_0",
+        "correct": true,
+        "confidence": 0.75,
+        "spend": 10,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_8",
+        "actual": "diagnosis_8",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 10,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_3",
+        "actual": "diagnosis_3",
+        "correct": true,
+        "confidence": 0.8571428571428571,
+        "spend": 10,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_2",
+        "actual": "diagnosis_2",
+        "correct": true,
+        "confidence": 0.8571428571428571,
+        "spend": 10,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_6",
+        "actual": "diagnosis_1",
+        "correct": false,
+        "confidence": 1.0,
+        "spend": 10,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_7",
+        "actual": "diagnosis_7",
+        "correct": true,
+        "confidence": 0.5,
+        "spend": 10,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_1",
+        "actual": "diagnosis_1",
+        "correct": true,
+        "confidence": 0.75,
+        "spend": 10,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_5",
+        "actual": "diagnosis_5",
+        "correct": true,
+        "confidence": 0.6666666666666666,
+        "spend": 10,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_7",
+        "actual": "diagnosis_7",
+        "correct": true,
+        "confidence": 0.6666666666666666,
+        "spend": 10,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_6",
+        "actual": "diagnosis_6",
+        "correct": true,
+        "confidence": 0.6666666666666666,
+        "spend": 10,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_6",
+        "actual": "diagnosis_6",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 10,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_6",
+        "actual": "diagnosis_6",
+        "correct": true,
+        "confidence": 0.6666666666666666,
+        "spend": 10,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_0",
+        "actual": "diagnosis_0",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 10,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_9",
+        "actual": "diagnosis_9",
+        "correct": true,
+        "confidence": 0.6666666666666666,
+        "spend": 10,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_6",
+        "actual": "diagnosis_6",
+        "correct": true,
+        "confidence": 0.6666666666666666,
+        "spend": 10,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_8",
+        "actual": "diagnosis_9",
+        "correct": false,
+        "confidence": 0.6666666666666666,
+        "spend": 10,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_2",
+        "actual": "diagnosis_2",
+        "correct": true,
+        "confidence": 0.7142857142857143,
+        "spend": 10,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_2",
+        "actual": "diagnosis_7",
+        "correct": false,
+        "confidence": 0.5714285714285714,
+        "spend": 10,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_6",
+        "actual": "diagnosis_2",
+        "correct": false,
+        "confidence": 0.6666666666666666,
+        "spend": 10,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_5",
+        "actual": "diagnosis_5",
+        "correct": true,
+        "confidence": 0.3333333333333333,
+        "spend": 10,
+        "verified": true,
+        "repaired": false
+      }
+    ]
+  },
+  "Unlimited Budget": {
+    "accuracy": 0.59,
+    "correct": 118,
+    "total": 200,
+    "verified_rate": 1.0,
+    "repair_rate": 0.0,
+    "avg_spend": 11.0,
+    "results": [
+      {
+        "predicted": "diagnosis_7",
+        "actual": "diagnosis_7",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_2",
+        "actual": "diagnosis_9",
+        "correct": false,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_7",
+        "actual": "diagnosis_7",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_2",
+        "actual": "diagnosis_6",
+        "correct": false,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_3",
+        "actual": "diagnosis_4",
+        "correct": false,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_1",
+        "actual": "diagnosis_6",
+        "correct": false,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_4",
+        "actual": "diagnosis_4",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_1",
+        "actual": "diagnosis_1",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_1",
+        "actual": "diagnosis_1",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_0",
+        "actual": "diagnosis_1",
+        "correct": false,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_2",
+        "actual": "diagnosis_2",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_1",
+        "actual": "diagnosis_4",
+        "correct": false,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_2",
+        "actual": "diagnosis_2",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_3",
+        "actual": "diagnosis_8",
+        "correct": false,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_0",
+        "actual": "diagnosis_0",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_0",
+        "actual": "diagnosis_8",
+        "correct": false,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_2",
+        "actual": "diagnosis_9",
+        "correct": false,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_7",
+        "actual": "diagnosis_7",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_2",
+        "actual": "diagnosis_2",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_0",
+        "actual": "diagnosis_4",
+        "correct": false,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_6",
+        "actual": "diagnosis_8",
+        "correct": false,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_0",
+        "actual": "diagnosis_0",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_0",
+        "actual": "diagnosis_4",
+        "correct": false,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_0",
+        "actual": "diagnosis_5",
+        "correct": false,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_2",
+        "actual": "diagnosis_6",
+        "correct": false,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_5",
+        "actual": "diagnosis_5",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_3",
+        "actual": "diagnosis_6",
+        "correct": false,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_2",
+        "actual": "diagnosis_2",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_1",
+        "actual": "diagnosis_1",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_2",
+        "actual": "diagnosis_2",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_3",
+        "actual": "diagnosis_5",
+        "correct": false,
+        "confidence": 0.9428571428571428,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_1",
+        "actual": "diagnosis_6",
+        "correct": false,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_7",
+        "actual": "diagnosis_7",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_7",
+        "actual": "diagnosis_7",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_7",
+        "actual": "diagnosis_8",
+        "correct": false,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_7",
+        "actual": "diagnosis_7",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_1",
+        "actual": "diagnosis_1",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_1",
+        "actual": "diagnosis_1",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_2",
+        "actual": "diagnosis_2",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_0",
+        "actual": "diagnosis_9",
+        "correct": false,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_0",
+        "actual": "diagnosis_5",
+        "correct": false,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_8",
+        "actual": "diagnosis_8",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_6",
+        "actual": "diagnosis_6",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_3",
+        "actual": "diagnosis_3",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_7",
+        "actual": "diagnosis_7",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_8",
+        "actual": "diagnosis_8",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_4",
+        "actual": "diagnosis_6",
+        "correct": false,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_3",
+        "actual": "diagnosis_3",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_0",
+        "actual": "diagnosis_0",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_6",
+        "actual": "diagnosis_7",
+        "correct": false,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_3",
+        "actual": "diagnosis_3",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_0",
+        "actual": "diagnosis_7",
+        "correct": false,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_8",
+        "actual": "diagnosis_8",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_1",
+        "actual": "diagnosis_1",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_3",
+        "actual": "diagnosis_8",
+        "correct": false,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_0",
+        "actual": "diagnosis_4",
+        "correct": false,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_4",
+        "actual": "diagnosis_6",
+        "correct": false,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_3",
+        "actual": "diagnosis_3",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_0",
+        "actual": "diagnosis_0",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_4",
+        "actual": "diagnosis_9",
+        "correct": false,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_0",
+        "actual": "diagnosis_0",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_0",
+        "actual": "diagnosis_0",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_1",
+        "actual": "diagnosis_6",
+        "correct": false,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_4",
+        "actual": "diagnosis_9",
+        "correct": false,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_2",
+        "actual": "diagnosis_2",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_6",
+        "actual": "diagnosis_6",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_7",
+        "actual": "diagnosis_7",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_0",
+        "actual": "diagnosis_0",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_9",
+        "actual": "diagnosis_9",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_4",
+        "actual": "diagnosis_7",
+        "correct": false,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_2",
+        "actual": "diagnosis_2",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_3",
+        "actual": "diagnosis_3",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_0",
+        "actual": "diagnosis_0",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_3",
+        "actual": "diagnosis_6",
+        "correct": false,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_1",
+        "actual": "diagnosis_6",
+        "correct": false,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_3",
+        "actual": "diagnosis_3",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_1",
+        "actual": "diagnosis_1",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_5",
+        "actual": "diagnosis_5",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_9",
+        "actual": "diagnosis_9",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_4",
+        "actual": "diagnosis_4",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_1",
+        "actual": "diagnosis_1",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_7",
+        "actual": "diagnosis_6",
+        "correct": false,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_0",
+        "actual": "diagnosis_8",
+        "correct": false,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_4",
+        "actual": "diagnosis_5",
+        "correct": false,
+        "confidence": 0.95,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_0",
+        "actual": "diagnosis_4",
+        "correct": false,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_4",
+        "actual": "diagnosis_4",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_8",
+        "actual": "diagnosis_8",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_3",
+        "actual": "diagnosis_3",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_7",
+        "actual": "diagnosis_7",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_3",
+        "actual": "diagnosis_3",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_2",
+        "actual": "diagnosis_9",
+        "correct": false,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_1",
+        "actual": "diagnosis_1",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_7",
+        "actual": "diagnosis_7",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_3",
+        "actual": "diagnosis_5",
+        "correct": false,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_2",
+        "actual": "diagnosis_2",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_2",
+        "actual": "diagnosis_9",
+        "correct": false,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_2",
+        "actual": "diagnosis_2",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_4",
+        "actual": "diagnosis_4",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_6",
+        "actual": "diagnosis_6",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_1",
+        "actual": "diagnosis_1",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_1",
+        "actual": "diagnosis_1",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_7",
+        "actual": "diagnosis_7",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_7",
+        "actual": "diagnosis_7",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_2",
+        "actual": "diagnosis_1",
+        "correct": false,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_0",
+        "actual": "diagnosis_8",
+        "correct": false,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_7",
+        "actual": "diagnosis_7",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_0",
+        "actual": "diagnosis_6",
+        "correct": false,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_2",
+        "actual": "diagnosis_2",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_3",
+        "actual": "diagnosis_3",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_0",
+        "actual": "diagnosis_0",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_3",
+        "actual": "diagnosis_9",
+        "correct": false,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_5",
+        "actual": "diagnosis_5",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_2",
+        "actual": "diagnosis_6",
+        "correct": false,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_1",
+        "actual": "diagnosis_1",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_7",
+        "actual": "diagnosis_7",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_0",
+        "actual": "diagnosis_5",
+        "correct": false,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_0",
+        "actual": "diagnosis_8",
+        "correct": false,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_2",
+        "actual": "diagnosis_2",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_3",
+        "actual": "diagnosis_3",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_1",
+        "actual": "diagnosis_6",
+        "correct": false,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_6",
+        "actual": "diagnosis_6",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_8",
+        "actual": "diagnosis_8",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_2",
+        "actual": "diagnosis_9",
+        "correct": false,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_0",
+        "actual": "diagnosis_0",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_0",
+        "actual": "diagnosis_0",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_0",
+        "actual": "diagnosis_5",
+        "correct": false,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_5",
+        "actual": "diagnosis_5",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_2",
+        "actual": "diagnosis_2",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_0",
+        "actual": "diagnosis_8",
+        "correct": false,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_0",
+        "actual": "diagnosis_8",
+        "correct": false,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_2",
+        "actual": "diagnosis_9",
+        "correct": false,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_2",
+        "actual": "diagnosis_2",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_2",
+        "actual": "diagnosis_2",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_7",
+        "actual": "diagnosis_7",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_0",
+        "actual": "diagnosis_9",
+        "correct": false,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_2",
+        "actual": "diagnosis_9",
+        "correct": false,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_4",
+        "actual": "diagnosis_4",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_4",
+        "actual": "diagnosis_5",
+        "correct": false,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_0",
+        "actual": "diagnosis_7",
+        "correct": false,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_7",
+        "actual": "diagnosis_7",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_0",
+        "actual": "diagnosis_5",
+        "correct": false,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_7",
+        "actual": "diagnosis_7",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_0",
+        "actual": "diagnosis_0",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_3",
+        "actual": "diagnosis_3",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_4",
+        "actual": "diagnosis_4",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_3",
+        "actual": "diagnosis_3",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_3",
+        "actual": "diagnosis_3",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_4",
+        "actual": "diagnosis_6",
+        "correct": false,
+        "confidence": 0.85,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_0",
+        "actual": "diagnosis_5",
+        "correct": false,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_3",
+        "actual": "diagnosis_3",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_2",
+        "actual": "diagnosis_2",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_3",
+        "actual": "diagnosis_3",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_2",
+        "actual": "diagnosis_6",
+        "correct": false,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_0",
+        "actual": "diagnosis_5",
+        "correct": false,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_4",
+        "actual": "diagnosis_4",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_0",
+        "actual": "diagnosis_0",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_4",
+        "actual": "diagnosis_9",
+        "correct": false,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_1",
+        "actual": "diagnosis_1",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_3",
+        "actual": "diagnosis_3",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_0",
+        "actual": "diagnosis_7",
+        "correct": false,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_7",
+        "actual": "diagnosis_7",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_1",
+        "actual": "diagnosis_1",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_2",
+        "actual": "diagnosis_9",
+        "correct": false,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_1",
+        "actual": "diagnosis_2",
+        "correct": false,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_0",
+        "actual": "diagnosis_8",
+        "correct": false,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_8",
+        "actual": "diagnosis_8",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_0",
+        "actual": "diagnosis_8",
+        "correct": false,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_0",
+        "actual": "diagnosis_0",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_0",
+        "actual": "diagnosis_8",
+        "correct": false,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_5",
+        "actual": "diagnosis_6",
+        "correct": false,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_1",
+        "actual": "diagnosis_8",
+        "correct": false,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_3",
+        "actual": "diagnosis_3",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_4",
+        "actual": "diagnosis_4",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_4",
+        "actual": "diagnosis_4",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_4",
+        "actual": "diagnosis_9",
+        "correct": false,
+        "confidence": 0.85,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_0",
+        "actual": "diagnosis_8",
+        "correct": false,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_0",
+        "actual": "diagnosis_8",
+        "correct": false,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_5",
+        "actual": "diagnosis_5",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_7",
+        "actual": "diagnosis_7",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_0",
+        "actual": "diagnosis_5",
+        "correct": false,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_0",
+        "actual": "diagnosis_0",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_1",
+        "actual": "diagnosis_8",
+        "correct": false,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_3",
+        "actual": "diagnosis_3",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_2",
+        "actual": "diagnosis_2",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_1",
+        "actual": "diagnosis_1",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_7",
+        "actual": "diagnosis_7",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_1",
+        "actual": "diagnosis_1",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_5",
+        "actual": "diagnosis_5",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_7",
+        "actual": "diagnosis_7",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_6",
+        "actual": "diagnosis_6",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_4",
+        "actual": "diagnosis_6",
+        "correct": false,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_6",
+        "actual": "diagnosis_6",
+        "correct": true,
+        "confidence": 0.8666666666666667,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_0",
+        "actual": "diagnosis_0",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_4",
+        "actual": "diagnosis_9",
+        "correct": false,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_1",
+        "actual": "diagnosis_6",
+        "correct": false,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_0",
+        "actual": "diagnosis_9",
+        "correct": false,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_2",
+        "actual": "diagnosis_2",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_2",
+        "actual": "diagnosis_7",
+        "correct": false,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_3",
+        "actual": "diagnosis_2",
+        "correct": false,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_3",
+        "actual": "diagnosis_5",
+        "correct": false,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      }
+    ]
+  }
+}

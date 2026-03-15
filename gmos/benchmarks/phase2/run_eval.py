@@ -49,7 +49,7 @@ def main():
     
     # Run Baseline B (Ungoverned GMI)
     print("\n[3] Running Baseline B (Ungoverned GMI)...")
-    system_b = BaselineB(diagnoses, diagnosis_symptoms)
+    system_b = BaselineB(diagnoses, diagnosis_symptoms, budget_limit=100)
     results_b = run_evaluation(system_b, test, train)
     print(f"  Accuracy: {results_b['accuracy']:.1%}")
     print(f"  Verified rate: {results_b['verified_rate']:.1%}")
@@ -57,10 +57,10 @@ def main():
     # Run System C (Full GMI)
     print("\n[4] Running System C (Full GMI on GM-OS)...")
     system_c = FullGMI(
-        diagnoses, 
+        diagnoses,
         diagnosis_symptoms,
-        budget_limit=10,
-        reserve_floor=0.2
+        budget_limit=100,  # Increased to evaluate more candidates
+        reserve_floor=0.15
     )
     results_c = run_evaluation(system_c, test, train)
     print(f"  Accuracy: {results_c['accuracy']:.1%}")

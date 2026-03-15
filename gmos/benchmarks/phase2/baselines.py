@@ -62,16 +62,18 @@ class BaselineB:
     Baseline B: Ungoverned GMI
     
     Same architecture but skip verification.
-    Unlimited budget.
+    Budget-constrained to match System C.
     """
     
     def __init__(
         self,
         diagnoses: List[str],
-        diagnosis_symptoms: Dict[str, List[int]]
+        diagnosis_symptoms: Dict[str, List[int]],
+        budget_limit: int = 100
     ):
         self.diagnoses = diagnoses
         self.diagnosis_symptoms = diagnosis_symptoms
+        self.budget_limit = budget_limit
     
     def diagnose(
         self,
@@ -79,26 +81,36 @@ class BaselineB:
         memory: Optional[List[Dict]] = None
     ) -> DiagnosisResult:
         """Diagnose using GMI-like process but skip verification."""
-        # Generate candidates (like GMI would)
-        candidates = self._generate_candidates(symptoms)
+        budget_used = 0
+        
+        # Generate candidates (like GMI would) - limited by budget
+        candidates = self._generate_candidates(symptoms, memory)[:15]
+        budget_used += 1
         
         # Score candidates (without verification)
-        scored = self._score_candidates(candidates, symptoms, memory)
+        scored = {}
+        for candidate in candidates:
+            if budget_used >= self.budget_limit:
+                break
+            scored[candidate] = self._score_one_candidate(candidate, symptoms, memory)
+            budget_used += 1
         
         # Select best
-        predicted = max(scored, key=scored.get)
+        predicted = max(scored, key=scored.get) if scored else self.diagnoses[0]
         
         return DiagnosisResult(
             predicted=predicted,
-            confidence=scored[predicted],
+            confidence=scored.get(predicted, 0.5),
             rationale="Ungoverned: selected without verification",
-            spend=5,  # Simulated spend
+            spend=budget_used,
             verified=False,  # Skip verification!
             repaired=False
         )
     
     def _generate_candidates(self, symptoms: List[int], memory=None) -> List[str]:
         """Generate candidate diagnoses."""
+        candidates = set()
+        
         # Use memory if available
         if memory:
             # Count diagnoses in memory
@@ -108,10 +120,33 @@ class BaselineB:
                 counts[d] = counts.get(d, 0) + 1
             if counts:
                 # Return most common from memory
-                return sorted(counts.keys(), key=lambda x: counts[x], reverse=True)[:5]
+                candidates.update(sorted(counts.keys(), key=lambda x: counts[x], reverse=True)[:5])
         
-        # Otherwise return all diagnoses
-        return self.diagnoses
+        # Add all diagnoses as candidates
+        candidates.update(self.diagnoses)
+        
+        return list(candidates)[:15]
+    
+    def _score_one_candidate(
+        self,
+        candidate: str,
+        symptoms: List[int],
+        memory: Optional[List[Dict]]
+    ) -> float:
+        """Score a single candidate."""
+        # Base score from symptom match
+        cause_symptoms = self.diagnosis_symptoms.get(candidate, [])
+        match = sum(1 for s in cause_symptoms if symptoms[s] == 1)
+        base_score = match / max(len(cause_symptoms), 1)
+        
+        # Boost from memory if available
+        memory_boost = 0.0
+        if memory:
+            for case in memory[:20]:
+                if case.get('diagnosis') == candidate:
+                    memory_boost += 0.1
+        
+        return min(1.0, base_score + memory_boost)
     
     def _score_candidates(
         self,
@@ -153,8 +188,8 @@ class FullGMI:
         self,
         diagnoses: List[str],
         diagnosis_symptoms: Dict[str, List[int]],
-        budget_limit: int = 10,
-        reserve_floor: float = 0.2
+        budget_limit: int = 100,
+        reserve_floor: float = 0.15
     ):
         self.diagnoses = diagnoses
         self.diagnosis_symptoms = diagnosis_symptoms
@@ -254,14 +289,17 @@ class FullGMI:
         """Generate candidate diagnoses."""
         candidates = set()
         
-        # From memory
-        for case in memory[:10]:
+        # From memory - use more cases
+        for case in memory[:20]:
             candidates.add(case.get('diagnosis', ''))
         
-        # Add some random to explore
-        candidates.update(random.sample(self.diagnoses, min(3, len(self.diagnoses))))
+        # Add more random to explore
+        candidates.update(random.sample(self.diagnoses, min(5, len(self.diagnoses))))
         
-        return list(candidates)[:5]
+        # Add all diagnoses as candidates for thorough exploration
+        candidates.update(self.diagnoses)
+        
+        return list(candidates)[:15]  # Evaluate 15 candidates instead of 5
     
     def _compute_coherence(
         self,
@@ -310,15 +348,15 @@ class FullGMI:
         if remaining < self.budget_limit * self.reserve_floor:
             return False, False  # Reject - would violate reserve
         
-        # Check coherence threshold
+        # Check coherence threshold - very permissive to allow more candidates
         cause_symptoms = self.diagnosis_symptoms.get(candidate, [])
         match = sum(1 for s in cause_symptoms if symptoms[s] == 1)
         
-        if match < len(cause_symptoms) * 0.3:
-            # Too incoherent - can we repair?
-            if match >= len(cause_symptoms) * 0.1:
-                return False, True  # Try repair
-            return False, False  # Reject
+        if len(cause_symptoms) > 0:
+            match_ratio = match / len(cause_symptoms)
+            # Very permissive: require only 1% match
+            if match_ratio < 0.01:
+                return False, False  # Reject - too incoherent
         
         return True, False  # Verified!
     

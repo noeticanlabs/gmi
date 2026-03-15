@@ -1,25 +1,25 @@
 {
   "system_a": {
     "name": "Baseline A (Heuristic)",
-    "accuracy": 0.09,
-    "correct": 18,
+    "accuracy": 0.15,
+    "correct": 30,
     "total": 200
   },
   "system_b": {
     "name": "Baseline B (Ungoverned GMI)",
-    "accuracy": 0.86,
-    "correct": 172,
+    "accuracy": 0.655,
+    "correct": 131,
     "total": 200,
     "verified_rate": 0.0,
     "repair_rate": 0.0
   },
   "system_c": {
     "name": "System C (Full GMI)",
-    "accuracy": 0.82,
-    "correct": 164,
+    "accuracy": 0.63,
+    "correct": 126,
     "total": 200,
     "verified_rate": 1.0,
-    "repair_rate": 0.995,
-    "avg_spend": 4.92
+    "repair_rate": 0.0,
+    "avg_spend": 11.0
   }
 }
