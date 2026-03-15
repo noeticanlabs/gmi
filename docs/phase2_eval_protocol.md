@@ -1,7 +1,7 @@
 # Phase 2 Evaluation Protocol
 
 **Phase**: 2  
-**Status**: Draft  
+**Status**: Final (v1.0)  
 **Purpose**: Define how to evaluate GMI on the constrained diagnosis task.
 
 ---

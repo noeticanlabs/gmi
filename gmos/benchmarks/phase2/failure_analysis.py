@@ -19,6 +19,15 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)) + "/../../src")
 from task_dataset import DiagnosisDatasetGenerator
 from baselines import BaselineA, BaselineB, FullGMI, run_evaluation
 
+# Import shared utilities
+try:
+    from __init__ import get_results_path
+except ImportError:
+    # Fallback if __init__.py not available
+    from pathlib import Path
+    def get_results_path(filename: str) -> Path:
+        return Path(__file__).resolve().parent / filename
+
 
 def analyze_failures(
     test_cases: List[Dict],
@@ -231,8 +240,9 @@ def run_failure_analysis():
     net_advantage = c_success_b_fail - b_success_c_fail
     print(f"\nNet governance advantage: {net_advantage:+d} cases")
     
-    # Save results
-    output_path = "/home/user/gmi/gmos/benchmarks/phase2/failure_analysis.json"
+    # Save results using repo-relative path
+    output_path = get_results_path("failure_analysis.json")
+    output_path.parent.mkdir(parents=True, exist_ok=True)
     with open(output_path, 'w') as f:
         json.dump(analysis, f, indent=2, default=str)
     print(f"\nResults saved to {output_path}")

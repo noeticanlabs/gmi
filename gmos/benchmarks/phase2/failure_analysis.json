@@ -1,131 +1,132 @@
 {
   "total_cases": 200,
   "correct_by_system": {
-    "A": 16,
-    "B": 126,
-    "C": 129
+    "A": 22,
+    "B": 125,
+    "C": 137
   },
   "error_taxonomy": {
     "A": {
-      "near_miss": 28,
-      "random_error": 47,
-      "confusable": 74,
-      "moderate_error": 35
+      "random_error": 44,
+      "near_miss": 33,
+      "confusable": 52,
+      "moderate_error": 49
     },
     "B": {
-      "random_error": 9,
-      "moderate_error": 18,
-      "near_miss": 28,
+      "random_error": 10,
+      "moderate_error": 19,
+      "near_miss": 27,
       "confusable": 19
     },
     "C": {
-      "random_error": 29,
-      "near_miss": 10,
+      "random_error": 19,
+      "near_miss": 11,
       "moderate_error": 23,
-      "confusable": 9
+      "confusable": 10
     }
   },
   "confusion_matrices": {
     "A": {
       "diagnosis_7": {
-        "diagnosis_8": 2,
-        "diagnosis_5": 3,
         "diagnosis_1": 4,
-        "diagnosis_3": 3,
-        "diagnosis_2": 3,
-        "diagnosis_0": 4,
-        "diagnosis_6": 4,
-        "diagnosis_9": 3,
-        "diagnosis_4": 1
-      },
-      "diagnosis_9": {
-        "diagnosis_2": 4,
-        "diagnosis_4": 2,
-        "diagnosis_7": 1,
-        "diagnosis_5": 2,
         "diagnosis_3": 5,
+        "diagnosis_4": 3,
+        "diagnosis_9": 3,
+        "diagnosis_5": 2,
         "diagnosis_6": 2,
+        "diagnosis_2": 1,
         "diagnosis_0": 2,
         "diagnosis_8": 1
       },
-      "diagnosis_6": {
-        "diagnosis_0": 3,
-        "diagnosis_7": 1,
-        "diagnosis_9": 4,
-        "diagnosis_3": 4,
-        "diagnosis_4": 3,
-        "diagnosis_8": 2,
-        "diagnosis_1": 1,
-        "diagnosis_5": 2,
-        "diagnosis_2": 2
-      },
-      "diagnosis_4": {
+      "diagnosis_9": {
+        "diagnosis_2": 6,
         "diagnosis_6": 1,
+        "diagnosis_5": 3,
         "diagnosis_8": 1,
-        "diagnosis_2": 5,
-        "diagnosis_7": 2,
-        "diagnosis_1": 2,
-        "diagnosis_9": 1
+        "diagnosis_7": 3,
+        "diagnosis_3": 2,
+        "diagnosis_0": 1
+      },
+      "diagnosis_6": {
+        "diagnosis_5": 2,
+        "diagnosis_4": 3,
+        "diagnosis_9": 4,
+        "diagnosis_2": 6,
+        "diagnosis_7": 1,
+        "diagnosis_0": 3,
+        "diagnosis_3": 1,
+        "diagnosis_8": 1
       },
       "diagnosis_1": {
-        "diagnosis_3": 3,
+        "diagnosis_3": 2,
+        "diagnosis_5": 2,
+        "diagnosis_2": 4,
+        "diagnosis_4": 2,
         "diagnosis_6": 2,
-        "diagnosis_2": 2,
-        "diagnosis_5": 3,
-        "diagnosis_4": 1,
-        "diagnosis_8": 5,
+        "diagnosis_8": 2,
+        "diagnosis_0": 1,
         "diagnosis_7": 1,
-        "diagnosis_0": 1
+        "diagnosis_9": 1
+      },
+      "diagnosis_4": {
+        "diagnosis_0": 2,
+        "diagnosis_7": 1,
+        "diagnosis_3": 1,
+        "diagnosis_6": 2,
+        "diagnosis_2": 3,
+        "diagnosis_8": 1,
+        "diagnosis_5": 1,
+        "diagnosis_9": 1
       },
       "diagnosis_2": {
-        "diagnosis_0": 2,
-        "diagnosis_3": 3,
+        "diagnosis_9": 3,
+        "diagnosis_4": 1,
+        "diagnosis_7": 2,
         "diagnosis_8": 3,
-        "diagnosis_5": 3,
-        "diagnosis_4": 3,
-        "diagnosis_9": 2,
-        "diagnosis_7": 1,
-        "diagnosis_1": 1,
-        "diagnosis_6": 1
+        "diagnosis_3": 2,
+        "diagnosis_1": 3,
+        "diagnosis_0": 3,
+        "diagnosis_5": 1
       },
       "diagnosis_8": {
-        "diagnosis_4": 2,
-        "diagnosis_0": 4,
-        "diagnosis_6": 2,
-        "diagnosis_3": 2,
-        "diagnosis_2": 2,
-        "diagnosis_1": 1,
+        "diagnosis_6": 3,
+        "diagnosis_3": 4,
+        "diagnosis_2": 3,
+        "diagnosis_0": 3,
         "diagnosis_9": 2,
-        "diagnosis_5": 5
-      },
-      "diagnosis_0": {
-        "diagnosis_6": 1,
-        "diagnosis_8": 2,
-        "diagnosis_3": 2,
-        "diagnosis_7": 2,
-        "diagnosis_1": 3,
-        "diagnosis_4": 2,
-        "diagnosis_9": 2,
-        "diagnosis_2": 2
-      },
-      "diagnosis_5": {
-        "diagnosis_8": 4,
-        "diagnosis_7": 2,
-        "diagnosis_1": 3,
-        "diagnosis_3": 1,
-        "diagnosis_6": 1,
-        "diagnosis_2": 4,
+        "diagnosis_1": 4,
+        "diagnosis_7": 1,
+        "diagnosis_5": 2,
         "diagnosis_4": 1
       },
-      "diagnosis_3": {
-        "diagnosis_2": 2,
-        "diagnosis_8": 2,
-        "diagnosis_7": 2,
-        "diagnosis_5": 2,
-        "diagnosis_6": 2,
-        "diagnosis_4": 2,
+      "diagnosis_0": {
+        "diagnosis_8": 3,
+        "diagnosis_4": 1,
+        "diagnosis_5": 4,
+        "diagnosis_3": 2,
         "diagnosis_1": 2,
-        "diagnosis_0": 1
+        "diagnosis_9": 1,
+        "diagnosis_7": 1
+      },
+      "diagnosis_5": {
+        "diagnosis_0": 4,
+        "diagnosis_1": 2,
+        "diagnosis_9": 1,
+        "diagnosis_6": 3,
+        "diagnosis_7": 2,
+        "diagnosis_2": 2,
+        "diagnosis_8": 1,
+        "diagnosis_3": 1
+      },
+      "diagnosis_3": {
+        "diagnosis_6": 1,
+        "diagnosis_2": 3,
+        "diagnosis_1": 1,
+        "diagnosis_8": 4,
+        "diagnosis_4": 3,
+        "diagnosis_7": 3,
+        "diagnosis_9": 1,
+        "diagnosis_5": 1
       }
     },
     "B": {
@@ -143,10 +144,11 @@
         "diagnosis_3": 3
       },
       "diagnosis_0": {
-        "diagnosis_1": 5,
+        "diagnosis_1": 4,
+        "diagnosis_5": 1,
         "diagnosis_4": 5,
         "diagnosis_3": 2,
-        "diagnosis_8": 3
+        "diagnosis_8": 4
       },
       "diagnosis_6": {
         "diagnosis_4": 5,
@@ -176,15 +178,17 @@
     "C": {
       "diagnosis_9": {
         "diagnosis_2": 8,
-        "diagnosis_0": 3,
         "diagnosis_4": 4,
         "diagnosis_7": 1,
-        "diagnosis_3": 1
+        "diagnosis_3": 1,
+        "diagnosis_0": 1
       },
       "diagnosis_4": {
         "diagnosis_3": 1,
         "diagnosis_1": 1,
-        "diagnosis_0": 4
+        "diagnosis_0": 1,
+        "diagnosis_9": 1,
+        "diagnosis_2": 1
       },
       "diagnosis_2": {
         "diagnosis_7": 1,
@@ -193,13 +197,16 @@
         "diagnosis_3": 1
       },
       "diagnosis_8": {
-        "diagnosis_0": 10,
+        "diagnosis_3": 2,
         "diagnosis_6": 1,
         "diagnosis_7": 1,
+        "diagnosis_9": 1,
+        "diagnosis_0": 4,
         "diagnosis_1": 3
       },
       "diagnosis_0": {
         "diagnosis_5": 1,
+        "diagnosis_8": 1,
         "diagnosis_1": 1
       },
       "diagnosis_5": {
@@ -212,18 +219,16 @@
         "diagnosis_2": 1,
         "diagnosis_4": 2,
         "diagnosis_3": 1,
-        "diagnosis_7": 1,
+        "diagnosis_7": 2,
         "diagnosis_0": 1,
         "diagnosis_1": 2,
         "diagnosis_5": 1
       },
-      "diagnosis_7": {
-        "diagnosis_6": 1,
-        "diagnosis_0": 3,
-        "diagnosis_2": 1
-      },
       "diagnosis_1": {
         "diagnosis_6": 3,
+        "diagnosis_2": 1
+      },
+      "diagnosis_7": {
         "diagnosis_2": 1
       }
     }
@@ -231,12 +236,12 @@
   "difficulty_analysis": {
     "78%": {
       "total": 200,
-      "correct_A": 16,
-      "correct_B": 126,
-      "correct_C": 129,
-      "error_rate_A": 0.92,
-      "error_rate_B": 0.37,
-      "error_rate_C": 0.355
+      "correct_A": 22,
+      "correct_B": 125,
+      "correct_C": 137,
+      "error_rate_A": 0.89,
+      "error_rate_B": 0.375,
+      "error_rate_C": 0.31499999999999995
     }
   }
 }

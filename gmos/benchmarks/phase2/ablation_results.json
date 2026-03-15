@@ -1,7 +1,7 @@
 {
   "Full GMI": {
-    "accuracy": 0.68,
-    "correct": 136,
+    "accuracy": 0.585,
+    "correct": 117,
     "total": 200,
     "verified_rate": 1.0,
     "repair_rate": 0.0,
@@ -17,9 +17,9 @@
         "repaired": false
       },
       {
-        "predicted": "diagnosis_9",
+        "predicted": "diagnosis_2",
         "actual": "diagnosis_9",
-        "correct": true,
+        "correct": false,
         "confidence": 1.0,
         "spend": 11,
         "verified": true,
@@ -53,9 +53,9 @@
         "repaired": false
       },
       {
-        "predicted": "diagnosis_1",
+        "predicted": "diagnosis_6",
         "actual": "diagnosis_6",
-        "correct": false,
+        "correct": true,
         "confidence": 1.0,
         "spend": 11,
         "verified": true,
@@ -92,24 +92,6 @@
         "predicted": "diagnosis_0",
         "actual": "diagnosis_1",
         "correct": false,
-        "confidence": 1.0,
-        "spend": 11,
-        "verified": true,
-        "repaired": false
-      },
-      {
-        "predicted": "diagnosis_7",
-        "actual": "diagnosis_2",
-        "correct": false,
-        "confidence": 1.0,
-        "spend": 11,
-        "verified": true,
-        "repaired": false
-      },
-      {
-        "predicted": "diagnosis_4",
-        "actual": "diagnosis_4",
-        "correct": true,
         "confidence": 1.0,
         "spend": 11,
         "verified": true,
@@ -125,9 +107,27 @@
         "repaired": false
       },
       {
-        "predicted": "diagnosis_8",
-        "actual": "diagnosis_8",
+        "predicted": "diagnosis_3",
+        "actual": "diagnosis_4",
+        "correct": false,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_2",
+        "actual": "diagnosis_2",
         "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_3",
+        "actual": "diagnosis_8",
+        "correct": false,
         "confidence": 1.0,
         "spend": 11,
         "verified": true,
@@ -143,18 +143,18 @@
         "repaired": false
       },
       {
-        "predicted": "diagnosis_8",
+        "predicted": "diagnosis_0",
         "actual": "diagnosis_8",
-        "correct": true,
+        "correct": false,
         "confidence": 1.0,
         "spend": 11,
         "verified": true,
         "repaired": false
       },
       {
-        "predicted": "diagnosis_9",
+        "predicted": "diagnosis_2",
         "actual": "diagnosis_9",
-        "correct": true,
+        "correct": false,
         "confidence": 1.0,
         "spend": 11,
         "verified": true,
@@ -179,18 +179,18 @@
         "repaired": false
       },
       {
-        "predicted": "diagnosis_4",
+        "predicted": "diagnosis_0",
         "actual": "diagnosis_4",
-        "correct": true,
+        "correct": false,
         "confidence": 1.0,
         "spend": 11,
         "verified": true,
         "repaired": false
       },
       {
-        "predicted": "diagnosis_8",
+        "predicted": "diagnosis_6",
         "actual": "diagnosis_8",
-        "correct": true,
+        "correct": false,
         "confidence": 1.0,
         "spend": 11,
         "verified": true,
@@ -287,9 +287,9 @@
         "repaired": false
       },
       {
-        "predicted": "diagnosis_1",
+        "predicted": "diagnosis_6",
         "actual": "diagnosis_6",
-        "correct": false,
+        "correct": true,
         "confidence": 1.0,
         "spend": 11,
         "verified": true,
@@ -359,16 +359,16 @@
         "repaired": false
       },
       {
-        "predicted": "diagnosis_9",
+        "predicted": "diagnosis_0",
         "actual": "diagnosis_9",
-        "correct": true,
+        "correct": false,
         "confidence": 1.0,
         "spend": 11,
         "verified": true,
         "repaired": false
       },
       {
-        "predicted": "diagnosis_0",
+        "predicted": "diagnosis_2",
         "actual": "diagnosis_5",
         "correct": false,
         "confidence": 1.0,
@@ -449,9 +449,9 @@
         "repaired": false
       },
       {
-        "predicted": "diagnosis_7",
+        "predicted": "diagnosis_6",
         "actual": "diagnosis_7",
-        "correct": true,
+        "correct": false,
         "confidence": 1.0,
         "spend": 11,
         "verified": true,
@@ -467,9 +467,9 @@
         "repaired": false
       },
       {
-        "predicted": "diagnosis_7",
+        "predicted": "diagnosis_0",
         "actual": "diagnosis_7",
-        "correct": true,
+        "correct": false,
         "confidence": 1.0,
         "spend": 11,
         "verified": true,
@@ -494,16 +494,16 @@
         "repaired": false
       },
       {
-        "predicted": "diagnosis_8",
+        "predicted": "diagnosis_3",
         "actual": "diagnosis_8",
-        "correct": true,
+        "correct": false,
         "confidence": 1.0,
         "spend": 11,
         "verified": true,
         "repaired": false
       },
       {
-        "predicted": "diagnosis_9",
+        "predicted": "diagnosis_0",
         "actual": "diagnosis_4",
         "correct": false,
         "confidence": 1.0,
@@ -512,9 +512,9 @@
         "repaired": false
       },
       {
-        "predicted": "diagnosis_4",
+        "predicted": "diagnosis_6",
         "actual": "diagnosis_6",
-        "correct": false,
+        "correct": true,
         "confidence": 1.0,
         "spend": 11,
         "verified": true,
@@ -539,36 +539,36 @@
         "repaired": false
       },
       {
-        "predicted": "diagnosis_9",
+        "predicted": "diagnosis_4",
         "actual": "diagnosis_9",
-        "correct": true,
-        "confidence": 1.0,
-        "spend": 11,
-        "verified": true,
-        "repaired": false
-      },
-      {
-        "predicted": "diagnosis_0",
-        "actual": "diagnosis_0",
-        "correct": true,
-        "confidence": 1.0,
-        "spend": 11,
-        "verified": true,
-        "repaired": false
-      },
-      {
-        "predicted": "diagnosis_0",
-        "actual": "diagnosis_0",
-        "correct": true,
-        "confidence": 1.0,
-        "spend": 11,
-        "verified": true,
-        "repaired": false
-      },
-      {
-        "predicted": "diagnosis_1",
-        "actual": "diagnosis_6",
         "correct": false,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_0",
+        "actual": "diagnosis_0",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_0",
+        "actual": "diagnosis_0",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_6",
+        "actual": "diagnosis_6",
+        "correct": true,
         "confidence": 1.0,
         "spend": 11,
         "verified": true,
@@ -584,9 +584,9 @@
         "repaired": false
       },
       {
-        "predicted": "diagnosis_8",
+        "predicted": "diagnosis_2",
         "actual": "diagnosis_2",
-        "correct": false,
+        "correct": true,
         "confidence": 1.0,
         "spend": 11,
         "verified": true,
@@ -692,9 +692,9 @@
         "repaired": false
       },
       {
-        "predicted": "diagnosis_1",
+        "predicted": "diagnosis_6",
         "actual": "diagnosis_1",
-        "correct": true,
+        "correct": false,
         "confidence": 1.0,
         "spend": 11,
         "verified": true,
@@ -746,9 +746,9 @@
         "repaired": false
       },
       {
-        "predicted": "diagnosis_8",
+        "predicted": "diagnosis_0",
         "actual": "diagnosis_8",
-        "correct": true,
+        "correct": false,
         "confidence": 1.0,
         "spend": 11,
         "verified": true,
@@ -764,7 +764,7 @@
         "repaired": false
       },
       {
-        "predicted": "diagnosis_0",
+        "predicted": "diagnosis_2",
         "actual": "diagnosis_4",
         "correct": false,
         "confidence": 1.0,
@@ -818,9 +818,9 @@
         "repaired": false
       },
       {
-        "predicted": "diagnosis_9",
+        "predicted": "diagnosis_2",
         "actual": "diagnosis_9",
-        "correct": true,
+        "correct": false,
         "confidence": 1.0,
         "spend": 11,
         "verified": true,
@@ -863,9 +863,9 @@
         "repaired": false
       },
       {
-        "predicted": "diagnosis_9",
+        "predicted": "diagnosis_2",
         "actual": "diagnosis_9",
-        "correct": true,
+        "correct": false,
         "confidence": 1.0,
         "spend": 11,
         "verified": true,
@@ -908,9 +908,9 @@
         "repaired": false
       },
       {
-        "predicted": "diagnosis_1",
+        "predicted": "diagnosis_6",
         "actual": "diagnosis_1",
-        "correct": true,
+        "correct": false,
         "confidence": 1.0,
         "spend": 11,
         "verified": true,
@@ -944,7 +944,7 @@
         "repaired": false
       },
       {
-        "predicted": "diagnosis_9",
+        "predicted": "diagnosis_0",
         "actual": "diagnosis_8",
         "correct": false,
         "confidence": 1.0,
@@ -971,9 +971,9 @@
         "repaired": false
       },
       {
-        "predicted": "diagnosis_9",
+        "predicted": "diagnosis_2",
         "actual": "diagnosis_2",
-        "correct": false,
+        "correct": true,
         "confidence": 1.0,
         "spend": 11,
         "verified": true,
@@ -998,9 +998,9 @@
         "repaired": false
       },
       {
-        "predicted": "diagnosis_9",
+        "predicted": "diagnosis_3",
         "actual": "diagnosis_9",
-        "correct": true,
+        "correct": false,
         "confidence": 1.0,
         "spend": 11,
         "verified": true,
@@ -1106,18 +1106,18 @@
         "repaired": false
       },
       {
-        "predicted": "diagnosis_9",
+        "predicted": "diagnosis_2",
         "actual": "diagnosis_9",
-        "correct": true,
+        "correct": false,
         "confidence": 1.0,
         "spend": 11,
         "verified": true,
         "repaired": false
       },
       {
-        "predicted": "diagnosis_8",
+        "predicted": "diagnosis_0",
         "actual": "diagnosis_0",
-        "correct": false,
+        "correct": true,
         "confidence": 1.0,
         "spend": 11,
         "verified": true,
@@ -1151,8 +1151,17 @@
         "repaired": false
       },
       {
-        "predicted": "diagnosis_9",
+        "predicted": "diagnosis_2",
         "actual": "diagnosis_2",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_0",
+        "actual": "diagnosis_8",
         "correct": false,
         "confidence": 1.0,
         "spend": 11,
@@ -1169,15 +1178,6 @@
         "repaired": false
       },
       {
-        "predicted": "diagnosis_8",
-        "actual": "diagnosis_8",
-        "correct": true,
-        "confidence": 1.0,
-        "spend": 11,
-        "verified": true,
-        "repaired": false
-      },
-      {
         "predicted": "diagnosis_2",
         "actual": "diagnosis_9",
         "correct": false,
@@ -1196,9 +1196,9 @@
         "repaired": false
       },
       {
-        "predicted": "diagnosis_2",
+        "predicted": "diagnosis_3",
         "actual": "diagnosis_2",
-        "correct": true,
+        "correct": false,
         "confidence": 1.0,
         "spend": 11,
         "verified": true,
@@ -1214,9 +1214,9 @@
         "repaired": false
       },
       {
-        "predicted": "diagnosis_9",
+        "predicted": "diagnosis_0",
         "actual": "diagnosis_9",
-        "correct": true,
+        "correct": false,
         "confidence": 1.0,
         "spend": 11,
         "verified": true,
@@ -1250,9 +1250,9 @@
         "repaired": false
       },
       {
-        "predicted": "diagnosis_7",
+        "predicted": "diagnosis_0",
         "actual": "diagnosis_7",
-        "correct": true,
+        "correct": false,
         "confidence": 1.0,
         "spend": 11,
         "verified": true,
@@ -1421,9 +1421,9 @@
         "repaired": false
       },
       {
-        "predicted": "diagnosis_9",
+        "predicted": "diagnosis_1",
         "actual": "diagnosis_1",
-        "correct": false,
+        "correct": true,
         "confidence": 1.0,
         "spend": 11,
         "verified": true,
@@ -1439,9 +1439,9 @@
         "repaired": false
       },
       {
-        "predicted": "diagnosis_7",
+        "predicted": "diagnosis_0",
         "actual": "diagnosis_7",
-        "correct": true,
+        "correct": false,
         "confidence": 1.0,
         "spend": 11,
         "verified": true,
@@ -1466,9 +1466,9 @@
         "repaired": false
       },
       {
-        "predicted": "diagnosis_9",
+        "predicted": "diagnosis_2",
         "actual": "diagnosis_9",
-        "correct": true,
+        "correct": false,
         "confidence": 1.0,
         "spend": 11,
         "verified": true,
@@ -1502,9 +1502,9 @@
         "repaired": false
       },
       {
-        "predicted": "diagnosis_8",
+        "predicted": "diagnosis_0",
         "actual": "diagnosis_8",
-        "correct": true,
+        "correct": false,
         "confidence": 1.0,
         "spend": 11,
         "verified": true,
@@ -1520,9 +1520,9 @@
         "repaired": false
       },
       {
-        "predicted": "diagnosis_8",
+        "predicted": "diagnosis_0",
         "actual": "diagnosis_8",
-        "correct": true,
+        "correct": false,
         "confidence": 1.0,
         "spend": 11,
         "verified": true,
@@ -1583,9 +1583,9 @@
         "repaired": false
       },
       {
-        "predicted": "diagnosis_8",
+        "predicted": "diagnosis_0",
         "actual": "diagnosis_8",
-        "correct": true,
+        "correct": false,
         "confidence": 1.0,
         "spend": 11,
         "verified": true,
@@ -1637,9 +1637,9 @@
         "repaired": false
       },
       {
-        "predicted": "diagnosis_8",
+        "predicted": "diagnosis_2",
         "actual": "diagnosis_8",
-        "correct": true,
+        "correct": false,
         "confidence": 1.0,
         "spend": 11,
         "verified": true,
@@ -1664,9 +1664,9 @@
         "repaired": false
       },
       {
-        "predicted": "diagnosis_1",
+        "predicted": "diagnosis_6",
         "actual": "diagnosis_1",
-        "correct": true,
+        "correct": false,
         "confidence": 1.0,
         "spend": 11,
         "verified": true,
@@ -1709,18 +1709,18 @@
         "repaired": false
       },
       {
-        "predicted": "diagnosis_7",
+        "predicted": "diagnosis_6",
         "actual": "diagnosis_6",
-        "correct": false,
+        "correct": true,
         "confidence": 1.0,
         "spend": 11,
         "verified": true,
         "repaired": false
       },
       {
-        "predicted": "diagnosis_4",
+        "predicted": "diagnosis_6",
         "actual": "diagnosis_6",
-        "correct": false,
+        "correct": true,
         "confidence": 1.0,
         "spend": 11,
         "verified": true,
@@ -1745,9 +1745,9 @@
         "repaired": false
       },
       {
-        "predicted": "diagnosis_9",
+        "predicted": "diagnosis_4",
         "actual": "diagnosis_9",
-        "correct": true,
+        "correct": false,
         "confidence": 1.0,
         "spend": 11,
         "verified": true,
@@ -1799,7 +1799,7 @@
         "repaired": false
       },
       {
-        "predicted": "diagnosis_7",
+        "predicted": "diagnosis_3",
         "actual": "diagnosis_5",
         "correct": false,
         "confidence": 1.0,
@@ -1810,8 +1810,8 @@
     ]
   },
   "No Repair": {
-    "accuracy": 0.68,
-    "correct": 136,
+    "accuracy": 0.595,
+    "correct": 119,
     "total": 200,
     "verified_rate": 1.0,
     "repair_rate": 0.0,
@@ -1827,9 +1827,9 @@
         "repaired": false
       },
       {
-        "predicted": "diagnosis_9",
+        "predicted": "diagnosis_2",
         "actual": "diagnosis_9",
-        "correct": true,
+        "correct": false,
         "confidence": 1.0,
         "spend": 11,
         "verified": true,
@@ -1863,9 +1863,9 @@
         "repaired": false
       },
       {
-        "predicted": "diagnosis_1",
+        "predicted": "diagnosis_6",
         "actual": "diagnosis_6",
-        "correct": false,
+        "correct": true,
         "confidence": 1.0,
         "spend": 11,
         "verified": true,
@@ -1908,18 +1908,18 @@
         "repaired": false
       },
       {
-        "predicted": "diagnosis_7",
+        "predicted": "diagnosis_2",
         "actual": "diagnosis_2",
-        "correct": false,
+        "correct": true,
         "confidence": 1.0,
         "spend": 11,
         "verified": true,
         "repaired": false
       },
       {
-        "predicted": "diagnosis_4",
+        "predicted": "diagnosis_3",
         "actual": "diagnosis_4",
-        "correct": true,
+        "correct": false,
         "confidence": 1.0,
         "spend": 11,
         "verified": true,
@@ -1935,9 +1935,9 @@
         "repaired": false
       },
       {
-        "predicted": "diagnosis_8",
+        "predicted": "diagnosis_3",
         "actual": "diagnosis_8",
-        "correct": true,
+        "correct": false,
         "confidence": 1.0,
         "spend": 11,
         "verified": true,
@@ -1962,9 +1962,9 @@
         "repaired": false
       },
       {
-        "predicted": "diagnosis_9",
+        "predicted": "diagnosis_2",
         "actual": "diagnosis_9",
-        "correct": true,
+        "correct": false,
         "confidence": 1.0,
         "spend": 11,
         "verified": true,
@@ -1989,18 +1989,18 @@
         "repaired": false
       },
       {
-        "predicted": "diagnosis_4",
+        "predicted": "diagnosis_0",
         "actual": "diagnosis_4",
-        "correct": true,
+        "correct": false,
         "confidence": 1.0,
         "spend": 11,
         "verified": true,
         "repaired": false
       },
       {
-        "predicted": "diagnosis_8",
+        "predicted": "diagnosis_6",
         "actual": "diagnosis_8",
-        "correct": true,
+        "correct": false,
         "confidence": 1.0,
         "spend": 11,
         "verified": true,
@@ -2097,9 +2097,9 @@
         "repaired": false
       },
       {
-        "predicted": "diagnosis_1",
+        "predicted": "diagnosis_6",
         "actual": "diagnosis_6",
-        "correct": false,
+        "correct": true,
         "confidence": 1.0,
         "spend": 11,
         "verified": true,
@@ -2169,16 +2169,16 @@
         "repaired": false
       },
       {
-        "predicted": "diagnosis_9",
+        "predicted": "diagnosis_0",
         "actual": "diagnosis_9",
-        "correct": true,
+        "correct": false,
         "confidence": 1.0,
         "spend": 11,
         "verified": true,
         "repaired": false
       },
       {
-        "predicted": "diagnosis_0",
+        "predicted": "diagnosis_2",
         "actual": "diagnosis_5",
         "correct": false,
         "confidence": 1.0,
@@ -2259,9 +2259,9 @@
         "repaired": false
       },
       {
-        "predicted": "diagnosis_7",
+        "predicted": "diagnosis_6",
         "actual": "diagnosis_7",
-        "correct": true,
+        "correct": false,
         "confidence": 1.0,
         "spend": 11,
         "verified": true,
@@ -2277,9 +2277,9 @@
         "repaired": false
       },
       {
-        "predicted": "diagnosis_7",
+        "predicted": "diagnosis_0",
         "actual": "diagnosis_7",
-        "correct": true,
+        "correct": false,
         "confidence": 1.0,
         "spend": 11,
         "verified": true,
@@ -2304,16 +2304,16 @@
         "repaired": false
       },
       {
-        "predicted": "diagnosis_8",
+        "predicted": "diagnosis_3",
         "actual": "diagnosis_8",
-        "correct": true,
+        "correct": false,
         "confidence": 1.0,
         "spend": 11,
         "verified": true,
         "repaired": false
       },
       {
-        "predicted": "diagnosis_9",
+        "predicted": "diagnosis_0",
         "actual": "diagnosis_4",
         "correct": false,
         "confidence": 1.0,
@@ -2322,9 +2322,9 @@
         "repaired": false
       },
       {
-        "predicted": "diagnosis_4",
+        "predicted": "diagnosis_6",
         "actual": "diagnosis_6",
-        "correct": false,
+        "correct": true,
         "confidence": 1.0,
         "spend": 11,
         "verified": true,
@@ -2349,36 +2349,36 @@
         "repaired": false
       },
       {
-        "predicted": "diagnosis_9",
+        "predicted": "diagnosis_4",
         "actual": "diagnosis_9",
-        "correct": true,
-        "confidence": 1.0,
-        "spend": 11,
-        "verified": true,
-        "repaired": false
-      },
-      {
-        "predicted": "diagnosis_0",
-        "actual": "diagnosis_0",
-        "correct": true,
-        "confidence": 1.0,
-        "spend": 11,
-        "verified": true,
-        "repaired": false
-      },
-      {
-        "predicted": "diagnosis_0",
-        "actual": "diagnosis_0",
-        "correct": true,
-        "confidence": 1.0,
-        "spend": 11,
-        "verified": true,
-        "repaired": false
-      },
-      {
-        "predicted": "diagnosis_1",
-        "actual": "diagnosis_6",
         "correct": false,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_0",
+        "actual": "diagnosis_0",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_0",
+        "actual": "diagnosis_0",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_6",
+        "actual": "diagnosis_6",
+        "correct": true,
         "confidence": 1.0,
         "spend": 11,
         "verified": true,
@@ -2394,9 +2394,9 @@
         "repaired": false
       },
       {
-        "predicted": "diagnosis_8",
+        "predicted": "diagnosis_2",
         "actual": "diagnosis_2",
-        "correct": false,
+        "correct": true,
         "confidence": 1.0,
         "spend": 11,
         "verified": true,
@@ -2502,9 +2502,9 @@
         "repaired": false
       },
       {
-        "predicted": "diagnosis_1",
+        "predicted": "diagnosis_6",
         "actual": "diagnosis_1",
-        "correct": true,
+        "correct": false,
         "confidence": 1.0,
         "spend": 11,
         "verified": true,
@@ -2556,9 +2556,9 @@
         "repaired": false
       },
       {
-        "predicted": "diagnosis_8",
+        "predicted": "diagnosis_0",
         "actual": "diagnosis_8",
-        "correct": true,
+        "correct": false,
         "confidence": 1.0,
         "spend": 11,
         "verified": true,
@@ -2574,7 +2574,7 @@
         "repaired": false
       },
       {
-        "predicted": "diagnosis_0",
+        "predicted": "diagnosis_2",
         "actual": "diagnosis_4",
         "correct": false,
         "confidence": 1.0,
@@ -2628,9 +2628,9 @@
         "repaired": false
       },
       {
-        "predicted": "diagnosis_9",
+        "predicted": "diagnosis_2",
         "actual": "diagnosis_9",
-        "correct": true,
+        "correct": false,
         "confidence": 1.0,
         "spend": 11,
         "verified": true,
@@ -2673,9 +2673,9 @@
         "repaired": false
       },
       {
-        "predicted": "diagnosis_9",
+        "predicted": "diagnosis_2",
         "actual": "diagnosis_9",
-        "correct": true,
+        "correct": false,
         "confidence": 1.0,
         "spend": 11,
         "verified": true,
@@ -2718,9 +2718,9 @@
         "repaired": false
       },
       {
-        "predicted": "diagnosis_1",
+        "predicted": "diagnosis_6",
         "actual": "diagnosis_1",
-        "correct": true,
+        "correct": false,
         "confidence": 1.0,
         "spend": 11,
         "verified": true,
@@ -2754,7 +2754,7 @@
         "repaired": false
       },
       {
-        "predicted": "diagnosis_9",
+        "predicted": "diagnosis_0",
         "actual": "diagnosis_8",
         "correct": false,
         "confidence": 1.0,
@@ -2781,9 +2781,9 @@
         "repaired": false
       },
       {
-        "predicted": "diagnosis_9",
+        "predicted": "diagnosis_2",
         "actual": "diagnosis_2",
-        "correct": false,
+        "correct": true,
         "confidence": 1.0,
         "spend": 11,
         "verified": true,
@@ -2808,9 +2808,9 @@
         "repaired": false
       },
       {
-        "predicted": "diagnosis_9",
+        "predicted": "diagnosis_3",
         "actual": "diagnosis_9",
-        "correct": true,
+        "correct": false,
         "confidence": 1.0,
         "spend": 11,
         "verified": true,
@@ -2916,18 +2916,18 @@
         "repaired": false
       },
       {
-        "predicted": "diagnosis_9",
+        "predicted": "diagnosis_2",
         "actual": "diagnosis_9",
-        "correct": true,
+        "correct": false,
         "confidence": 1.0,
         "spend": 11,
         "verified": true,
         "repaired": false
       },
       {
-        "predicted": "diagnosis_8",
+        "predicted": "diagnosis_0",
         "actual": "diagnosis_0",
-        "correct": false,
+        "correct": true,
         "confidence": 1.0,
         "spend": 11,
         "verified": true,
@@ -2961,8 +2961,17 @@
         "repaired": false
       },
       {
-        "predicted": "diagnosis_9",
+        "predicted": "diagnosis_2",
         "actual": "diagnosis_2",
+        "correct": true,
+        "confidence": 1.0,
+        "spend": 11,
+        "verified": true,
+        "repaired": false
+      },
+      {
+        "predicted": "diagnosis_0",
+        "actual": "diagnosis_8",
         "correct": false,
         "confidence": 1.0,
         "spend": 11,
@@ -2979,15 +2988,6 @@
         "repaired": false
       },
       {
-        "predicted": "diagnosis_8",
-        "actual": "diagnosis_8",
-        "correct": true,
-        "confidence": 1.0,
-        "spend": 11,
-        "verified": true,
-        "repaired": false
-      },
-      {
         "predicted": "diagnosis_2",
         "actual": "diagnosis_9",
         "correct": false,
@@ -3006,9 +3006,9 @@
         "repaired": false
       },
       {
-        "predicted": "diagnosis_2",
+        "predicted": "diagnosis_3",
         "actual": "diagnosis_2",
-        "correct": true,
+        "correct": false,
         "confidence": 1.0,
         "spend": 11,
         "verified": true,
@@ -3024,9 +3024,9 @@
         "repaired": false
       },
       {
-        "predicted": "diagnosis_9",
+        "predicted": "diagnosis_0",
         "actual": "diagnosis_9",
-        "correct": true,
+        "correct": false,
         "confidence": 1.0,
         "spend": 11,
         "verified": true,
@@ -3060,9 +3060,9 @@
         "repaired": false
       },
       {
-        "predicted": "diagnosis_7",
+        "predicted": "diagnosis_0",
         "actual": "diagnosis_7",
-        "correct": true,
+        "correct": false,
         "confidence": 1.0,
         "spend": 11,
         "verified": true,
@@ -3231,9 +3231,9 @@
         "repaired": false
       },
       {
-        "predicted": "diagnosis_9",
+        "predicted": "diagnosis_1",
         "actual": "diagnosis_1",
-        "correct": false,
+        "correct": true,
         "confidence": 1.0,
         "spend": 11,
         "verified": true,
@@ -3249,9 +3249,9 @@
         "repaired": false
       },
       {
-        "predicted": "diagnosis_7",
+        "predicted": "diagnosis_0",
         "actual": "diagnosis_7",
-        "correct": true,
+        "correct": false,
         "confidence": 1.0,
         "spend": 11,
         "verified": true,
@@ -3276,9 +3276,9 @@
         "repaired": false
       },
       {
-        "predicted": "diagnosis_9",
+        "predicted": "diagnosis_2",
         "actual": "diagnosis_9",
-        "correct": true,
+        "correct": false,
         "confidence": 1.0,
         "spend": 11,
         "verified": true,
@@ -3312,9 +3312,9 @@
         "repaired": false
       },
       {
-        "predicted": "diagnosis_8",
+        "predicted": "diagnosis_0",
         "actual": "diagnosis_8",
-        "correct": true,
+        "correct": false,
         "confidence": 1.0,
         "spend": 11,
         "verified": true,
@@ -3330,9 +3330,9 @@
         "repaired": false
       },
       {
-        "predicted": "diagnosis_8",
+        "predicted": "diagnosis_0",
         "actual": "diagnosis_8",
-        "correct": true,
+        "correct": false,
         "confidence": 1.0,
         "spend": 11,
         "verified": true,
@@ -3393,9 +3393,9 @@
         "repaired": false
       },
       {
-        "predicted": "diagnosis_8",
+        "predicted": "diagnosis_0",
         "actual": "diagnosis_8",
-        "correct": true,
+        "correct": false,
         "confidence": 1.0,
         "spend": 11,
         "verified": true,
@@ -3474,9 +3474,9 @@
         "repaired": false
       },
       {
-        "predicted": "diagnosis_1",
+        "predicted": "diagnosis_6",
         "actual": "diagnosis_1",
-        "correct": true,
+        "correct": false,
         "confidence": 1.0,
         "spend": 11,
         "verified": true,
@@ -3519,18 +3519,18 @@
         "repaired": false
       },
       {
-        "predicted": "diagnosis_7",
+        "predicted": "diagnosis_6",
         "actual": "diagnosis_6",
-        "correct": false,
+        "correct": true,
         "confidence": 1.0,
         "spend": 11,
         "verified": true,
         "repaired": false
       },
       {
-        "predicted": "diagnosis_4",
+        "predicted": "diagnosis_6",
         "actual": "diagnosis_6",
-        "correct": false,
+        "correct": true,
         "confidence": 1.0,
         "spend": 11,
         "verified": true,
@@ -3555,9 +3555,9 @@
         "repaired": false
       },
       {
-        "predicted": "diagnosis_9",
+        "predicted": "diagnosis_4",
         "actual": "diagnosis_9",
-        "correct": true,
+        "correct": false,
         "confidence": 1.0,
         "spend": 11,
         "verified": true,
@@ -3609,7 +3609,7 @@
         "repaired": false
       },
       {
-        "predicted": "diagnosis_7",
+        "predicted": "diagnosis_3",
         "actual": "diagnosis_5",
         "correct": false,
         "confidence": 1.0,

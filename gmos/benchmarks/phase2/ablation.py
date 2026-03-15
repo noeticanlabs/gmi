@@ -21,6 +21,15 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)) + "/../../src")
 from task_dataset import DiagnosisDatasetGenerator
 from baselines import DiagnosisResult
 
+# Import shared utilities
+try:
+    from __init__ import get_results_path
+except ImportError:
+    # Fallback if __init__.py not available
+    from pathlib import Path
+    def get_results_path(filename: str) -> Path:
+        return Path(__file__).resolve().parent / filename
+
 
 class GMINoRepair:
     """
@@ -446,8 +455,9 @@ def run_ablation_study():
     print(f"Memory value: {memory_value:+.1%}")
     print(f"Budget constraint cost: {-budget_value:+.1%}")
     
-    # Save results
-    output_path = "/home/user/gmi/gmos/benchmarks/phase2/ablation_results.json"
+    # Save results using repo-relative path
+    output_path = get_results_path("ablation_results.json")
+    output_path.parent.mkdir(parents=True, exist_ok=True)
     with open(output_path, 'w') as f:
         json.dump(results, f, indent=2)
     print(f"\nResults saved to {output_path}")
