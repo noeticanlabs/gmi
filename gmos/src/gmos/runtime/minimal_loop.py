@@ -176,16 +176,19 @@ class MinimalVerifier:
         )
     
     def _can_spend_within_reserve(self, budget: BudgetState, spend: float) -> bool:
-        """Check if spend would violate reserve floor."""
-        # Check each channel's reserve floor
+        """Check if spend would violate reserve floor.
+        
+        Uses strict inequality: must leave strictly MORE than reserve floor.
+        """
+        # Check each channel's reserve floor (strict: must be > floor)
         for channel, floor in budget.reserve_floors.items():
             current_reserve = budget.reserves.get(channel, 0)
             reserve_after = current_reserve - spend
-            if reserve_after < floor:
+            if reserve_after <= floor:
                 return False
         
         # Also check total available doesn't go below zero
-        return budget.available - spend >= 0
+        return budget.available - spend > 0
 
 
 # =============================================================================
@@ -252,9 +255,10 @@ class MinimalBudgetManager:
         """
         Check if amount can be spent without violating reserve floor.
         
-        HARD constraint: available - amount >= reserve_floor
+        HARD constraint: available - amount > reserve_floor
+        (must leave strictly MORE than reserve - spending TO the floor is not allowed)
         """
-        return self.available - amount >= self.reserve_floor
+        return self.available - amount > self.reserve_floor
     
     def spend(self, amount: float) -> bool:
         """Execute spend if it doesn't violate reserve floor."""

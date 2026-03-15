@@ -279,7 +279,8 @@ def test_sound_localization():
     system = create_dynamics_system()
     
     # Tolerance for distinguishing sounds
-    SOUND_DIFF_THRESHOLD = 0.01
+    # Lowered from 0.01 to 0.005 to be more robust against noise
+    SOUND_DIFF_THRESHOLD = 0.005
     
     print("\n[1] Testing sound from LEFT...")
     

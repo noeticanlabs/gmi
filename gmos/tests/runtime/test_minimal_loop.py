@@ -380,13 +380,21 @@ class TestPhase1Acceptance:
         assert result.verdict in [Verdict.ACCEPT, Verdict.REPAIR]
     
     def test_reserve_floor_violation(self):
-        """Test reserve floor violation detection."""
+        """Test reserve floor violation detection.
+        
+        With reserve_floor=20 and total=100:
+        - can_spend(80) leaves 20, which equals the floor (not allowed with strict >)
+        - can_spend(79) leaves 21, which is above the floor (allowed)
+        """
         manager = MinimalBudgetManager(total=100.0, reserve_floor=20.0)
         
-        # This should fail - would leave only 5, below 20 reserve
-        can_spend = manager.can_spend(80.0)
+        # Spending 80 leaves exactly 20, which equals floor (violates strict >)
+        can_spend_80 = manager.can_spend(80.0)
+        assert can_spend_80 is False
         
-        assert can_spend is False
+        # Spending 79 leaves 21, which is above floor (allowed)
+        can_spend_79 = manager.can_spend(79.0)
+        assert can_spend_79 is True
     
     def test_invalid_percept(self):
         """Test handling of invalid/malformed percept."""
