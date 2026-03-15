@@ -1,0 +1,57 @@
+{
+  "task_a": {
+    "full": {
+      "accuracy": 0.55,
+      "total_cases": 100,
+      "avg_spent": 1.0,
+      "memory_usage_rate": 0.0
+    },
+    "no_memory": {
+      "accuracy": 0.55,
+      "total_cases": 100,
+      "avg_spent": 1.0,
+      "memory_usage_rate": 0.0
+    },
+    "no_adaptation": {
+      "accuracy": 0.55,
+      "total_cases": 100,
+      "avg_spent": 1.0,
+      "memory_usage_rate": 0.0
+    }
+  },
+  "task_b": {
+    "full": {
+      "accuracy": 0.39,
+      "total_cases": 100,
+      "avg_spent": 1.33,
+      "memory_usage_rate": 0.74,
+      "safehold_rate": 0.67
+    },
+    "no_memory": {
+      "accuracy": 0.14,
+      "total_cases": 100,
+      "avg_spent": 1.0,
+      "memory_usage_rate": 0.0,
+      "safehold_rate": 1.0
+    },
+    "no_adaptation": {
+      "accuracy": 0.39,
+      "total_cases": 100,
+      "avg_spent": 1.33,
+      "memory_usage_rate": 0.74,
+      "safehold_rate": 0.67
+    },
+    "no_safehold": {
+      "accuracy": 0.64,
+      "total_cases": 100,
+      "avg_spent": 1.74,
+      "memory_usage_rate": 0.74,
+      "safehold_rate": 0.0
+    }
+  },
+  "summary": {
+    "mgsr": 0.47000000000000003,
+    "memory_benefit_a": 0.0,
+    "memory_benefit_b": 0.25
+  }
+}
