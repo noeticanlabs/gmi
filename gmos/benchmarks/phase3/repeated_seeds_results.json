@@ -1,0 +1,110 @@
+{
+  "n_seeds": 10,
+  "task_a": {
+    "full_mean": 0.687,
+    "full_std": 0.04605431575867782,
+    "no_mem_mean": 0.687,
+    "no_mem_std": 0.04605431575867782
+  },
+  "task_b": {
+    "full_mean": 0.6709999999999999,
+    "full_std": 0.030479501308256333,
+    "no_mem_mean": 0.14100000000000001,
+    "no_mem_std": 0.045044422518220835
+  },
+  "memory_benefit_a": 0.0,
+  "memory_benefit_b": 0.53,
+  "mgsr": 0.679,
+  "seeds": [
+    {
+      "seed": 0,
+      "task_a_full": 0.62,
+      "task_a_no_mem": 0.62,
+      "task_b_full": 0.66,
+      "task_b_no_mem": 0.1,
+      "memory_benefit_a": 0.0,
+      "memory_benefit_b": 0.56
+    },
+    {
+      "seed": 1,
+      "task_a_full": 0.68,
+      "task_a_no_mem": 0.68,
+      "task_b_full": 0.63,
+      "task_b_no_mem": 0.12,
+      "memory_benefit_a": 0.0,
+      "memory_benefit_b": 0.51
+    },
+    {
+      "seed": 2,
+      "task_a_full": 0.67,
+      "task_a_no_mem": 0.67,
+      "task_b_full": 0.68,
+      "task_b_no_mem": 0.23,
+      "memory_benefit_a": 0.0,
+      "memory_benefit_b": 0.45000000000000007
+    },
+    {
+      "seed": 3,
+      "task_a_full": 0.74,
+      "task_a_no_mem": 0.74,
+      "task_b_full": 0.67,
+      "task_b_no_mem": 0.16,
+      "memory_benefit_a": 0.0,
+      "memory_benefit_b": 0.51
+    },
+    {
+      "seed": 4,
+      "task_a_full": 0.74,
+      "task_a_no_mem": 0.74,
+      "task_b_full": 0.65,
+      "task_b_no_mem": 0.2,
+      "memory_benefit_a": 0.0,
+      "memory_benefit_b": 0.45
+    },
+    {
+      "seed": 5,
+      "task_a_full": 0.7,
+      "task_a_no_mem": 0.7,
+      "task_b_full": 0.63,
+      "task_b_no_mem": 0.14,
+      "memory_benefit_a": 0.0,
+      "memory_benefit_b": 0.49
+    },
+    {
+      "seed": 6,
+      "task_a_full": 0.74,
+      "task_a_no_mem": 0.74,
+      "task_b_full": 0.68,
+      "task_b_no_mem": 0.15,
+      "memory_benefit_a": 0.0,
+      "memory_benefit_b": 0.53
+    },
+    {
+      "seed": 7,
+      "task_a_full": 0.68,
+      "task_a_no_mem": 0.68,
+      "task_b_full": 0.68,
+      "task_b_no_mem": 0.09,
+      "memory_benefit_a": 0.0,
+      "memory_benefit_b": 0.5900000000000001
+    },
+    {
+      "seed": 8,
+      "task_a_full": 0.7,
+      "task_a_no_mem": 0.7,
+      "task_b_full": 0.69,
+      "task_b_no_mem": 0.08,
+      "memory_benefit_a": 0.0,
+      "memory_benefit_b": 0.61
+    },
+    {
+      "seed": 9,
+      "task_a_full": 0.6,
+      "task_a_no_mem": 0.6,
+      "task_b_full": 0.74,
+      "task_b_no_mem": 0.14,
+      "memory_benefit_a": 0.0,
+      "memory_benefit_b": 0.6
+    }
+  ]
+}

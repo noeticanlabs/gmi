@@ -2,8 +2,8 @@
 
 ## Memory-Informed Constrained Maintenance Triage
 
-**Phase**: 3  
-**Status**: Draft  
+**Phase**: 3
+**Status**: Final v1.0
 **Purpose**: Second task for Phase 3 multi-task evaluation — tests state-dependent action selection under constraints.
 
 ---

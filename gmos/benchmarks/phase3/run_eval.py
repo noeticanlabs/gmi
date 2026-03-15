@@ -18,6 +18,7 @@ import sys
 import os
 import random
 import importlib.util
+from pathlib import Path
 from typing import List, Dict, Any, Optional
 
 # Add paths for imports
@@ -106,7 +107,13 @@ class DiagnosisWithEnhancedMemory:
         
         # Track budget
         budget = self.budget_limit
-        spent = 0
+        spent = 1
+        
+        # Reset mode machine for new episode
+        self.mode_machine.reset()
+        
+        # Reset mode machine for new episode
+        self.mode_machine.reset()
         
         # Mode: OBSERVE (symptoms are already given)
         RuntimeMode = mode_machine.RuntimeMode
@@ -232,6 +239,9 @@ class TriageWithEnhancedMemory:
         # Track budget
         budget = self.budget_limit
         spent = 0
+        
+        # Reset mode machine for new episode
+        self.mode_machine.reset()
         
         # Mode: OBSERVE
         RuntimeMode = mode_machine.RuntimeMode
@@ -608,7 +618,8 @@ def main():
         }
     }
     
-    with open("gmos/benchmarks/phase3/results.json", "w") as f:
+    results_path = Path(__file__).resolve().parent / "results.json"
+    with open(results_path, "w") as f:
         json.dump(output, f, indent=2)
     
     print(f"\nResults saved to: gmos/benchmarks/phase3/results.json")
