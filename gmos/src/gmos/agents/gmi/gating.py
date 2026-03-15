@@ -203,7 +203,8 @@ class GatingPolicy:
         task_benefit = config.task_benefit_map.get(self.task_name, None)
         
         # Check if we have evidence that memory helps this task
-        if task_benefit is not None and task_benefit < 0:
+        # Disable memory if benefit is None (unknown) or <= 0
+        if task_benefit is not None and task_benefit <= 0:
             # Memory has hurt this task - disable
             return MemoryGatingDecision(
                 use_memory=False,
