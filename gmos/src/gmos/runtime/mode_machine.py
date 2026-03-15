@@ -163,7 +163,7 @@ class ModeMachine:
         self,
         enable_safehold: bool = True,
         safehold_config: Optional[SafeHoldConfig] = None,
-        enable_logging: bool = True
+        enable_logging: bool = False
     ):
         self.current_mode = RuntimeMode.OBSERVE
         self.mode_history: List[ModeTransition] = []
@@ -434,7 +434,7 @@ class ModeMachine:
 
 def create_mode_machine(
     enable_safehold: bool = True,
-    enable_logging: bool = True
+    enable_logging: bool = False
 ) -> ModeMachine:
     """Factory function to create a mode machine."""
     return ModeMachine(

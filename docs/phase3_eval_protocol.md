@@ -1,7 +1,7 @@
 # Phase 3 Evaluation Protocol
 
 **Phase**: 3  
-**Status**: Draft  
+**Status**: Final v1.0  
 **Purpose**: Multi-task evaluation protocol for Phase 3 — measuring substrate value across Task A (diagnosis) and Task B (triage).
 
 ---
