@@ -1,7 +1,7 @@
 # Phase 4 Evaluation Protocol
 
 **Phase**: 4  
-**Status**: Draft  
+**Status**: In Progress  
 **Purpose**: Multi-regime evaluation protocol for Phase 4 — measuring selective intelligence across Tasks A, B, and C.
 
 ---

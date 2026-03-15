@@ -4,7 +4,7 @@
 
 Phase 4 transforms GM-OS from a system with always-on features to a **selectively intelligent** substrate that decides when to use memory, SafeHold, repair, and evidence gathering.
 
-**Status**: 🚧 IN PROGRESS
+**Status**: 🚧 IN PROGRESS (~60-65%)
 
 ---
 
@@ -184,18 +184,31 @@ gmos/benchmarks/phase4/test_gating.py
 
 ## Phase 4 Verdict (Current)
 
-**IN PROGRESS - Minimum completion not yet achieved**
+**IN PROGRESS (~60-65%)**
 
-The Phase 4 scaffolding is in place:
-- Gating policy implemented ✓
-- Calibration layer implemented ✓
-- Task C dataset implemented ✓
+### Honest Assessment
 
-But value demonstration requires:
-- Running the experiments
-- Comparing gated vs always-on
-- Measuring SafeHold calibration improvement
-- Evaluating Task C
+| Area | Score | Notes |
+|------|-------|-------|
+| Architecture/Setup | 8.5/10 | Gating, calibration, Task C, docs all in place |
+| Component-level | 7.5/10 | Gating disables memory on Task A, enables on Task B; ECE ~0.085 |
+| End-to-end | 3/10 | Eval harness uses toy shells, doesn't inherit Phase 3 wins |
+
+### What Works
+- Gating policy correctly disables memory on Task A (0% benefit)
+- Gating policy correctly enables memory on Task B (+53% benefit)
+- Calibration layer works (ECE < 0.1)
+- Evidence request triggers in medium confidence
+
+### What's Missing
+- End-to-end harness inherits Phase 3 results
+- Task B actual +53% memory advantage not leveraged
+- Task C downstream outcome tracking
+
+### Next Steps
+1. Wire gating to real Phase 3 systems (not toy shells)
+2. Make Task B use proven memory advantage path
+3. Add downstream outcome tracking to Task C
 
 ---
 

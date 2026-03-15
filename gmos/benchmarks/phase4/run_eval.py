@@ -495,8 +495,8 @@ def main():
     print(f"Gated average:     {gated_avg:.1%}")
     print(f"Improvement:       {gated_avg - always_on_avg:+.1%}")
     
-    # Save results
-    output_path = BASE_DIR / "gmos" / "benchmarks" / "phase4" / "evaluation_results.json"
+    # Save results - use correct path
+    output_path = BASE_DIR / "benchmarks" / "phase4" / "evaluation_results.json"
     output_path.parent.mkdir(parents=True, exist_ok=True)
     with open(output_path, "w") as f:
         json.dump(results, f, indent=2, default=float)

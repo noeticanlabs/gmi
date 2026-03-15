@@ -1,0 +1,41 @@
+{
+  "task_a": {
+    "always_on": {
+      "correct": 29,
+      "total": 50,
+      "accuracy": 0.58
+    },
+    "gated": {
+      "correct": 29,
+      "total": 50,
+      "accuracy": 0.58
+    },
+    "no_memory": {
+      "correct": 29,
+      "total": 50,
+      "accuracy": 0.58
+    }
+  },
+  "task_b": {
+    "always_on": {
+      "correct": 34,
+      "total": 50,
+      "accuracy": 0.68
+    },
+    "gated": {
+      "correct": 34,
+      "total": 50,
+      "accuracy": 0.68
+    },
+    "no_memory": {
+      "correct": 7,
+      "total": 50,
+      "accuracy": 0.14
+    }
+  },
+  "summary": {
+    "always_on_avg": 0.63,
+    "gated_avg": 0.63,
+    "improvement": 0.0
+  }
+}
